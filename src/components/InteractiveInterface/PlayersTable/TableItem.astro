@@ -1,0 +1,33 @@
+---
+interface Props {
+  type?: "active" | "default" | undefined;
+}
+
+const { type } = Astro.props as Props;
+---
+<div class=`w-full h-full gold-bordered rounded-[5px] p-[1px] ${type}` data-id="table-item">
+  <div
+    class=`relative flex w-full h-full ${type === 'active' ? 'bg-gold-gradient' : 'bg-black-gradient'} rounded-[5px] z-10`
+  >
+    <div
+      class="w-[25%] max-w-[128px] min-w-[65px] h-full flex flex-col shadow-[3px_0_4px_0_rgba(0,0,0,0.4)] rounded-l-[5px] p-[3px] [&>*]:flex [&>*]:justify-center [&>*]:items-center"
+    >
+      <div
+        class="h-[11%] min-h-[15px] max-h-[30px] shadow-[0_2px_4px_0_rgba(0,0,0,0.9)] px-[4px] laptop:px-[8px]" data-id="table-item-player-name"
+      >
+        <slot name="table-item-player-name" />
+      </div>
+      <div class="grow px-[3px] laptop:px-[6px] py-[4px] laptop:py-[8px]" data-id="table-item-hero" >
+        <slot name="table-item-hero" />
+      </div>
+      <div
+        class="h-[24%] min-h-[32px] max-h-[64px] shadow-[0_-2px_4px_0_rgba(0,0,0,0.9)]" data-id="table-item-statistic"
+      >
+        <slot name="table-item-statistic" />
+      </div>
+    </div>
+    <section class="grow p-[15px] laptop:p-[30px] flex justify-center items-center [&>div]:max-h-full [&>div]:w-full [&>div]:h-[113px] [&>div]:min-w-[141px] [&>div]:desktop-lg:h-[216px] [&>div]:max-w-[282px] [&>div]:flex [&>div]:flex-wrap [&>div]:justify-center [&>div]:items-center [&>div]:gap-[3px] [&>div]:laptop:gap-[6px]" data-id="table-item-followers">
+      <slot name="table-item-followers" />
+    </section>
+  </div>
+</div>

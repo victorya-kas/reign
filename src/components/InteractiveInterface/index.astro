@@ -1,0 +1,19 @@
+---
+import InterfaceFooter from "./InterfaceFooter.astro";
+import InterfaceHeader from "./InterfaceHeader.astro";
+import PlayersTable from "./PlayersTable/index.astro";
+---
+
+<div
+  class="relative w-full h-full flex flex-col gap-[4px] [&>div]:overflow-hidden" data-id="interface-container"
+>
+  <div class="w-full h-[15%] min-h-[43px] laptop:min-h-[85px]" data-id="interface-header">
+    <InterfaceHeader />
+  </div>
+  <div class="grow" data-id="interface-table">
+    <PlayersTable />
+  </div>
+  <div class="w-full h-[15%] min-h-[56px] laptop:min-h-[110px]" data-id="interface-footer">
+    <InterfaceFooter/>
+  </div>
+</div>

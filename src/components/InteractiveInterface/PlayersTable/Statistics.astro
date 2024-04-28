@@ -1,0 +1,81 @@
+---
+import Image from "@assets/Image.astro";
+
+interface Props {
+  coin?: string;
+  cards?: string;
+  power?: string;
+  followers?: string;
+}
+const {
+  coin = "0",
+  cards = "0",
+  power = "0",
+  followers = "0",
+} = Astro.props as Props;
+---
+
+<div tooltip-id="table-item-statictics">
+  <div
+    class="relative h-full grid grid-cols-2 grid-rows-2 gap-[3px] laptop:gap-[6px] items-center [&>*]:h-[10px] laptop:[&>*]:h-[20px] px-[4px] laptop:px-[8px] py-[3px] laptop:py-[6px]"
+    tooltip-id="table-item-statictics"
+    tooltip-content="table-item-statictics-content"
+  >
+    <div
+      class="flex gap-[2px] laptop:gap-[4px] items-center pr-[11px] desktop-sm:pr-[22px] [&>*]:shrink-0"
+      tooltip-id="table-item-statictics-coin"
+      tooltip-content="table-item-statictics-coin"
+    >
+      <Image
+        name="icon-empty-coin-silver"
+        className="min-w-[10px] max-w-[20px] min-h-[10px] max-h-[20px]"
+      />
+      <span
+        class="w-[7px] laptop:w-[13px] text-silver text-[10px] laptop:text-[20px]"
+        >{coin}</span
+      >
+    </div>
+    <div
+      class="flex gap-[2px] laptop:gap-[4px] items-center pr-[7px] desktop-sm:pr-[14px] [&>*]:h-auto [&>*]:shrink-0"
+      tooltip-id="table-item-statictics-cards"
+      tooltip-content="table-item-statictics-cards"
+    >
+      <Image
+        name="icon-cards-silver"
+        className="min-w-[10px] max-w-[20px] min-h-[10px] max-h-[20px]"
+      />
+      <span
+        class="w-[7px] laptop:w-[13px] text-silver text-[10px] laptop:text-[20px]"
+        >{cards}</span
+      >
+    </div>
+    <div
+      class="flex gap-[2px] laptop:gap-[4px] items-center pr-[11px] desktop-sm:pr-[22px] [&>*]:h-auto [&>*]:shrink-0"
+      tooltip-id="table-item-statictics-power"
+      tooltip-content="table-item-statictics-power"
+    >
+      <Image
+        name="icon-power-silver"
+        className="min-w-[10px] max-w-[20px] min-h-[10px] max-h-[20px]"
+      />
+      <span
+        class="w-[7px] laptop:w-[13px] text-silver text-[10px] laptop:text-[20px]"
+        >{power}</span
+      >
+    </div>
+    <div
+      class="flex gap-[2px] laptop:gap-[4px] items-center pr-[7px] desktop-sm:pr-[14px] [&>*]:h-auto [&>*]:shrink-0"
+      tooltip-id="table-item-statictics-followers"
+      tooltip-content="table-item-statictics-followers"
+    >
+      <Image
+        name="icon-followers-silver"
+        className="min-w-[10px] max-w-[20px] min-h-[10px] max-h-[20px]"
+      />
+      <span
+        class="w-[7px] laptop:w-[13px] text-silver text-[10px] laptop:text-[20px]"
+        >{followers}</span
+      >
+    </div>
+  </div>
+</div>

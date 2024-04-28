@@ -1,0 +1,73 @@
+---
+import { images } from "@assets/images";
+type variant =
+  | "gold-bordered"
+  | "silver-bordered"
+  | "trapezoid-left"
+  | "trapezoid-right";
+type size = "sm" | "md" | "lg";
+interface Props {
+  variant: variant;
+  size: size;
+  className?: string | undefined;
+}
+
+const { variant, size, className } = Astro.props as Props;
+
+const bthClasses = `w-full h-full max-h-full min-h-full flex justify-center items-center relative ${variant} ${size} ${
+  className ?? ""
+}`;
+---
+
+<style>
+  button[class*="bordered"].sm {
+    width: 45px;
+    height: 32px;
+    border-radius: 3px;
+    padding: 1px;
+  }
+  button[class*="bordered"].sm > span {
+    border-radius: 3px;
+    padding: 2px 5px;
+  }
+  button[class*="bordered"].lg {
+    width: 160px;
+    max-height: 64px;
+    border-radius: 6px;
+    padding: 1px;
+  }
+  button[class*="bordered"].lg > span {
+    border-radius: 6px;
+    padding: 4px 10px;
+  }
+  button[class*="trapezoid"].lg {
+    width: 156px;
+    max-height: 86px;
+    padding: clamp(10px, 1vw, 20px);
+  }
+</style>
+{
+  (variant === "silver-bordered" || variant === "gold-bordered") && (
+    <button class={`shadow ${bthClasses}`}>
+      <span class="w-full h-full flex justify-center items-center bg-[#1C1C1C] z-10">
+        <span
+          class={`text-12-24 ${variant === "silver-bordered" ? "text-silver" : "text-gold"}`}
+        >
+          <slot />
+        </span>
+      </span>
+    </button>
+  )
+}
+{
+  (variant === "trapezoid-left" || variant === "trapezoid-right") && (
+    <button
+      class={`bg-cover bg-center bg-no-repeat ${variant === "trapezoid-left" ? '' : ''} ${bthClasses}`}
+      style={{ backgroundImage: `url(${variant === "trapezoid-left" ? images?.["trapezoid-btn-left"] : images?.["trapezoid-bth-right"]})` }}
+    >
+      <span class="text-gold text-20-40 -translate-x-[11px]">
+        <slot />
+      </span>
+    </button>
+  )
+}

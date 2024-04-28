@@ -1,0 +1,25 @@
+{
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    "baseUrl": "/Users/victoriakasianova/Documents/reign/src",
+    "paths": {
+      "@components/*": [
+        "./components/*"
+      ],
+      "@layouts/*": [
+        "./layouts/*"
+      ],
+      "@pages/*": [
+        "./pages/*"
+      ],
+      "@assets/*": [
+        "./assets/*"
+      ],
+      "@/utils": [
+        "./utils/*"
+      ]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "react"
+  }
+}

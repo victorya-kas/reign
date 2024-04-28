@@ -1,0 +1,16 @@
+---
+import Mockup from "@components/Mockup.astro";
+import InteractiveInterface from "@components/InteractiveInterface/index.astro"
+import Page from "@layouts/Page.astro";
+---
+
+<Page title="Reign">
+  <Mockup>
+    <InteractiveInterface/>
+  </Mockup>
+  <div slot="scripts">
+    <script src="../scripts/interactiveInterface.ts"></script>
+  </div>
+</Page>
+
+

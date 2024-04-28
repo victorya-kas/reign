@@ -1,0 +1,172 @@
+---
+import type { heroID, heroOrder } from "ts/types";
+import Card from "./Card.astro";
+import Image from "assets/Image.astro";
+
+type heroAttributes = {
+  order: { value: heroOrder; url: string };
+  border: string;
+};
+type heroes = {
+  [key in heroID]: heroAttributes;
+};
+
+interface Props {
+  id: heroID;
+  mode?: "vertical" | "horizontal";
+  active?: boolean;
+}
+
+const { id, mode = "vertical", active = mode === "horizontal" ? true : false } = Astro.props as Props;
+const isHorizontallMode = mode === "horizontal";
+
+const heroesImg: { [key in heroID]: string } = {
+  "1101":
+    "https://static.tildacdn.com/tild3165-6537-4935-b234-646436623037/hero-1101.png",
+  "1201":
+    "https://static.tildacdn.com/tild6237-3365-4034-a665-646562613334/hero-1201.png",
+  "1301":
+    "https://static.tildacdn.com/tild3333-3436-4365-a266-343035353362/hero-1301.png",
+  "1401":
+    "https://static.tildacdn.com/tild6666-6233-4264-b463-336532306165/hero-1401.png",
+  "1501":
+    "https://static.tildacdn.com/tild3033-3663-4665-a661-316232313235/hero-1501.png",
+  "1601":
+    "https://static.tildacdn.com/tild3864-3365-4131-b735-383333316261/hero-1601.png",
+  "1701":
+    "https://static.tildacdn.com/tild3435-3830-4639-a538-663531663766/hero-1701.png",
+  "1801":
+    "https://static.tildacdn.com/tild3532-3133-4362-b331-333133343335/hero-1801.png",
+};
+
+const heroesHorizontalImg: { [key in heroID]: string } = {
+  "1101":
+    "https://static.tildacdn.com/tild6434-3337-4763-b261-623736366334/hero-horizontal-1101.png",
+  "1201":
+    "https://static.tildacdn.com/tild6463-3933-4765-b735-393934313261/hero-horizontal-1201.png",
+  "1301":
+    "https://static.tildacdn.com/tild6132-3330-4332-b439-616461653931/hero-horizontal-1301.png",
+  "1401":
+    "https://static.tildacdn.com/tild3734-3230-4962-a162-313032653465/hero-horizontal-1401.png",
+  "1501":
+    "https://static.tildacdn.com/tild3735-6530-4937-a162-323038643965/hero-horizontal-1501.png",
+  "1601":
+    "https://static.tildacdn.com/tild6262-6634-4739-b037-383964666235/hero-horizontal-1601.png",
+  "1701":
+    "https://static.tildacdn.com/tild3732-3139-4836-b730-386530303530/hero-horizontal-1701.png",
+  "1801":
+    "https://static.tildacdn.com/tild3966-3261-4536-a231-633266326330/hero-horizontal-1801.png",
+};
+
+const heroesAttributesImg: { [key: string]: string } = {
+  // hero's cards borders bg
+  "border-blue": isHorizontallMode
+    ? "https://static.tildacdn.com/tild6437-3565-4234-b230-353866386264/border-hero-topframe.png"
+    : "https://static.tildacdn.com/tild6564-3935-4334-a566-353331633833/border-hero-general-.png",
+  "border-gold": isHorizontallMode
+    ? "https://static.tildacdn.com/tild3361-3935-4466-b031-613063663634/border-hero-topframe.png"
+    : "https://static.tildacdn.com/tild3039-6538-4636-b839-353361366262/border-hero-general-.png",
+  "border-silver": isHorizontallMode
+    ? "https://static.tildacdn.com/tild3531-3735-4335-b063-616535346235/border-hero-topframe.png"
+    : "https://static.tildacdn.com/tild3065-3663-4935-a633-656230323165/border-hero-general-.png",
+  "border-green": isHorizontallMode
+    ? "https://static.tildacdn.com/tild3534-3939-4264-b063-616435336666/border-hero-topframe.png"
+    : "",
+  "border-red": isHorizontallMode
+    ? "https://static.tildacdn.com/tild3863-3130-4562-b964-313464636535/border-hero-topframe.png"
+    : "",
+  // hero's card order bg
+  "order-gold":
+    "https://static.tildacdn.com/tild6137-3231-4339-a531-633437303064/hero-number-frame-go.png",
+  "order-red":
+    "https://static.tildacdn.com/tild6562-3864-4365-b131-313037636266/hero-number-frame-re.png",
+  "order-green":
+    "https://static.tildacdn.com/tild6263-3635-4136-b461-313133323536/hero-number-frame-gr.png",
+  "order-silver":
+    "https://static.tildacdn.com/tild3663-6131-4562-a534-383764343031/hero-number-frame-si.png",
+  "order-blue":
+    "https://static.tildacdn.com/tild3934-6533-4531-b438-396134613130/hero-number-frame-bl.png",
+  // hero card facedown
+  "card-cover":
+    "https://static.tildacdn.com/tild6461-3034-4466-b265-336465316430/card-cover.png",
+};
+
+const heroesAtrributes: heroes = {
+  1101: {
+    order: { value: "1", url: heroesAttributesImg?.["order-silver"]! },
+    border: heroesAttributesImg?.["border-silver"]!,
+  },
+  1201: {
+    order: { value: "2", url: heroesAttributesImg?.["order-silver"]! },
+    border: heroesAttributesImg?.["border-silver"]!,
+  },
+  1301: {
+    order: { value: "3", url: heroesAttributesImg?.["order-silver"]! },
+    border: heroesAttributesImg?.["border-silver"]!,
+  },
+  1401: {
+    order: { value: "4", url: heroesAttributesImg?.["order-gold"]! },
+    border: heroesAttributesImg?.["border-gold"]!,
+  },
+  1501: {
+    order: { value: "5", url: heroesAttributesImg?.["order-blue"]! },
+    border: heroesAttributesImg?.["border-blue"]!,
+  },
+  1601: {
+    order: { value: "6", url: heroesAttributesImg?.["order-green"]! },
+    border: heroesAttributesImg?.["border-green"]!,
+  },
+  1701: {
+    order: { value: "7", url: heroesAttributesImg?.["order-silver"]! },
+    border: heroesAttributesImg?.["border-silver"]!,
+  },
+  1801: {
+    order: { value: "8", url: heroesAttributesImg?.["order-red"]! },
+    border: heroesAttributesImg?.["border-red"]!,
+  },
+};
+
+const url = isHorizontallMode ? heroesHorizontalImg[id] : heroesImg[id];
+const coverUrl = heroesAttributesImg?.["card-cover"];
+const order = heroesAtrributes?.[id as keyof heroes]?.order?.value!;
+const orderBg = heroesAtrributes?.[id as keyof heroes]?.order?.url!;
+const border = heroesAtrributes?.[id as keyof heroes]?.border;
+const cardSizeClasses = isHorizontallMode
+  ? "max-w-[140px] min-w-[70px] max-h-[86px] min-h-[43px]"
+  : "max-w-[112px] min-w-[56px] max-h-[154px] min-h-[77px]";
+---
+
+{
+  active ? (
+    <Card className={cardSizeClasses}>
+      <span
+        class="block absolute top-0 bottom-0 left-0 right-0 w-full h-full z-10 bg-contain bg-center bg-no-repeat"
+        style={{ backgroundImage: `url("${border}")` }}
+        slot="img"
+      />
+      <Image
+        url={url}
+        slot="img"
+      />
+      <span
+        class="bottom-[-3px] right-[-3px] w-[12px] desktop-sm:w-[28px] h-[16px] desktop-sm:h-[36px]"
+        style={{ backgroundImage: `url("${orderBg}")` }}
+        slot="icon-bottom-right"
+      >
+        <span
+          class={`text-gold ${
+            isHorizontallMode
+              ? "text-[11px] desktop-sm:text-[22px]"
+              : "text-[12px] desktop-sm:text-[24px]"
+          }`}
+        >
+          {order}
+        </span>
+      </span>
+    </Card>
+  ) : (
+    <Card className={cardSizeClasses}>
+      <Image url={coverUrl} slot="img" />
+    </Card>
+  )
+}

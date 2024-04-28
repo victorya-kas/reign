@@ -1,0 +1,27 @@
+---
+import Button from "@components/Button.astro";
+import Image from "@assets/Image.astro";
+import Follower from "@components/Follower.astro";
+
+---
+
+<div class="w-full flex justify-between items-center gap-[15px] laptop:[30px]">
+    <div class="relative shrink-0">
+        <Button variant="trapezoid-right" size="lg">30</Button>
+        <span class="absolute right-0 top-0">
+            <Button variant="silver-bordered" size="sm">90</Button>
+        </span>
+    </div>
+    <div class="grow flex items-center justify-center">
+        <Follower id="2603"/>
+        <Follower id="2802"/>
+        <Follower id="2501"/>
+        <Follower id="2015"/>
+        <Follower id="2403"/>
+    </div>
+    <div class="relative shrink-0">
+        <Button variant="trapezoid-left" size="lg">
+            <Image name="icon-settings" className="w-[28px] h-[28px] laptop:w-[55px] laptop:h-[55px]"/>
+        </Button>
+    </div>
+</div>

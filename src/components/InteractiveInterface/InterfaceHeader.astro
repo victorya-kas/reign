@@ -1,0 +1,30 @@
+---
+import Button from "@components/Button.astro";
+import Hero from "@components/Hero.astro";
+import Image from "@assets/Image.astro";
+
+---
+
+<div class="w-full flex justify-between items-center gap-[15px] laptop:[30px]">
+    <div class="relative shrink-0">
+        <Button variant="trapezoid-right" size="lg">30</Button>
+        <span class="absolute right-0 top-0">
+            <Button variant="silver-bordered" size="sm">90</Button>
+        </span>
+    </div>
+    <div class="grow flex items-center justify-center">
+        <Hero id="1101" mode="horizontal"/>
+        <Hero id="1201" mode="horizontal"/>
+        <Hero id="1301" mode="horizontal"/>
+        <Hero id="1401" mode="horizontal"/>
+        <Hero id="1501" mode="horizontal"/>
+        <Hero id="1601" mode="horizontal"/>
+        <Hero id="1701" mode="horizontal"/>
+        <Hero id="1801" mode="horizontal"/>
+    </div>
+    <div class="relative shrink-0">
+        <Button variant="trapezoid-left" size="lg">
+            <Image name="icon-settings" className="w-[28px] h-[28px] laptop:w-[55px] laptop:h-[55px]"/>
+        </Button>
+    </div>
+</div>

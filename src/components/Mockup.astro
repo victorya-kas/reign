@@ -1,0 +1,10 @@
+---
+import Image from "assets/Image.astro";
+---
+
+<div class="relative max-w-[1605px] max-h-[775px] min-w-[812px] min-h-[375px] flex flex-col">
+  <Image name="mobile-mockup" />
+  <div class="absolute top-0 left-0 right-0 bottom-0 block m-[30px]">
+    <slot />
+  </div>
+</div>

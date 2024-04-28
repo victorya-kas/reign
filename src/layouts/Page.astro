@@ -1,0 +1,28 @@
+---
+import 'styles/global.css';
+
+interface Props {
+    title: string;
+}
+
+const {title} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>{title}</title>
+    <slot name="head"></slot>
+  </head>
+  <body class="flex flex-col items-center justify-center h-screen gap-[30px] px-[15px] py-[30px] laptop:px-[30px] laptop:py-[60px]">
+    <header></header>
+    <main class="grow">
+        <slot></slot>
+    </main>
+    <footer></footer>
+    <slot name="scripts"/>
+  </body>
+</html>
