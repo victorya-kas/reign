@@ -1,57 +1,57 @@
 ---
 import Hero from "@components/Hero.astro";
-import Follower from "@components/Follower.astro";
-import Statictics from "./Statistics.astro";
+import Follower from "@components/Follower/Follower.astro";
+import Statictics from "./Statistics/Statistics.astro";
 import PlayerName from "./PlayerName.astro";
 import TableItem from "./TableItem.astro";
 ---
 
-<div class="w-full h-full grid grid-rows-2 grid-cols-3 gap-[2px]">
+<div class="grow w-full grid grid-rows-2 grid-cols-3 gap-[2px]">
   <TableItem>
     <PlayerName name="JULHIPOO" slot="table-item-player-name" />
-    <Hero id="1701" active={false} slot="table-item-hero"/>
+    <Hero id="1701" active={false} showTooltip={true} slot="table-item-hero"/>
     <Statictics coin="1" cards="2" power="3" followers="2" slot="table-item-statistic" />
     <div slot="table-item-followers">
-      <Follower id="2002" size="small"/>
-      <Follower id="2501" size="small"/>
+      <Follower showTooltip={true} id="2002" size="small"/>
+      <Follower showTooltip={true} id="2501" size="small"/>
     </div>
   </TableItem>
   <TableItem>
     <PlayerName name="WWWWWWWW" slot="table-item-player-name" />
-    <Hero id="1501" active={true} slot="table-item-hero"/>
+    <Hero id="1501" active={true} showTooltip={true} slot="table-item-hero"/>
     <Statictics coin="2" cards="3" power="3" followers="1" slot="table-item-statistic" />
     <div slot="table-item-followers">
-      <Follower id="2803" size="small"/>
+      <Follower showTooltip={true} id="2803" size="small"/>
     </div>
   </TableItem>
   <TableItem>
     <PlayerName name="koekvero" active={true} slot="table-item-player-name" />
-    <Hero id="1401" active={true} slot="table-item-hero"/>
+    <Hero id="1401" active={true} showTooltip={true} slot="table-item-hero"/>
     <Statictics coin="0" cards="2" power="4" followers="2" slot="table-item-statistic" />
     <div slot="table-item-followers">
-      <Follower id="2502" size="small"/>
-      <Follower id="2802" size="small"/>
+      <Follower showTooltip={true} id="2502" size="small"/>
+      <Follower showTooltip={true} id="2802" size="small"/>
     </div>
   </TableItem>
   <TableItem>
     <PlayerName name="Drone" slot="table-item-player-name" />
-    <Hero id="1101" active={true} slot="table-item-hero"/>
+    <Hero id="1101" active={true} showTooltip={true} slot="table-item-hero"/>
     <Statictics coin="3" cards="3" power="2" followers="1" slot="table-item-statistic" />
     <div slot="table-item-followers">
-      <Follower id="2603" size="small"/>
+      <Follower showTooltip={true} id="2603" size="small"/>
     </div>
   </TableItem>
   <TableItem type="active">
     <PlayerName name="Drone" slot="table-item-player-name" />
-    <Hero id="1201" active={true} slot="table-item-hero"/>
+    <Hero id="1201" active={true} showTooltip={true} slot="table-item-hero"/>
     <Statictics coin="5" cards="5" slot="table-item-statistic" />
   </TableItem>
   <TableItem>
     <PlayerName name="Stoshkas" slot="table-item-player-name" />
-    <Hero id="1801" active={false} slot="table-item-hero"/>
+    <Hero id="1801" active={false} showTooltip={true} slot="table-item-hero"/>
     <Statictics coin="1" cards="4" power="3" followers="1" slot="table-item-statistic" />
     <div slot="table-item-followers">
-      <Follower id="2401" size="small"/>
+      <Follower showTooltip={true} id="2401" size="small"/>
     </div>
   </TableItem>
 </div>

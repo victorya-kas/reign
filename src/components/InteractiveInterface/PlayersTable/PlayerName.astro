@@ -1,5 +1,6 @@
 ---
-import Image from '@assets/Image.astro';
+import Image from "@assets/Image.astro";
+import Tooltip from "@components/Tooltip/Tooltip.astro";
 interface Props {
   name: string;
   active?: boolean;
@@ -8,7 +9,29 @@ interface Props {
 const { name, active = false } = Astro.props as Props;
 ---
 
-<div class="w-full flex items-center gap-[4px] laptop:gap-[8px]">
-  {active && <Image name="icon-crown" className='shrink-0 w-[6px] h-[5px] laptop:w-[12px] laptop:h-[10px]'/>}
-  <h3 class="grow text-center text-silver break-words uppercase text-[5px] laptop:text-[10px]">{name}</h3>
+<Tooltip
+  id="player-name"
+  content={{
+    title: "player name title",
+    content: "player name content",
+  }}
+/>
+
+<div
+  class="w-full flex items-center gap-[4px] desktop-md:gap-[8px]"
+  tooltip-id="player-name"
+>
+  {
+    active && (
+      <Image
+        name="icon-crown"
+        className="shrink-0 w-[6px] h-[5px] desktop-md:w-[12px] desktop-md:h-[10px]"
+      />
+    )
+  }
+  <h3
+    class="grow text-center text-silver break-words uppercase text-[5px] desktop-md:text-[10px] overflow-hidden whitespace-nowrap text-ellipsis"
+  >
+    {name}
+  </h3>
 </div>

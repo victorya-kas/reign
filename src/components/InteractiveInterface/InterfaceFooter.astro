@@ -1,27 +1,48 @@
 ---
 import Button from "@components/Button.astro";
 import Image from "@assets/Image.astro";
-import Follower from "@components/Follower.astro";
-
+import Follower from "@components/Follower/Follower.astro";
+import Tooltip from "@components/Tooltip/Tooltip.astro";
 ---
+<Tooltip
+  id="btn-resourses"
+  content={{
+    title: "btn-resourses title",
+    content: "btn-resourses content",
+  }}
+/>
+<Tooltip
+  id="btn-ability-intelligence"
+  content={{
+    title: "btn-ability-intelligence title",
+    content: "btn-ability-intelligence content",
+  }}
+/>
 
-<div class="w-full flex justify-between items-center gap-[15px] laptop:[30px]">
-    <div class="relative shrink-0">
-        <Button variant="trapezoid-right" size="lg">30</Button>
-        <span class="absolute right-0 top-0">
-            <Button variant="silver-bordered" size="sm">90</Button>
-        </span>
-    </div>
-    <div class="grow flex items-center justify-center">
-        <Follower id="2603"/>
-        <Follower id="2802"/>
-        <Follower id="2501"/>
-        <Follower id="2015"/>
-        <Follower id="2403"/>
-    </div>
-    <div class="relative shrink-0">
-        <Button variant="trapezoid-left" size="lg">
-            <Image name="icon-settings" className="w-[28px] h-[28px] laptop:w-[55px] laptop:h-[55px]"/>
-        </Button>
-    </div>
+<div
+  class="h-[15%] min-h-[86px] max-h-[115px] flex justify-between gap-[15px] shrink-0 desktop-md:[30px] px-[10px] desktop-md:px-[20px]"
+>
+  <div class="shrink-0 h-full" tooltip-id="btn-resourses">
+    <Button variant="gold-bordered" size="lg">
+      <Image
+        name="icon-resourses"
+        className="w-[28px] h-[28px] desktop-md:w-[55px] desktop-md:h-[55px]"
+      />
+    </Button>
+  </div>
+  <div class="w-[47%] min-w-[383px] max-w-[756px] flex justify-center">
+    <Follower id="2603" showTooltip={true} />
+    <Follower id="2802" showTooltip={true} />
+    <Follower id="2501" showTooltip={true} />
+    <Follower id="2015" showTooltip={true} />
+    <Follower id="2403" showTooltip={true} />
+  </div>
+  <div class="shrink-0 h-full" tooltip-id="btn-ability-intelligence">
+    <Button variant="gold-bordered" size="lg">
+      <Image
+        name="icon-ability-intelligence"
+        className="w-[28px] h-[28px] desktop-md:w-[55px] desktop-md:h-[55px]"
+      />
+    </Button>
+  </div>
 </div>

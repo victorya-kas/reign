@@ -12,7 +12,7 @@ interface Props {
   className?: string | undefined;
 }
 
-const { variant, size, className } = Astro.props as Props;
+const { variant, size, className, ...rest } = Astro.props as Props;
 
 const bthClasses = `w-full h-full max-h-full min-h-full flex justify-center items-center relative ${variant} ${size} ${
   className ?? ""
@@ -21,8 +21,8 @@ const bthClasses = `w-full h-full max-h-full min-h-full flex justify-center item
 
 <style>
   button[class*="bordered"].sm {
-    width: 45px;
-    height: 32px;
+    width: 27px;
+    height: 16px;
     border-radius: 3px;
     padding: 1px;
   }
@@ -31,8 +31,8 @@ const bthClasses = `w-full h-full max-h-full min-h-full flex justify-center item
     padding: 2px 5px;
   }
   button[class*="bordered"].lg {
-    width: 160px;
-    max-height: 64px;
+    width: 80px;
+    height: 50px;
     border-radius: 6px;
     padding: 1px;
   }
@@ -41,17 +41,45 @@ const bthClasses = `w-full h-full max-h-full min-h-full flex justify-center item
     padding: 4px 10px;
   }
   button[class*="trapezoid"].lg {
-    width: 156px;
+    height: 100%;
+    width: 78px;
+    min-height: 43px;
     max-height: 86px;
     padding: clamp(10px, 1vw, 20px);
+  }
+  @media (min-width: 1024px) {
+    button[class*="bordered"].sm {
+      width: 36px;
+      height: 24px;
+    }
+    button[class*="bordered"].lg {
+      width: 120px;
+      height: 75px;
+    }
+    button[class*="trapezoid"].lg {
+      width: 110px;
+    }
+  }
+  @media (min-width: 1440px) {
+    button[class*="bordered"].sm {
+      width: 45px;
+      height: 32px;
+    }
+    button[class*="bordered"].lg {
+      width: 160px;
+      height: 100px;
+    }
+    button[class*="trapezoid"].lg {
+      width: 156px;
+    }
   }
 </style>
 {
   (variant === "silver-bordered" || variant === "gold-bordered") && (
-    <button class={`shadow ${bthClasses}`}>
+    <button class={`shadow ${bthClasses}`} {...rest}>
       <span class="w-full h-full flex justify-center items-center bg-[#1C1C1C] z-10">
         <span
-          class={`text-12-24 ${variant === "silver-bordered" ? "text-silver" : "text-gold"}`}
+          class={`text-[12px] desktop-sm:text-[18px] desktop-lg:text-[24px] ${variant === "silver-bordered" ? "text-silver" : "text-gold"}`}
         >
           <slot />
         </span>
@@ -62,10 +90,15 @@ const bthClasses = `w-full h-full max-h-full min-h-full flex justify-center item
 {
   (variant === "trapezoid-left" || variant === "trapezoid-right") && (
     <button
-      class={`bg-cover bg-center bg-no-repeat ${variant === "trapezoid-left" ? '' : ''} ${bthClasses}`}
-      style={{ backgroundImage: `url(${variant === "trapezoid-left" ? images?.["trapezoid-btn-left"] : images?.["trapezoid-bth-right"]})` }}
+      class={`relative bg-cover bg-center bg-no-repeat ${variant === "trapezoid-left" ? "" : ""} ${bthClasses}`}
+      style={{
+        backgroundImage: `url(${variant === "trapezoid-left" ? images?.["trapezoid-btn-left"] : images?.["trapezoid-btn-right"]})`,
+      }}
+      {...rest}
     >
-      <span class="text-gold text-20-40 -translate-x-[11px]">
+      <span
+        class={`text-gold text-20-40 ${variant === "trapezoid-left" ? "translate-x-[40%] -translate-y-[10%]" : "-translate-x-[11px]"}`}
+      >
         <slot />
       </span>
     </button>

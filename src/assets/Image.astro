@@ -7,6 +7,7 @@ interface Props {
   width?: string | undefined;
   height?: string | undefined;
   className?: string;
+  style?: object;
 }
 
 const {
@@ -14,19 +15,23 @@ const {
   url,
   width,
   height,
-  className
+  className,
+  style, 
+  ...rest
 } = Astro.props as Props;
 
-const style = {
+const compileStyle = {
   ...(width && {width}),
   ...(height && {height}),
+  ...(style && {...style})
 }
 const imgSrc = url ?? images[name as keyof Images] ?? '';
 ---
 
 <figure
-  class={`${className ? className : ""}`} style={Object.keys(style)?.length > 0 ? style : {}}
+  class={`relative overflow-hidden ${className ? className : ""}`} style={Object.keys(compileStyle)?.length > 0 ? compileStyle : {}} {...rest}
 >
+  <slot/>
   <img
     class='w-full h-full object-contain'
     src={imgSrc}

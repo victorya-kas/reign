@@ -1,0 +1,36 @@
+---
+import Tooltip from "@components/Tooltip/Tooltip.astro";
+import StatisticItem from "./StatisticItem.astro";
+
+interface Props {
+  coin?: string;
+  cards?: string;
+  power?: string;
+  followers?: string;
+}
+
+const {
+  coin = "0",
+  cards = "0",
+  power = "0",
+  followers = "0",
+} = Astro.props as Props;
+---
+
+<Tooltip
+  id="statistics"
+  content={{
+    title: "statistics title",
+    content: "statistics content",
+  }}
+/>
+
+<div
+  class="h-full w-full grid grid-cols-2 grid-rows-2 gap-[5px]"
+  tooltip-id="statistics"
+>
+  <StatisticItem icon="icon-empty-coin-silver" content={coin} />
+  <StatisticItem icon="icon-cards-silver" content={cards} />
+  <StatisticItem icon="icon-power-silver" content={power} />
+  <StatisticItem icon="icon-followers-silver" content={followers} />
+</div>

@@ -1,10 +1,16 @@
 ---
-import Image from "assets/Image.astro";
+import Image from "@assets/Image.astro";
+import { images } from "@assets/images";
 ---
 
-<div class="relative max-w-[1605px] max-h-[775px] min-w-[812px] min-h-[375px] flex flex-col">
+<div
+  class="relative max-w-[1605px] max-h-[775px] min-w-[812px] min-h-[375px] flex flex-col"
+>
   <Image name="mobile-mockup" />
-  <div class="absolute top-0 left-0 right-0 bottom-0 block m-[30px]">
+  <div
+    class="absolute top-0 left-0 right-0 bottom-0 block m-[15px] desktop-md:m-[30px] bg-center bg-cover bg-no-repeat"
+    style={{ backgroundImage: `url(${images?.["mobile-mockup-bg"]})` }}
+  >
     <slot />
   </div>
 </div>

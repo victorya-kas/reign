@@ -1,3 +1,23 @@
+// common
+export type stringObject =  {
+  [key:string]: string
+}
+
+export type tooltip = {
+  title: string,
+  content: string
+}
+
+export type lang = "en" | "ru";
+export type languages = {
+  [key in lang]: string;
+}
+export type translations = {
+  [key in lang]: {
+    [key: string]: string;
+  };
+};
+
 // hero's types
 export type heroID =
   | "1101" //Praetor

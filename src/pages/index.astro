@@ -2,14 +2,18 @@
 import Mockup from "@components/Mockup.astro";
 import InteractiveInterface from "@components/InteractiveInterface/index.astro"
 import Page from "@layouts/Page.astro";
+import Image from "@assets/Image.astro";
 ---
 
 <Page title="Reign">
-  <Mockup>
-    <InteractiveInterface/>
-  </Mockup>
+  <Image name="interactive-interface-mockup" className="laptop:hidden"/>
+  <div class="hidden laptop:block">
+    <Mockup>
+      <InteractiveInterface/>
+    </Mockup>
+  </div>
   <div slot="scripts">
-    <script src="../scripts/interactiveInterface.ts"></script>
+    <script src="../scripts/components/Tooltip.ts"/>
   </div>
 </Page>
 

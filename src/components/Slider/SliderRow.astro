@@ -1,0 +1,24 @@
+---
+interface Props {
+    animation?: {
+        direction?: string,
+        duration?: number
+    }
+}
+
+const {animation = {}} = Astro?.props;
+const {direction = "normal", duration = 40} = animation;
+---
+<style>
+    @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-250px * 7));
+    }
+  }
+</style>
+<div class=`flex items-center animate-[scroll_${duration}s_linear_infinite_${direction}] w-${"full"}`>
+    <slot/>
+</div>

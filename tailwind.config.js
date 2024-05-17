@@ -6,22 +6,30 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "gold-gradient":
+        "gold-gradient-270":
           "linear-gradient(270deg, #533419 0%, #1E0E01 77.48%, #1C0C00 100%)",
+          "gold-gradient-286": "linear-gradient(286deg, rgba(97, 88, 69, 0) 23%, rgb(209, 174, 109) 50%, rgba(97, 88, 69, 0) 84%)",
         "dark-gold-gradient":
           "linear-gradient(180deg, #35251C 0%, #170C06 100%)",
-        "black-gradient": "linear-gradient(270deg, #0E0601 0%, #070402 100%)",
+        "black-gradient-270": "linear-gradient(270deg, #0E0601 0%, #070402 100%)",
+        "black-gradient-180": "linear-gradient(180deg, rgba(0, 0, 0, 0.90) 0%, rgba(0, 0, 0, 0.00) 85.14%)"
       },
       fontFamily: {
         jost: ["Jost", "sans-serif"],
+        story: ["v_CCTheStorySoFar"]
+      },
+      padding: {
+        "11-22": "clamp(11px, 3vh, 22px)",
       },
       fontSize: {
-        "12-24-s": "clamp(12px, 2vh, 24px)",
-        "20-40-l": "clamp(20px, 3vh, 40px)",
+        "20-40": "clamp(20px, 100%, 40px)",
+        "12-24": "clamp(12px, 2vw, 24px)",
+        "10-20": "clamp(10px, 100%, 20px)",
+        "11-22": "clamp(11px, 2vw, 22px)",
       },
       screens: {
-        mobile: "480px",
-        laptop: "640px",
+        "mobile": "576px",
+        "laptop": "840px",
         "desktop-sm": "1024px",
         "desktop-md": "1280px",
         "desktop-lg": "1440px",
@@ -62,7 +70,17 @@ module.exports = {
           backgroundClip: "text",
           fontWeight: "800",
           lineHeight: 1,
-        }
+        },
+        ".text-story-gold": {
+          fontFamily: "v_CCTheStorySoFar-Regular",
+          color: "transparent",
+          backgroundImage: "linear-gradient(180deg, #FCE9C9 0%, #B39F7D 100%)",
+          backgroundClip: "text",
+          fontWeight: "400"
+        },
+        ".shadow-1": {
+          filter: "drop-shadow(var(--shadow1))",
+        },
       };
       addComponents(newComponents, ["responsive", "hover"]);
       matchUtilities(
@@ -76,6 +94,7 @@ module.exports = {
             textShadow: value,
           }),
         },
+
         { values: theme("textShadow") }
       );
     }),
