@@ -1,9 +1,9 @@
 ---
+import Card from "@ui/Card.astro";
 import type { FollowerID, followerColor, followerValue } from "ts/types";
-import Card from "../Card.astro";
 import Image from "@assets/Image.astro";
 import type { Images } from "@assets/images";
-import Tooltip from "../Tooltip/Tooltip.astro";
+import Tooltip from "@ui/Tooltip.astro";
 import { useTranslations } from "i18n/utils";
 
 type follower = {
@@ -48,6 +48,54 @@ const followerImg: Partial<followerImg> = {
     "https://static.tildacdn.com/tild3634-3333-4962-a334-663338613663/follower-20015.png",
   "2403":
     "https://static.tildacdn.com/tild3361-6664-4435-b631-633363666161/follower-2403.png",
+  "2013":
+    "https://static.tildacdn.com/tild3538-6361-4264-b035-623261393736/follower-20013.png",
+  "2010":
+    "https://static.tildacdn.com/tild3132-6562-4264-b163-343563393638/follower-20010.png",
+  "2009":
+    "https://static.tildacdn.com/tild3138-3164-4535-a433-383561316132/follower-2009.png",
+  "2602":
+    "https://static.tildacdn.com/tild6233-3363-4039-b130-656363323364/follower-2602.png",
+  "2504":
+    "https://static.tildacdn.com/tild3830-6262-4937-a531-383733393765/follower-2504.png",
+  "2008":
+    "https://static.tildacdn.com/tild6439-3763-4561-b939-383635376139/follower-2008.png",
+  "2005":
+    "https://static.tildacdn.com/tild3733-6632-4466-b532-396166326438/follower-2005.png",
+  "2604":
+    "https://static.tildacdn.com/tild3831-3935-4936-b237-393136323931/follower-2604.png",
+  "2004":
+    "https://static.tildacdn.com/tild6266-6438-4631-a633-666563623434/follower-2004.png",
+  "2605":
+    "https://static.tildacdn.com/tild6232-6530-4630-b266-633736323863/follower-2605.png",
+  "2016":
+    "https://static.tildacdn.com/tild3661-6461-4137-b538-316134616536/follower-20016.png",
+  "2003":
+    "https://static.tildacdn.com/tild3634-3065-4065-b631-393463303561/follower-2003.png",
+  "2402":
+    "https://static.tildacdn.com/tild3230-6638-4532-b734-363237613466/follower-2402.png",
+  "2012":
+    "https://static.tildacdn.com/tild6235-3363-4332-b463-393134643735/follower-20012.png",
+  "2804":
+    "https://static.tildacdn.com/tild6337-6261-4432-a438-316333303264/follower-2804.png",
+  "2011":
+    "https://static.tildacdn.com/tild3063-6131-4433-a633-666531366432/follower-20011.png",
+  "2606":
+    "https://static.tildacdn.com/tild6433-3536-4232-a363-353332663561/follower-2606.png",
+  "2007":
+    "https://static.tildacdn.com/tild3139-3565-4430-b237-376636346138/follower-2007.png",
+  "2801":
+    "https://static.tildacdn.com/tild6162-3837-4462-a166-313637303762/follower-2801.png",
+  "2006":
+    "https://static.tildacdn.com/tild6633-3433-4238-a162-633339363639/follower-2006.png",
+  "2503":
+    "https://static.tildacdn.com/tild3934-3033-4262-a635-363633363035/follower-2503.png",
+  "2001":
+    "https://static.tildacdn.com/tild6364-3037-4430-b532-366236353538/follower-2001.png",
+  "2601":
+    "https://static.tildacdn.com/tild3264-6430-4239-a637-613731343661/follower-2601.png",
+  "2014":
+    "https://static.tildacdn.com/tild3137-3138-4666-a630-663335346637/follower-20014.png",
 };
 
 const followerAttributesImg: Images = {
@@ -101,6 +149,30 @@ const followerAttributes: Partial<followers> = {
   "2802": { color: "red", value: "2" },
   "2015": { color: "purple", value: "5" },
   "2403": { color: "gold", value: "5" },
+  "2016": { color: "purple", value: "6" },
+  "2014": { color: "purple", value: "5" },
+  "2013": { color: "purple", value: "5" },
+  "2011": { color: "purple", value: "5" },
+  "2012": { color: "purple", value: "3" },
+  "2804": { color: "red", value: "4" },
+  "2606": { color: "green", value: "5" },
+  "2801": { color: "red", value: "1" },
+  "2604": { color: "green", value: "3" },
+  "2605": { color: "green", value: "4" },
+  "2602": { color: "green", value: "2" },
+  "2504": { color: "blue", value: "5" },
+  "2601": { color: "green", value: "1" },
+  "2503": { color: "blue", value: "3" },
+  "2402": { color: "gold", value: "4" },
+  "2009": { color: "purple", value: "5" },
+  "2007": { color: "purple", value: "5" },
+  "2004": { color: "purple", value: "4" },
+  "2006": { color: "purple", value: "5" },
+  "2003": { color: "purple", value: "3" },
+  "2005": { color: "purple", value: "5" },
+  "2008": { color: "purple", value: "5" },
+  "2010": { color: "purple", value: "5" },
+  "2001": { color: "purple", value: "3" },
 };
 const t = useTranslations();
 const coin = followerAttributesImg[`coin-${followerAttributes[id]?.value}`];
@@ -159,7 +231,7 @@ const name = t(`${id}_name`);
       <span
         class="!z-30 bg-contain bg-center bg-no-repeat top-[-1px] left-[-1px] w-[24%] h-[22%] min-w-[18px] min-h-[23px] max-w-[36px] max-h-[46px]"
         style={{ backgroundImage: `url("${flag}")` }}
-        slot="card-icon"
+        slot="card-content"
         tooltip-id={showTooltip ? "follower-flag" : ""}
       />
     ) : (
@@ -171,7 +243,7 @@ const name = t(`${id}_name`);
       <span
         class="top-0 right-0 w-full h-[20px] desktop-md:h-[40px]"
         tooltip-id={showTooltip ? "follower-name" : ""}
-        slot="card-icon"
+        slot="card-content"
       >
         <span
           class={`w-full flex justify-center p-[3px] m-[3%] desktop-md:p-[6px] ${flag ? "!pl-[24%]" : ""} bg-black-gradient-180`}
@@ -188,7 +260,7 @@ const name = t(`${id}_name`);
   <Image
     url={border}
     className={"z-10"}
-    slot="img"
+    slot="card-img"
     tooltip-id={showTooltip &&
       `${isSmallSize ? "follower-card-sm" : "follower-card"}`}
   >
@@ -201,6 +273,6 @@ const name = t(`${id}_name`);
   <span
     class=`bg-contain bg-no-repeat bg-center ${!isSmallSize ? "!sticky bottom-0" : "bottom-[-6px]"} left-[-6px] ${isSmallSize ? 'w-[35%] h-[30%] min-w-[16px] min-h-[16px] max-w-[32px] max-h-[32px]' : 'w-[26%] h-[20%] min-w-[20px] min-h-[20px] max-w-[40px] max-h-[40px]'}`
     style={{ backgroundImage: `url("${coin}")` }}
-    slot="card-icon"
+    slot="card-content"
     tooltip-id={showTooltip ? "follower-value" : ""}></span>
 </Card>

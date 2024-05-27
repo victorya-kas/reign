@@ -1,8 +1,20 @@
 ---
-import Button from "@components/Button.astro";
-import Hero from "@components/Hero.astro";
+import Button from "ui/Button.astro";
+import Hero from "@components/Cards/Hero.astro";
 import Image from "@assets/Image.astro";
-import Tooltip from "@components/Tooltip/Tooltip.astro";
+import Tooltip from "@ui/Tooltip.astro";
+import type { heroID } from "@ts/types";
+
+const heroes: heroID[] = [
+  "1101",
+  "1201",
+  "1301",
+  "1401",
+  "1501",
+  "1601",
+  "1701",
+  "1801",
+];
 ---
 
 <Tooltip
@@ -38,7 +50,9 @@ import Tooltip from "@components/Tooltip/Tooltip.astro";
   class="h-[12%] min-h-[45px] max-h-[90px] flex justify-between items-center shrink-0"
 >
   <div class="relative shrink-0 h-full">
-    <Button variant="trapezoid-right" size="lg" tooltip-id="btn-timer">30</Button>
+    <Button variant="trapezoid-right" size="lg" tooltip-id="btn-timer"
+      >30</Button
+    >
     <span class="absolute right-0 top-0" tooltip-id="btn-sml-timer">
       <Button variant="silver-bordered" size="sm">90</Button>
     </span>
@@ -47,14 +61,15 @@ import Tooltip from "@components/Tooltip/Tooltip.astro";
     class="rerlative h-full flex items-center justify-center p-[0_25px_0_32px] desktop-md:p-[0_2vw_0_2.5vw]"
     tooltip-id="header-heroes"
   >
-    <Hero id="1101" mode="horizontal" />
-    <Hero id="1201" mode="horizontal" />
-    <Hero id="1301" mode="horizontal" orderFlag="empty" />
-    <Hero id="1401" mode="horizontal" />
-    <Hero id="1501" mode="horizontal" />
-    <Hero id="1601" mode="horizontal" />
-    <Hero id="1701" mode="horizontal" orderFlag="real" />
-    <Hero id="1801" mode="horizontal" />
+    {
+      heroes?.map((id: heroID) => (
+        <Hero
+          id={id}
+          mode="horizontal"
+          orderFlag={id === "1301" ? "empty" : id === "1701" ? "real" : null}
+        />
+      ))
+    }
   </div>
   <div class="shrink-0 h-full" tooltip-id="btn-settings">
     <Button variant="trapezoid-left" size="lg">

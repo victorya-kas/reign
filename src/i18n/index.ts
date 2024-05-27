@@ -1,4 +1,4 @@
-import { followerTr } from "@components/Follower/translations";
+import { followerTr } from "@components/Cards/Follower/translations";
 import { interactiveInterfaceTr } from "@components/InteractiveInterface/translations";
 import type { languages as TLanguages, translations as TTranslations } from "@ts/types";
 

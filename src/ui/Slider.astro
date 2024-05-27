@@ -1,0 +1,97 @@
+---
+interface Props {
+  animation?: {
+    direction?: "reverse" | "normal";
+    duration?: number;
+  };
+}
+const { animation = {} } = Astro.props;
+const { direction = "normal", duration = 40 } = animation;
+---
+
+<style>
+  [astro-slider]:before,
+  [astro-slider]:after {
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 1) 0%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    content: "";
+    height: 100%;
+    position: absolute;
+    width: 10%;
+    min-width: 50px;
+    max-width: 300px;
+    z-index: 100;
+  }
+  [astro-slider]:before {
+    left: 0;
+    top: 0;
+  }
+  [astro-slider]:after {
+    right: 0;
+    top: 0;
+    transform: rotateZ(180deg);
+  }
+  [astro-slider] [astro-slider-track]:hover {
+    animation-play-state: paused !important;
+  }
+  [astro-slider-track] img {
+    transform: translateZ(0);
+  }
+
+  @keyframes astroSlider {
+    0% {
+      transform: translateX(0) translateZ(0);
+    }
+    100% {
+      transform: translateX(-50%) translateZ(0);
+    }
+  }
+</style>
+
+<div
+  class="block w-screen max-w-[1620px] relative py-[30px] desktop-md:py-[60px] overflow-hidden"
+  astro-slider
+>
+  <div
+    class="flex items-center [&>*]:shrink-0"
+    style={{
+      animation: `astroSlider ${duration}s linear infinite ${direction}`,
+    }}
+    astro-slider-track
+  >
+    <slot />
+    <slot />
+  </div>
+</div>
+
+<script>
+  const sliders = document?.querySelectorAll(`div[astro-slider]`);
+  if (sliders) {
+    sliders?.forEach((slider) => {
+      const sliderContainer = slider.querySelector(
+        "[astro-slider-track]"
+      ) as HTMLElement;
+      defineSliderTrackWidth(sliderContainer);
+      window.addEventListener("resize", () =>{
+        console.log("resize")
+        defineSliderTrackWidth(sliderContainer)}
+      );
+    });
+  }
+  function defineSliderTrackWidth(sliderContainer: HTMLElement) {
+    const gap = window?.innerWidth < 1280 ? 15 : 30;
+    sliderContainer.style.gap = `${gap}px`;
+    const children = sliderContainer?.children as HTMLCollection;
+    const length = children?.length;
+    const gapWidth = (length - 1) * gap;
+    let width = gapWidth;
+    Array.from(children)?.forEach((el) => {
+      const child = el as HTMLElement;
+      width += child?.offsetWidth;
+    });
+    sliderContainer.style.width = `${width}px`;
+  }
+</script>

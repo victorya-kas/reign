@@ -1,0 +1,24 @@
+---
+import type { teamMemberID } from "@ts/types";
+import TeamMember from "@components/Cards/TeamMember/TeamMember.astro";
+import Slider from "@ui/Slider.astro";
+const teamMembers: teamMemberID[] = [
+  "2912",
+  "1009",
+  "1201",
+  "1302",
+  "1609",
+  "0202",
+  "1603",
+  "1811",
+  "2511",
+  "1001",
+  "2508",
+  "1311",
+  "1706",
+];
+---
+
+<Slider>
+  {teamMembers?.map((id: teamMemberID) => <TeamMember id={id} />)}
+</Slider>

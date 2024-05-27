@@ -1,22 +1,38 @@
 // common
-export type stringObject =  {
-  [key:string]: string
-}
-
 export type tooltip = {
-  title: string,
-  content: string
-}
+  title: string;
+  content: string;
+};
 
 export type lang = "en" | "ru";
 export type languages = {
   [key in lang]: string;
-}
+};
 export type translations = {
   [key in lang]: {
     [key: string]: string;
   };
 };
+
+export type teamMemberID =
+  | "1001"
+  | "1201"
+  | "0202"
+  | "1302"
+  | "1603"
+  | "2904"
+  | "0705"
+  | "1706"
+  | "2508"
+  | "1009"
+  | "1609"
+  | "0211"
+  | "1311"
+  | "1811"
+  | "2211"
+  | "2511"
+  | "0212"
+  | "2912";
 
 // hero's types
 export type heroID =
@@ -32,11 +48,38 @@ export type heroColor = "blue" | "gold" | "silver" | "green" | "red";
 export type heroOrder = "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8";
 
 // follower's types
-export type MerchantFollowerID = "2601" | "2602" | "2603" | "2604" | "2605" | "2606";
+export type MerchantFollowerID =
+  | "2601"
+  | "2602"
+  | "2603"
+  | "2604"
+  | "2605"
+  | "2606";
 export type NoblesFollowerID = "2401" | "2402" | "2403";
-export type NeutralFollowerID = "2001" | "2002" | "2003" | "2004" | "2005" | "2006" | "2007" | "2008" | "2009" | "2010" | "2011" | "2012" | "2013" | "2014" | "2015" | "2016";
+export type NeutralFollowerID =
+  | "2001"
+  | "2002"
+  | "2003"
+  | "2004"
+  | "2005"
+  | "2006"
+  | "2007"
+  | "2008"
+  | "2009"
+  | "2010"
+  | "2011"
+  | "2012"
+  | "2013"
+  | "2014"
+  | "2015"
+  | "2016";
 export type MaesterFollowerID = "2501" | "2502" | "2503" | "2504";
-export type GuardFollowerID = "2801" | "2802" | "2803" | "2804"
-export type FollowerID = MerchantFollowerID | NoblesFollowerID | NeutralFollowerID | MaesterFollowerID | GuardFollowerID;
+export type GuardFollowerID = "2801" | "2802" | "2803" | "2804";
+export type FollowerID =
+  | MerchantFollowerID
+  | NoblesFollowerID
+  | NeutralFollowerID
+  | MaesterFollowerID
+  | GuardFollowerID;
 export type followerColor = "blue" | "gold" | "green" | "red" | "purple";
 export type followerValue = "1" | "2" | "3" | "4" | "5" | "6";

@@ -1,8 +1,8 @@
 ---
 import type { heroID, heroOrder } from "ts/types";
-import Card from "./Card.astro";
 import Image from "@assets/Image.astro";
-import Tooltip from "./Tooltip/Tooltip.astro";
+import Tooltip from "@ui/Tooltip.astro";
+import Card from "@ui/Card.astro";
 
 type heroAttributes = {
   order: { value: heroOrder; url: string };
@@ -17,7 +17,7 @@ interface Props {
   mode?: "vertical" | "horizontal";
   active?: boolean;
   order?: boolean;
-  orderFlag?: "real" | "empty";
+  orderFlag?: "real" | "empty" | null;
   showTooltip?: boolean;
 }
 
@@ -196,12 +196,17 @@ const cardSizeClasses = isHorizontallMode
         <div
           class={`order z-30 absolute top-[-1px] left-[-1px] bg-gold-gradient-286 rounded-tl-[6px] ${orderFlag ? "pointer-events-none" : ""} ${isHorizontallMode ? "w-[64%] h-full min-w-[45px] max-w-[90px]" : "h-[64%] w-full min-h-[49px] max-h-[98px]"}`}
           tooltip-id={showTooltip || orderFlag ? "hero-order-flag" : ""}
-          slot="card-icon"
+          slot="card-content"
         >
           <span class="block w-[calc(100%-1px)] h-[calc(100%-1px)] bg-[#560C15] p-[3px] desktop-md:p-[6px]">
-            <Image name={id === "1101" ? "icon-ability-intelligence" : "icon-ability"} className="w-[50%] h-[50%] [&>img]:drop-shadow-[0_0_2px_rgba(0,0,0.9)]"/>
+            <Image
+              name={
+                id === "1101" ? "icon-ability-intelligence" : "icon-ability"
+              }
+              className="w-[50%] h-[50%] [&>img]:drop-shadow-[0_0_2px_rgba(0,0,0.9)]"
+            />
           </span>
-        </div> 
+        </div>
       ) : (
         ""
       )}
@@ -209,7 +214,7 @@ const cardSizeClasses = isHorizontallMode
         url={border}
         className="h-full max-h-full z-10"
         tooltip-id={showTooltip && !isHorizontallMode ? "hero-card" : ""}
-        slot="img"
+        slot="card-img"
       >
         <span
           class="block absolute top-0 bottom-0 left-0 right-0 z-[-1] w-full h-full bg-contain bg-center bg-no-repeat"
@@ -221,7 +226,7 @@ const cardSizeClasses = isHorizontallMode
           class="flex justify-center items-center bg-contain bg-center bg-no-repeat bottom-[-2px] right-[-2px] w-[25%] h-[25%] min-w-[12px] max-w-[32px] min-h-[15px] max-h-[40px]"
           style={{ backgroundImage: `url("${orderBg}")` }}
           tooltip-id={showTooltip ? "hero-order" : ""}
-          slot="card-icon"
+          slot="card-content"
         >
           <span class="text-gold text-[12px] desktop-sm:text-[18px] desktop-xl:text-[24px]">
             {orderValue}
@@ -234,7 +239,7 @@ const cardSizeClasses = isHorizontallMode
       <Image
         className="h-full max-h-full"
         url={coverUrl}
-        slot="img"
+        slot="card-img"
         tooltip-id={showTooltip && !isHorizontallMode ? "hero-card-cover" : ""}
       />
     </Card>

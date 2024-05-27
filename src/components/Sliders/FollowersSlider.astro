@@ -1,0 +1,51 @@
+---
+import type { FollowerID } from "@ts/types";
+import Slider from "@ui/Slider.astro";
+import Follower from "@components/Cards/Follower/Follower.astro";
+const followersRowReverse: FollowerID[] = [
+  "2013",
+  "2603",
+  "2010",
+  "2802",
+  "2002",
+  "2403",
+  "2009",
+  "2602",
+  "2504",
+  "2008",
+  "2803",
+  "2005",
+  "2604",
+  "2004",
+  "2605",
+  "2016",
+];
+const followersRow: FollowerID[] = [
+  "2015",
+  "2003",
+  "2402",
+  "2012",
+  "2804",
+  "2011",
+  "2606",
+  "2501",
+  "2007",
+  "2801",
+  "2401",
+  "2006",
+  "2503",
+  "2001",
+  "2502",
+  "2601",
+  "2014",
+];
+---
+
+<div class="flex flex-col [&>*]:shrink-0">
+  <Slider animation={{ direction: "reverse", duration: 76 }}>
+    {followersRowReverse?.map((id: FollowerID) => <Follower id={id} />)}
+  </Slider>
+  <Slider animation={{ duration: 76 }}>
+    {followersRow?.map((id: FollowerID) => <Follower id={id} />)}
+  </Slider>
+</div>
