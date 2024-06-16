@@ -1,14 +1,17 @@
 ---
 import Card from "@ui/Card.astro";
-import type { FollowerID, followerColor, followerValue } from "ts/types";
+import type { FollowerID, followerColor, followerValue, lang } from "ts/types";
 import Image from "@assets/Image.astro";
 import type { Images } from "@assets/images";
-import Tooltip from "@ui/Tooltip.astro";
 import { useTranslations } from "i18n/utils";
+import { followerTr } from "./translations";
 
 type follower = {
   color: followerColor;
   value: followerValue;
+  name?: {
+    [key in lang]: string;
+  }
 };
 
 type followerImg = {
@@ -23,9 +26,10 @@ interface Props {
   id: FollowerID;
   size?: "regular" | "small";
   showTooltip?: boolean;
+  showAttributes?: "onhover" | "onload"
 }
 
-const { id, size = "regular", showTooltip = false } = Astro.props as Props;
+const { id, size = "regular", showTooltip = false, showAttributes = "onload" } = Astro.props as Props;
 
 const isSmallSize = size === "small";
 
@@ -174,65 +178,38 @@ const followerAttributes: Partial<followers> = {
   "2010": { color: "purple", value: "5" },
   "2001": { color: "purple", value: "3" },
 };
-const t = useTranslations();
+
+const t = useTranslations(followerTr);
 const coin = followerAttributesImg[`coin-${followerAttributes[id]?.value}`];
 const border = followerAttributesImg[`border-${followerAttributes[id]?.color}`];
 const flag = followerAttributesImg[`flag-${followerAttributes[id]?.color}`];
 const name = t(`${id}_name`);
 ---
-
-{
-  showTooltip && (
-    <>
-      <Tooltip
-        id="follower-card"
-        content={{
-          title: "follower-card card title",
-          content: "follower-card card content",
-        }}
-      />
-      <Tooltip
-        id="follower-card-sm"
-        content={{
-          title: "follower-card-sm title",
-          content: "follower-card-sm content",
-        }}
-      />
-      <Tooltip
-        id="follower-value"
-        content={{
-          title: "follower-value title",
-          content: "follower-value content",
-        }}
-      />
-      <Tooltip
-        id="follower-flag"
-        content={{
-          title: "follower-flag title",
-          content: "follower-flag content",
-        }}
-      />
-      <Tooltip
-        id="follower-name"
-        content={{
-          title: "follower-name title",
-          content: "follower-name content",
-        }}
-      />
-    </>
-  )
-}
+<style>
+  [follower-card="regular"].hover-attributes:hover {
+    transform: scale(1.1);
+  }
+  [follower-card="regular"].hover-attributes ["follower-card-border"] > img {
+    opacity: 0;
+  }
+  [follower-card="regular"].hover-attributes:hover ["follower-card-border"] > img {
+    opacity: 1;
+  }
+</style>
 
 <Card
-  className=`${ isSmallSize ? 'min-w-[45px] min-h-[55px] max-w-[90px] max-h-[105px]' : 'min-w-[75px] h-[105px] max-w-[150px] desktop-md:h-[210px]'}`
+  className=`${showAttributes === "onhover" ? "hover-attributes" : ""} ${ isSmallSize ? 'min-w-[45px] min-h-[55px] max-w-[90px] max-h-[105px]' : 'min-w-[75px] h-[105px] max-w-[150px] desktop-md:h-[210px]'}`
+  tooltip-id={showTooltip &&
+    `${isSmallSize ? "follower-card-sm" : "follower-card"}`}
+  follower-card={size}
 >
   {
     flag && !isSmallSize ? (
       <span
         class="!z-30 bg-contain bg-center bg-no-repeat top-[-1px] left-[-1px] w-[24%] h-[22%] min-w-[18px] min-h-[23px] max-w-[36px] max-h-[46px]"
         style={{ backgroundImage: `url("${flag}")` }}
+        follower-card-flag
         slot="card-content"
-        tooltip-id={showTooltip ? "follower-flag" : ""}
       />
     ) : (
       ""
@@ -242,7 +219,7 @@ const name = t(`${id}_name`);
     name && !isSmallSize ? (
       <span
         class="top-0 right-0 w-full h-[20px] desktop-md:h-[40px]"
-        tooltip-id={showTooltip ? "follower-name" : ""}
+        follower-card-name
         slot="card-content"
       >
         <span
@@ -257,22 +234,18 @@ const name = t(`${id}_name`);
       ""
     )
   }
-  <Image
-    url={border}
-    className={"z-10"}
-    slot="card-img"
-    tooltip-id={showTooltip &&
-      `${isSmallSize ? "follower-card-sm" : "follower-card"}`}
-  >
+  <Image url={border} className={"z-10"} slot="card-img" follower-card-border>
     <span
       class=`block absolute top-0 bottom-0 left-0 right-0 z-[-1] w-full h-full bg-cover bg-no-repeat ${isSmallSize ? "bg-[-4px_top]" : "bg-center"}`
+      follower-card-img
       style={{
         backgroundImage: `url("${followerImg[id as keyof followerImg]}")`,
       }}></span>
   </Image>
   <span
-    class=`bg-contain bg-no-repeat bg-center ${!isSmallSize ? "!sticky bottom-0" : "bottom-[-6px]"} left-[-6px] ${isSmallSize ? 'w-[35%] h-[30%] min-w-[16px] min-h-[16px] max-w-[32px] max-h-[32px]' : 'w-[26%] h-[20%] min-w-[20px] min-h-[20px] max-w-[40px] max-h-[40px]'}`
+    class=`bg-contain bg-no-repeat bg-center left-[-6px] ${isSmallSize ? 'bottom-[-6px] w-[35%] h-[30%] min-w-[16px] min-h-[16px] max-w-[32px] max-h-[32px]' : 'bottom-[5%] w-[26%] h-[20%] min-w-[20px] min-h-[20px] max-w-[40px] max-h-[40px]'}`
     style={{ backgroundImage: `url("${coin}")` }}
     slot="card-content"
-    tooltip-id={showTooltip ? "follower-value" : ""}></span>
+    tooltip-id={showTooltip ? "follower-value" : null}
+    follower-card-coin></span>
 </Card>

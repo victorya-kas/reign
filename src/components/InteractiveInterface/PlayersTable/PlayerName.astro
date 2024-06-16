@@ -1,6 +1,5 @@
 ---
 import Image from "@assets/Image.astro";
-import Tooltip from "@ui/Tooltip.astro";
 interface Props {
   name: string;
   active?: boolean;
@@ -9,16 +8,8 @@ interface Props {
 const { name, active = false } = Astro.props as Props;
 ---
 
-<Tooltip
-  id="player-name"
-  content={{
-    title: "player name title",
-    content: "player name content",
-  }}
-/>
-
 <div
-  class="w-full flex items-center gap-[4px] desktop-md:gap-[8px]"
+  class="w-full h-full flex justify-center items-center gap-[4px] desktop-md:gap-[8px] px-[4px] desktop-md:px-[8px]"
   tooltip-id="player-name"
 >
   {

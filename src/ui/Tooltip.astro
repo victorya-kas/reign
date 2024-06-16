@@ -10,7 +10,19 @@ const { content, id } = Astro.props as Props;
 
 <div tooltip-for={id} tooltip-content={JSON.stringify(content)} class="hidden">
 </div>
-
+<style is:global>
+  [highligted-tooltips-id] {
+    height: 0;
+    width: 0;
+  }
+  [highligted-tooltips-id] > * {
+    position: absolute !important;
+    z-index: 500 !important;
+  }
+  [origin-highlighted] {
+    opacity: 0;
+  }
+</style>
 <script>
   import type { tooltip } from "@ts/types";
 
@@ -19,15 +31,7 @@ const { content, id } = Astro.props as Props;
   const tooltipContainers = document.querySelectorAll("[tooltip-container]");
   if (tooltipContainers?.length) {
     tooltipContainers?.forEach((container) => {
-      const overlay =
-        container?.getAttribute("tooltip-container-overlay") === "true";
-      if (overlay) {
-        container.addEventListener("click", () => {
-          if (container.classList.contains("overlay")) {
-            removeTooltip();
-          }
-        });
-      }
+      container.classList.add("relative");
       const tooltips: NodeListOf<Element> | [] =
         container?.querySelectorAll("[tooltip-id]") ?? [];
       assignTooltipEventsListeners(tooltips);
@@ -37,7 +41,7 @@ const { content, id } = Astro.props as Props;
   function assignTooltipEventsListeners(tooltips: NodeListOf<Element> | []) {
     const tooltipsContent: tooltipsContent = getTooltipsContent(tooltips);
     tooltips.forEach((element) => {
-      element.addEventListener("mouseenter", (event: Event) => {
+      element.addEventListener("mouseover", (event: Event) => {
         onShowTooltip(event, tooltipsContent);
       });
       element.addEventListener("click", (event: Event) =>
@@ -45,7 +49,10 @@ const { content, id } = Astro.props as Props;
       );
     });
   }
-  function getTooltipContainer(tooltip: HTMLElement): HTMLElement {
+  function getTooltipContainer(
+    tooltip: HTMLElement | null
+  ): HTMLElement | null {
+    if (!tooltip) null;
     return tooltip?.closest("[tooltip-container]") as HTMLElement;
   }
 
@@ -82,21 +89,19 @@ const { content, id } = Astro.props as Props;
     });
     highlightedElsContainer?.remove();
     document?.getElementById("interactive-tooltip")?.remove();
-    const container = document?.querySelector(
-      "[tooltip-container][tooltip-container-overlay='true'].overlay"
-    );
-    if (container) container?.classList?.remove("overlay");
+    const overlay = document?.querySelector("[tooltip-container] > .overlay");
+    if (overlay) overlay.remove();
   }
 
   function onShowTooltip(event: Event, tooltipsContent: tooltipsContent): void {
     event.preventDefault();
     event.stopPropagation();
-    const el = event.target as HTMLElement;
+    const target = event.target as HTMLElement;
+    const el = target.closest("[tooltip-id]") as HTMLElement;
     const container = getTooltipContainer(el) as HTMLElement;
-    const id = el.getAttribute("tooltip-id") ?? "";
+    const id = el?.getAttribute("tooltip-id") ?? "";
     const content = tooltipsContent?.[id];
-
-    if (!content) return;
+    if (!el || !content || !container) return;
 
     showTooltip(el, content, container);
   }
@@ -106,15 +111,35 @@ const { content, id } = Astro.props as Props;
     content: string,
     container: HTMLElement
   ): void {
-    container?.classList?.add("overlay");
-    addHighlightTooltipEls(target, container);
-    const newTooltip = createTooltip(JSON.parse(content));
+    const overlay = document.createElement("div") as HTMLElement;
+    overlay?.classList?.add(
+      "overlay",
+      "absolute",
+      "top-0",
+      "left-0",
+      "bottom-0",
+      "right-0",
+      "w-full",
+      "h-full",
+      "z-[450]",
+      "bg-[rgba(0,0,0,0.8)]",
+      "rounded-[50px]"
+    );
+    overlay?.addEventListener("mouseenter", removeTooltip);
+    overlay?.addEventListener("click", removeTooltip);
+    container?.appendChild(overlay);
+    const tooltipId = target.getAttribute("tooltip-id");
+    addHighlightTooltipEls(target, tooltipId!, container);
+    const newTooltip = createTooltip(JSON.parse(content), tooltipId!);
     document.body.appendChild(newTooltip);
     positionTooltip(target, newTooltip, container);
   }
 
-  function addHighlightTooltipEls(target: HTMLElement, container: HTMLElement) {
-    const tooltipId = target.getAttribute("tooltip-id");
+  function addHighlightTooltipEls(
+    target: HTMLElement,
+    tooltipId: string,
+    container: HTMLElement
+  ) {
     const tooltipHighlightedEls = container?.querySelectorAll(
       `[tooltip-id=${tooltipId}]`
     );
@@ -135,23 +160,40 @@ const { content, id } = Astro.props as Props;
       highlightedElsContainer.appendChild(elClone);
       originEl.setAttribute("origin-highlighted", tooltipId);
       if (elClone.getAttribute("highlight-active") === "true") {
-        elClone.addEventListener("mouseleave", removeTooltip);
+        elClone.addEventListener("mouseout", () => {
+          target.removeAttribute("highlight-active");
+          removeTooltip();
+        });
       }
     });
     document.body.appendChild(highlightedElsContainer);
   }
 
-  function createTooltip(content: tooltip | string): HTMLSpanElement {
+  function createTooltip(
+    content: tooltip | string,
+    id: string
+  ): HTMLSpanElement {
     const span = document.createElement("span");
     span.setAttribute("id", "interactive-tooltip");
-    span.classList.add("absolute", "shadow", "z-[100]");
+    span.setAttribute("tooltip-for", id);
+    span.classList.add(
+      "block",
+      "!absolute",
+      "shadow",
+      "z-[550]",
+      "gold-bordered",
+      "w-full",
+      "min-w-[105px]",
+      "max-w-[225px]",
+      "desktop-md:max-w-[450px]"
+    );
     span.innerHTML =
       typeof content === "string"
         ? content
-        : `<span class="tooltip-content !fixed gold-bordered rounded-[5px] p-[1px]">
-                      <span class="flex flex-col justify-center items-center bg-dark-gold-gradient p-[15px] desktop-md:p-[30px] shadow rounded-[5px] relative z-30">
-                        <h3 class="text-10-20 text-gold pb-[10px]">${content?.title}</h3>
-                        <p class="font-jost text-[13px] text-[#FFC99D]">${content?.content}</p>
+        : `<span class="tooltip-content block w-full rounded-[5px] p-[1px]">
+                      <span class="flex flex-col justify-center bg-dark-gold-gradient p-[15px] desktop-md:p-[30px] shadow rounded-[5px] relative z-30">
+                        <h3 class="text-[12px] desktop-sm-[16px] desktop-md-[20px] text-gold pb-[10px]">${content?.title}</h3>
+                        <p class="font-jost text-[10px] desktop-sm-[14px] desktop-md-[16px] text-[#FFC99D]">${content?.content}</p>
                       </span>
                     </span>`;
     return span;
@@ -162,8 +204,11 @@ const { content, id } = Astro.props as Props;
     tooltip: HTMLElement,
     container: HTMLElement
   ) {
-    const { width: containerWidth = 100, height: containerHeight = 100 } =
+    let { width: containerWidth = 100, height: containerHeight = 100 } =
       container?.getBoundingClientRect();
+    containerWidth =
+      window?.innerWidth > containerWidth ? containerWidth : window?.innerWidth;
+
     const {
       top: targetPosTop,
       left: targetPosLeft,
@@ -173,30 +218,34 @@ const { content, id } = Astro.props as Props;
     const tooltipContent = tooltip.querySelector(
       ".tooltip-content"
     ) as HTMLElement;
-    const tooltipWidth = tooltipContent.offsetWidth;
-    const tooltipHeight = tooltipContent.offsetHeight;
+    const gap = 30;
+    const { width: tooltipW, height: tooltipH } =
+      tooltipContent?.getBoundingClientRect();
+    const tooltipWidth = tooltipW + gap;
+    const tooltipHeight = tooltipH + gap;
 
     const tooltipPosTopLeft = {
-      x: targetPosLeft * 0.9,
-      y: targetPosTop * 0.8,
+      x: targetPosLeft - tooltipWidth,
+      y: targetPosTop - tooltipHeight,
     };
     const tooltipPosTopRight = {
-      x: targetPosRight * 0.9,
-      y: targetPosTop * 0.8,
+      x: targetPosRight,
+      y: targetPosTop,
     };
     const tooltipPosBottomLeft = {
-      x: targetPosLeft * 0.9,
-      y: targetPosBottom * 1.15,
+      x: targetPosLeft - tooltipWidth,
+      y: targetPosBottom,
     };
     const tooltipPosBottomRight = {
-      x: targetPosRight * 0.9,
-      y: targetPosBottom * 1.15,
+      x: targetPosRight,
+      y: targetPosBottom,
     };
 
     if (
       tooltipPosBottomRight.x + tooltipWidth < containerWidth &&
       tooltipPosBottomRight.y + tooltipHeight < containerHeight
     ) {
+      console.log("tooltipPosBottomRight");
       setTooltipPos(tooltip, tooltipPosBottomRight.y, tooltipPosBottomRight.x);
       return;
     }
@@ -204,6 +253,7 @@ const { content, id } = Astro.props as Props;
       tooltipPosBottomRight.x + tooltipWidth > containerWidth &&
       tooltipPosBottomRight.y + tooltipHeight < containerHeight
     ) {
+      console.log("tooltipPosBottomLeft");
       setTooltipPos(tooltip, tooltipPosBottomLeft.y, tooltipPosBottomLeft.x);
       return;
     }
@@ -211,6 +261,7 @@ const { content, id } = Astro.props as Props;
       tooltipPosBottomRight.x + tooltipWidth < containerWidth &&
       tooltipPosBottomRight.y + tooltipHeight > containerHeight
     ) {
+      console.log("tooltipPosTopRight");
       setTooltipPos(tooltip, tooltipPosTopRight.y, tooltipPosTopRight.x);
       return;
     }
@@ -218,6 +269,7 @@ const { content, id } = Astro.props as Props;
       tooltipPosBottomRight.x + tooltipWidth > containerWidth &&
       tooltipPosBottomRight.y + tooltipHeight > containerHeight
     ) {
+      console.log("tooltipPosTopLeft");
       setTooltipPos(tooltip, tooltipPosTopLeft.y, tooltipPosTopLeft.x);
       return;
     }

@@ -14,43 +14,11 @@
 
 :root {
   --shadow1: 0px 0px 15px rgba(229, 149, 46, 0.40);
+  --shadow2: 0px 0px 5px rgba(116, 115, 122, 1);
 }
 
 body {
   box-sizing: border-box;
-}
-
-#interactive-tooltip {
-  z-index: 100;
-  animation: fadein 0.3s ease-in;
-}
-[highligted-tooltips-id] {
-  height: 0;
-  width: 0;
-}
-[highligted-tooltips-id] > * {
-  position: absolute !important;
-  z-index: 100 !important;
-}
-[origin-highlighted] {
-  opacity: 0
-}
-.overlay {
-  position: relative;
-}
-.overlay:before {
-  content: "";
-  position: absolute;
-  display: block;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 50;
-  background-color: rgba(0,0,0,0.8);
-  animation: fadein 0.2s linear;
 }
 .gold-bordered {
   position: relative;
@@ -107,16 +75,4 @@ body {
       #616161 20%,
       transparent 45%
     );
-  }
-
-  @keyframes fadein {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0.5;
-    }
-    100% {
-      opacity: 1;
-    }
   }

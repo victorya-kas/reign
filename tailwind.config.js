@@ -81,6 +81,20 @@ module.exports = {
         ".shadow-1": {
           filter: "drop-shadow(var(--shadow1))",
         },
+        ".shadow-2": {
+          filter: "drop-shadow(var(--shadow2))"
+        },
+        ".p-container": {
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          width: "100%",
+          height: "100%",
+          minHeight: "100vh",
+          maxWidth: "1980px",
+          minWidth: "375px"
+        }
       };
       addComponents(newComponents, ["responsive", "hover"]);
       matchUtilities(

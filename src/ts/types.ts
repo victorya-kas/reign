@@ -8,9 +8,9 @@ export type lang = "en" | "ru";
 export type languages = {
   [key in lang]: string;
 };
-export type translations = {
+export type translations<T = string> = {
   [key in lang]: {
-    [key: string]: string;
+    [key: string]: T;
   };
 };
 

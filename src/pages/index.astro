@@ -1,31 +1,18 @@
 ---
 import Page from "@layouts/Page.astro";
-import TeamSlider from "@components/Sliders/TeamSlider.astro";
-import MobileMockup from "@components/MobileMockup.astro";
 import InteractiveInterface from "@components/InteractiveInterface/InteractiveInterface.astro";
-import Image from "@assets/Image.astro";
 import FollowersSlider from "@components/Sliders/FollowersSlider.astro";
+import TeamSlider from "@components/Sliders/TeamSlider.astro";
 ---
 
 <Page title="Reign">
-  <!-- astro-interactive-gallery START -->
-  <section id="astro-interactive-gallery">
-    <Image name="interactive-interface-mockup" className="laptop:hidden" />
-    <div class="hidden laptop:block">
-      <MobileMockup>
-        <InteractiveInterface />
-      </MobileMockup>
-    </div>
+  <section id="astro-interactive-gallery" class="px-[15px] desktop-sm:px-[30px]">
+    <InteractiveInterface />
   </section>
-  <!-- astro-interactive-gallery END -->
-  <!-- astro-team-carousel START -->
   <section id="astro-team-carousel">
-    <TeamSlider/>
+    <TeamSlider />
   </section>
-  <!-- astro-team-carousel END -->
-  <!-- followers-carousel START -->
   <section id="followers-carousel">
-    <FollowersSlider/>
+    <FollowersSlider />
   </section>
-  <!-- followers-carousel END -->
 </Page>

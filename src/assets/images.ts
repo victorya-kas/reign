@@ -31,4 +31,6 @@ export const images: Images = {
     "https://static.tildacdn.com/tild3733-3333-4166-b337-653337333963/button-resourses.png",
   "icon-ability":
     "https://static.tildacdn.com/tild3737-6337-4131-b530-393739353964/roll-ability.png",
+  "icon-gold-cross":
+    "https://static.tildacdn.com/tild6334-6130-4437-b830-306635393534/gold-cross.svg",
 };

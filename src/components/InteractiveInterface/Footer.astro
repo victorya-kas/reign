@@ -1,29 +1,23 @@
 ---
 import Button from "ui/Button.astro";
 import Image from "@assets/Image.astro";
-import Tooltip from "@ui/Tooltip.astro";
 import type { FollowerID } from "@ts/types";
 import Follower from "@components/Cards/Follower/Follower.astro";
 
-const followers:FollowerID[] = ["2603", "2802", "2501", "2015", "2403"]
+const followers: FollowerID[] = ["2603", "2802", "2501", "2015", "2403"];
 ---
-<Tooltip
-  id="btn-resourses"
-  content={{
-    title: "btn-resourses title",
-    content: "btn-resourses content",
-  }}
-/>
-<Tooltip
-  id="btn-ability-intelligence"
-  content={{
-    title: "btn-ability-intelligence title",
-    content: "btn-ability-intelligence content",
-  }}
-/>
+<style>
+  div[followers-hand] > div[follower-card="regular"] {
+    background-color: red !important;
+  }
+  [followers-hand] div[follower-card="regular"] [follower-card-coin] {
+    position: sticky !important;
+    bottom: 0 !important;
+  }
+</style>
 
 <div
-  class="h-[15%] min-h-[86px] max-h-[115px] flex justify-between gap-[15px] shrink-0 desktop-md:[30px] px-[10px] desktop-md:px-[20px]"
+  class="h-[12%] min-h-[56px] max-h-[96px] flex justify-between gap-[15px] shrink-0 desktop-md:[30px] px-[10px] desktop-md:px-[20px]"
 >
   <div class="shrink-0 h-full" tooltip-id="btn-resourses">
     <Button variant="gold-bordered" size="lg">
@@ -33,10 +27,11 @@ const followers:FollowerID[] = ["2603", "2802", "2501", "2015", "2403"]
       />
     </Button>
   </div>
-  <div class="w-[47%] min-w-[383px] max-w-[756px] flex justify-center">
-    {
-      followers?.map((id:FollowerID) => <Follower id={id} showTooltip={true} />)
-    }
+  <div
+    class="w-[47%] min-w-[383px] max-w-[756px] flex justify-center"
+    tooltip-id="followers-hand" followers-hand
+  >
+    {followers?.map((id: FollowerID) => <Follower id={id} />)}
   </div>
   <div class="shrink-0 h-full" tooltip-id="btn-ability-intelligence">
     <Button variant="gold-bordered" size="lg">

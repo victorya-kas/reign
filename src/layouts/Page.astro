@@ -23,7 +23,7 @@ const { title = "Reign", className } = Astro.props;
   </head>
   <body>
     <div
-      class={`w-full flex flex-col items-center justify-center ${className ?? ""}`}
+      class={`p-container px-[15px] desktop-sm:px-[30px] py-[30px] desktop-sm:py-[60px] ${className ?? ""}`}
     >
       <slot />
     </div>

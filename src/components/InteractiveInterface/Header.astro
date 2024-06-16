@@ -2,7 +2,6 @@
 import Button from "ui/Button.astro";
 import Hero from "@components/Cards/Hero.astro";
 import Image from "@assets/Image.astro";
-import Tooltip from "@ui/Tooltip.astro";
 import type { heroID } from "@ts/types";
 
 const heroes: heroID[] = [
@@ -17,48 +16,19 @@ const heroes: heroID[] = [
 ];
 ---
 
-<Tooltip
-  id="header-heroes"
-  content={{
-    title: "header-heroes title",
-    content: "header-heroes content",
-  }}
-/>
-<Tooltip
-  id="btn-settings"
-  content={{
-    title: "btn-settings title",
-    content: "btn-settings content",
-  }}
-/>
-<Tooltip
-  id="btn-timer"
-  content={{
-    title: "btn-timer title",
-    content: "btn-timer content",
-  }}
-/>
-<Tooltip
-  id="btn-sml-timer"
-  content={{
-    title: "btn-sml-timer title",
-    content: "btn-sml-timer content",
-  }}
-/>
-
 <div
   class="h-[12%] min-h-[45px] max-h-[90px] flex justify-between items-center shrink-0"
 >
-  <div class="relative shrink-0 h-full">
-    <Button variant="trapezoid-right" size="lg" tooltip-id="btn-timer"
+  <div class="relative shrink-0 h-full" tooltip-id="btn-timer">
+    <Button variant="trapezoid-right" size="lg"
       >30</Button
     >
-    <span class="absolute right-0 top-0" tooltip-id="btn-sml-timer">
+    <span class="absolute right-0 top-0" tooltip-id="btn-sm-timer">
       <Button variant="silver-bordered" size="sm">90</Button>
     </span>
   </div>
   <div
-    class="rerlative h-full flex items-center justify-center p-[0_25px_0_32px] desktop-md:p-[0_2vw_0_2.5vw]"
+    class="relative h-full flex items-center justify-center p-[0_25px_0_32px] desktop-md:p-[0_2vw_0_2.5vw]"
     tooltip-id="header-heroes"
   >
     {
