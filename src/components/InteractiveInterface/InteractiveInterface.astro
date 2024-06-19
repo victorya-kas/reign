@@ -75,8 +75,12 @@ const t = useTranslations(interactiveInterfaceTr);
     }
   }
 </style>
-<div interactive-interface-container>
-  <div class="w-full min-w-full px-[15px]" interactive-interface-mockup>
+<section
+  id="astro-interactive-gallery"
+  class="w-full flex flex-col items-center px-[15px] desktop-sm:px-[30px]"
+  interactive-interface-container
+>
+  <div class="w-full min-w-full" interactive-interface-mockup>
     <Image className="w-full" name="interactive-interface-mockup" />
   </div>
   <p class="p-[15px] w-full flex justify-center" interactive-interface-message>
@@ -208,7 +212,7 @@ const t = useTranslations(interactiveInterfaceTr);
       </div>
     </MobileMockup>
   </div>
-</div>
+</section>
 
 <script>
   const container = document.querySelector("[interactive-interface-container]");

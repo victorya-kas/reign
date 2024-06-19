@@ -18,7 +18,8 @@ const teamMembers: teamMemberID[] = [
   "1706",
 ];
 ---
-
-<Slider>
-  {teamMembers?.map((id: teamMemberID) => <TeamMember id={id} />)}
-</Slider>
+<section id="astro-team-carousel">
+  <Slider>
+    {teamMembers?.map((id: teamMemberID) => <TeamMember id={id} />)}
+  </Slider>
+</section>

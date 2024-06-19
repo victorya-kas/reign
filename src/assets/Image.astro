@@ -33,7 +33,7 @@ const imgSrc = url ?? images[name as keyof Images] ?? '';
 >
   <slot/>
   <img
-    class='w-full h-full object-contain'
+    class='block w-full h-full object-contain'
     src={imgSrc}
     alt={`reign ${name ?? ''}`}
   />

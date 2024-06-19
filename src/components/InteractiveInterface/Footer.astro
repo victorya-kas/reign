@@ -17,12 +17,12 @@ const followers: FollowerID[] = ["2603", "2802", "2501", "2015", "2403"];
 </style>
 
 <div
-  class="h-[12%] min-h-[56px] max-h-[96px] flex justify-between gap-[15px] shrink-0 desktop-md:[30px] px-[10px] desktop-md:px-[20px]"
+  class="h-[15%] min-h-[56px] max-h-[96px] flex justify-between gap-[15px] shrink-0 desktop-md:[30px] px-[10px] desktop-md:px-[20px]"
 >
-  <div class="shrink-0 h-full" tooltip-id="btn-resourses">
+  <div class="shrink-0 h-full" tooltip-id="btn-resourses" tooltip-id="btn-ability-intelligence">
     <Button variant="gold-bordered" size="lg">
       <Image
-        name="icon-resourses"
+        name="icon-ability-intelligence"
         className="w-[28px] h-[28px] desktop-md:w-[55px] desktop-md:h-[55px]"
       />
     </Button>
@@ -33,10 +33,10 @@ const followers: FollowerID[] = ["2603", "2802", "2501", "2015", "2403"];
   >
     {followers?.map((id: FollowerID) => <Follower id={id} />)}
   </div>
-  <div class="shrink-0 h-full" tooltip-id="btn-ability-intelligence">
+  <div class="shrink-0 h-full" tooltip-id="btn-resourses">
     <Button variant="gold-bordered" size="lg">
       <Image
-        name="icon-ability-intelligence"
+        name="icon-resourses"
         className="w-[28px] h-[28px] desktop-md:w-[55px] desktop-md:h-[55px]"
       />
     </Button>

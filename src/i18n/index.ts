@@ -1,8 +1,8 @@
-import type { languages as TLanguages} from "@ts/types";
+import type { languages as TLanguages, lang} from "@ts/types";
 
 export const languages: TLanguages = {
   en: "English",
   ru: "Русский",
 };
 
-export const defaultLang = "ru";
+export const defaultLang: lang = "en";

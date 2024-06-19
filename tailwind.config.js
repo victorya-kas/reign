@@ -93,7 +93,8 @@ module.exports = {
           height: "100%",
           minHeight: "100vh",
           maxWidth: "1980px",
-          minWidth: "375px"
+          minWidth: "375px",
+          overflow: "hidden"
         }
       };
       addComponents(newComponents, ["responsive", "hover"]);

@@ -41,11 +41,41 @@ const followersRow: FollowerID[] = [
 ];
 ---
 
-<div class="flex flex-col gap-[15px] desktop-sm:gap-[30px] [&>*]:shrink-0 [&>*]:py-0">
-  <Slider animation={{ direction: "reverse", duration: 76 }}>
-    {followersRowReverse?.map((id: FollowerID) => <Follower id={id} showAttributes="onhover" />)}
+<section
+  class="flex flex-col gap-[16px] [&>*]:shrink-0 [&>*]:py-0"
+  id="followers-carousel"
+>
+  <Slider
+    animation={{ direction: "reverse", duration: 76 }}
+    className="[&>div]:overflow-visible [&>div]:relative [&>div:hover]:z-10"
+  >
+    {
+      followersRowReverse?.map((id: FollowerID) => {
+        return (
+          <div class="px-[8px]">
+            <Follower
+              id={id}
+              showAttributes="onhover"
+              className="w-[100px] !h-[138px] shadow-2"
+            />
+          </div>
+        );
+      })
+    }
   </Slider>
-  <Slider animation={{ duration: 76 }}>
-    {followersRow?.map((id: FollowerID) => <Follower id={id} showAttributes="onhover"/>)}
+  <Slider animation={{ duration: 76 }} className="[&>div]:overflow-visible">
+    {
+      followersRow?.map((id: FollowerID) => {
+        return (
+          <div class="px-[8px]">
+            <Follower
+              id={id}
+              showAttributes="onhover"
+              className="w-[100px] !h-[138px] shadow-2"
+            />
+          </div>
+        );
+      })
+    }
   </Slider>
-</div>
+</section>
