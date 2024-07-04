@@ -1,7 +1,6 @@
 ---
 import Card from "@ui/Card.astro";
-import Image from "@assets/Image.astro"
-import type {teamMemberID} from "@ts/types";
+import Image from "@assets/Image.astro";
 
 type teamMember = {
   img: string;
@@ -14,118 +13,157 @@ type team = {
 };
 
 interface Props {
-  id: teamMemberID;
+  id: string;
 }
 
 const { id } = Astro.props as Props;
 
-const team: team = {
+export const team: team = {
   "1001": {
-    img: "https://static.tildacdn.com/tild6132-6431-4561-a538-333963613166/Rectangle_605.png",
+    img: "https://static.tildacdn.com/tild6364-3535-4038-b334-363961666131/TAMARA_KOSTIUK.jpg",
     name: "Tamara Kostiuk",
     position: "Illustrator",
   },
   "1201": {
-    img: "https://static.tildacdn.com/tild6432-6630-4664-a639-613533306164/photo_2024-01-17_231.jpeg",
-    name: "Anastasia Ponkrashenkova",
+    img: "https://static.tildacdn.com/tild3964-3631-4530-a161-333031323663/STASY_PONKRASHENKOVA.jpg",
+    name: "Stacy Ponkrashenkova",
     position: "Project Manager",
   },
   "0202": {
-    img: "https://static.tildacdn.com/tild6435-3630-4861-b633-326366346136/Rectangle_609.png",
+    img: "https://static.tildacdn.com/tild3963-3162-4031-b030-376137306331/ALEXEY_CHERNOV_1.jpg",
     name: "Alexey Chernov",
     position: "Head Backend Developer",
   },
   "1302": {
-    img: "https://static.tildacdn.com/tild3238-3536-4532-b661-303335613664/Rectangle_596.png",
+    img: "https://static.tildacdn.com/tild3235-3336-4662-a661-326334326362/ANDREY_RIABOV_1.jpg",
     name: "Andrey Riabov",
     position: "Head Unity Developer",
   },
-  "1603": {
-    img: "https://static.tildacdn.com/tild3832-3231-4237-b664-663632656139/Rectangle_608.png",
-    name: "Alex Stoyanov",
-    position: "Backend Developer",
-  },
-  "2904": {
-    img: "",
-    name: "Leonid Zinov",
-    position: "QA Engineer",
-  },
   "0705": {
-    img: "",
+    img: "https://static.tildacdn.com/tild6530-3864-4233-a561-383864626338/ILYA_RIABOV.jpg",
     name: "Ilya Riabov",
     position: "QA Engineer",
   },
   "1706": {
-    img: "https://static.tildacdn.com/tild3664-3436-4334-b763-326333643361/Rectangle_611.png",
+    img: "https://static.tildacdn.com/tild3332-3035-4363-a436-396239366535/JANE_NEKRASHEVICH.jpg",
     name: "Jane Nekrashevich",
     position: "Head Writer",
   },
   "2508": {
-    img: "	https://static.tildacdn.com/tild6463-6462-4638-a335-396538623534/Rectangle_604.png",
+    img: "https://static.tildacdn.com/tild3961-3366-4439-b261-386266643734/ARK_FAINITSKY.jpg",
     name: "Ark Fainitsky",
     position: "Music Composer",
   },
   "1009": {
-    img: "https://static.tildacdn.com/tild3765-3364-4339-b038-316664373939/Rectangle_615.png",
+    img: "https://static.tildacdn.com/tild3939-6364-4139-a230-323339343338/MIRO_DOROFEEV_1.jpg",
     name: "Miro Dorofeev",
     position: "Product Manager",
   },
   "1609": {
-    img: "https://static.tildacdn.com/tild3932-3938-4634-a662-396431363030/Rectangle_595.png",
+    img: "https://static.tildacdn.com/tild3732-6434-4431-b537-366331396563/Ilya_Shpynov.png",
     name: "Ilya Shpynov",
     position: "Unity Developer",
   },
   "0211": {
-    img: "",
-    name: "Helen Kostyreva",
-    position: "QA Engineer",
+    img: "https://static.tildacdn.com/tild6234-3761-4465-b361-346263343731/HELEN_KOS.jpg",
+    name: "Helen Kos",
+    position: "Lead QA",
   },
   "1311": {
-    img: "https://static.tildacdn.com/tild6137-3437-4465-a564-396535346266/Rectangle_603.png",
+    img: "https://static.tildacdn.com/tild3834-6135-4362-b364-373336663262/ALEX_FARINA.jpg",
     name: "Alex Farina",
     position: "Localization Manager",
   },
   "1811": {
-    img: "https://static.tildacdn.com/tild6133-3934-4261-a666-626266623632/Rectangle_607.png",
+    img: "https://static.tildacdn.com/tild3030-6631-4666-b335-653466656533/JULIA_ARKHIPOVA.jpg",
     name: "Julia Arkhipova",
     position: "Head UX/UI Designer",
   },
-  "2211": {
-    img: "",
-    name: "Victoria Kasianova",
-    position: "Frontend Developer",
-  },
   "2511": {
-    img: "https://static.tildacdn.com/tild6430-3037-4330-a138-393333626230/Rectangle_606.png",
+    img: "https://static.tildacdn.com/tild3639-6631-4561-b466-626536633831/LILY_NEBESSKAYA.jpg",
     name: "Lily Nebesskaya",
     position: "UX/UI Designer",
   },
   "0212": {
-    img: "",
+    img: "https://static.tildacdn.com/tild6230-3535-4764-b730-373534336135/ROBERT_SAFONOV.jpg",
     name: "Robert Safonov",
     position: "QA Engineer",
   },
   "2912": {
-    img: "https://static.tildacdn.com/tild3835-6630-4234-b532-313931636164/Rectangle_614.png",
+    img: "https://static.tildacdn.com/tild3065-3331-4539-b265-323835646634/ALEX_TUCHKOV_1.jpg",
     name: "Alex Tuchkov",
     position: "Owner & Game Designer",
   },
+  "2211": {
+    img: "https://static.tildacdn.com/tild6164-3835-4563-b435-356464386336/VICTORIA_KASYANOVA.jpg",
+    name: "Victoria Kasianova",
+    position: "Frontend Developer",
+  },
+  "0001": {
+    img: "https://static.tildacdn.com/tild6338-3865-4061-b939-633563303432/ALEXA_KALACHEVA.jpg",
+    name: "Alexa Kalacheva",
+    position: "Data Analyst",
+  },
+  "0002": {
+    img: "https://static.tildacdn.com/tild6334-6638-4437-b165-353762373339/STANISLAV_DAVYDOV.jpg",
+    name: "Stanislav Davydov",
+    position: "QA Automation",
+  },
+  "0003": {
+    img: "https://static.tildacdn.com/tild3832-6663-4161-a663-376434653035/VASILY_SOROKIN.jpg",
+    name: "Vasily Sorokin",
+    position: "Editor-in-Chief",
+  },
+  "0004": {
+    img: "https://static.tildacdn.com/tild3561-6532-4462-b164-303965663432/MAX_KOLESNIKOV.jpg",
+    name: "Max Kolesnikov",
+    position: "Media CM",
+  },
+  "0005": {
+    img: "https://static.tildacdn.com/tild6166-3332-4563-b763-366564313064/NIKITA_MOCHALOV.jpg",
+    name: "Nikita Mochalov",
+    position: "Twitch CM",
+  },
+  "0006": {
+    img: "https://static.tildacdn.com/tild3963-3463-4839-a463-313566663862/KONSTANTIN_PECHNIKOV.jpg",
+    name: "Konstantin Pechnikov",
+    position: "SMM Manager",
+  },
+  "0007": {
+    img: "https://static.tildacdn.com/tild6365-6633-4366-a163-306537366236/ELIZA_ROSENFELD.jpg",
+    name: "El Rozenfeld",
+    position: "SMM Designer",
+  },
 };
 
-const img = team?.[id]?.img;
-const name = team?.[id]?.name;
-const position = team?.[id]?.position;
+const img = team?.[id]?.img ?? "";
+const name = team?.[id]?.name ?? "";
+const position = team?.[id]?.position ?? "";
+
 ---
 
 <Card
   className="group flex flex-col gap-[8px] w-[126px] min-h-[180px] px-[8px]"
 >
-  <Image url={img} slot="card-img" className="grayscale group-hover:grayscale-0 h-[160px] [&>img]:object-cover rounded-[4px] desktop-md:rounded-[8px] border border-solid border-[#D3D3D3]">
+  <div
+    class="block relative grayscale group-hover:grayscale-0 h-[160px]"
+  >
+    <Image
+      src={img}
+      className="object-cover border border-solid border-[#D3D3D3] rounded-[4px] desktop-md:rounded-[8px] min-h-full"
+      width="126"
+      height="180"
+    />
     <span
-        class={`flex items-end justify-center absolute z-10 top-0 left-0 w-full h-full py-[8px] px-[4px] destop-md:py-[16px] desktop-md:px-[8px] text-jost text-center font-bold text-[#D3D3D3] text-[10px] uppercase bg-gradient-to-t from-black via-transparent to-transparent invisible group-hover:visible`}
-      >
-        {name}
-      </span>
-  </Image>
-  <p class="w-full text-gold uppercase text-center text-[12px]" slot="card-content">{position}</p>
+      class={`flex items-end justify-center absolute z-10 top-0 left-0 w-full h-full py-[8px] px-[4px] destop-md:py-[16px] desktop-md:px-[8px] text-jost text-center font-bold text-[#D3D3D3] text-[10px] uppercase bg-gradient-to-t from-black via-transparent to-transparent invisible group-hover:visible`}
+    >
+      {name}
+    </span>
+  </div>
+
+  <figcaption
+    class="w-full text-gold uppercase text-center text-[12px]"
+  >
+    {position}
+  </figcaption>
 </Card>

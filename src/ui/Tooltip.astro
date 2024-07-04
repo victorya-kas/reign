@@ -10,23 +10,19 @@ const { content, id } = Astro.props as Props;
 
 <div tooltip-for={id} tooltip-content={JSON.stringify(content)} class="hidden">
 </div>
-<style is:global>
-  [highligted-tooltips-id] {
-    height: 0;
-    width: 0;
-  }
-  [highligted-tooltips-id] > * {
-    position: absolute !important;
-    z-index: 500 !important;
-  }
-  [origin-highlighted] {
-    opacity: 0;
-  }
-</style>
+
 <script>
   import type { tooltip } from "@ts/types";
 
   type tooltipsContent = { [key: string]: string };
+  type position = {
+    top: number;
+    left: number;
+    bottom: number;
+    right: number;
+    width: number,
+    height: number
+  };
 
   const tooltipContainers = document.querySelectorAll("[tooltip-container]");
   if (tooltipContainers?.length) {
@@ -89,15 +85,12 @@ const { content, id } = Astro.props as Props;
     });
     highlightedElsContainer?.remove();
     document?.getElementById("interactive-tooltip")?.remove();
-    const overlay = document?.querySelector("[tooltip-container] > .overlay");
-    if (overlay) overlay.remove();
   }
 
   function onShowTooltip(event: Event, tooltipsContent: tooltipsContent): void {
     event.preventDefault();
     event.stopPropagation();
-    const target = event.target as HTMLElement;
-    const el = target.closest("[tooltip-id]") as HTMLElement;
+    const el = event.currentTarget as HTMLElement;
     const container = getTooltipContainer(el) as HTMLElement;
     const id = el?.getAttribute("tooltip-id") ?? "";
     const content = tooltipsContent?.[id];
@@ -111,32 +104,14 @@ const { content, id } = Astro.props as Props;
     content: string,
     container: HTMLElement
   ): void {
-    const overlay = document.createElement("div") as HTMLElement;
-    overlay?.classList?.add(
-      "overlay",
-      "absolute",
-      "top-0",
-      "left-0",
-      "bottom-0",
-      "right-0",
-      "w-full",
-      "h-full",
-      "z-[450]",
-      "bg-[rgba(0,0,0,0.8)]",
-      "rounded-[50px]"
-    );
-    overlay?.addEventListener("mouseenter", removeTooltip);
-    overlay?.addEventListener("click", removeTooltip);
-    container?.appendChild(overlay);
     const tooltipId = target.getAttribute("tooltip-id");
-    addHighlightTooltipEls(target, tooltipId!, container);
     const newTooltip = createTooltip(JSON.parse(content), tooltipId!);
-    document.body.appendChild(newTooltip);
-    positionTooltip(target, newTooltip, container);
+    addHighlightTooltip(target, newTooltip, tooltipId!, container);
   }
 
-  function addHighlightTooltipEls(
+  function addHighlightTooltip(
     target: HTMLElement,
+    newTooltip: HTMLElement,
     tooltipId: string,
     container: HTMLElement
   ) {
@@ -147,10 +122,29 @@ const { content, id } = Astro.props as Props;
     target.setAttribute("highlight-active", "true");
     const highlightedElsContainer = document.createElement("div");
     highlightedElsContainer?.setAttribute("highligted-tooltips-id", tooltipId);
+    highlightedElsContainer?.classList?.add(
+      "absolute",
+      "top-0",
+      "left-0",
+      "w-full",
+      "h-full",
+      "z-[450]",
+      "[&>*]:absolute"
+    );
+    const overlay = document.createElement("span");
+    overlay?.classList?.add(
+      "w-full",
+      "h-full",
+      "bg-[rgba(0,0,0,0.8)]",
+    );
+    overlay.addEventListener("click", removeTooltip);
+    overlay.addEventListener("mouseenter", removeTooltip);
+    highlightedElsContainer.appendChild(overlay);
+    highlightedElsContainer.appendChild(newTooltip);
+    positionTooltip(target, newTooltip, container);
     tooltipHighlightedEls.forEach((tooltipEl) => {
       const originEl = tooltipEl as HTMLElement;
-      const originPos = getOffsetElPos(originEl);
-      const { top, left } = originPos;
+      const { top, left } = getRelativePosition(originEl, container);
       const elClone = originEl.cloneNode(true) as HTMLElement;
       elClone.classList.add("shadow-1");
       elClone.style.top = `${top}px`;
@@ -166,7 +160,7 @@ const { content, id } = Astro.props as Props;
         });
       }
     });
-    document.body.appendChild(highlightedElsContainer);
+    container.appendChild(highlightedElsContainer);
   }
 
   function createTooltip(
@@ -182,10 +176,10 @@ const { content, id } = Astro.props as Props;
       "shadow",
       "z-[550]",
       "gold-bordered",
-      "w-full",
-      "min-w-[105px]",
-      "max-w-[225px]",
-      "desktop-md:max-w-[450px]"
+      "min-w-[175px]",
+      "max-w-[350px]",
+      "max-h-[145px]",
+      "overflow-auto"
     );
     span.innerHTML =
       typeof content === "string"
@@ -204,48 +198,40 @@ const { content, id } = Astro.props as Props;
     tooltip: HTMLElement,
     container: HTMLElement
   ) {
-    let { width: containerWidth = 100, height: containerHeight = 100 } =
-      container?.getBoundingClientRect();
-    containerWidth =
-      window?.innerWidth > containerWidth ? containerWidth : window?.innerWidth;
-
+    const containerWidth = window?.innerWidth;
+    const containerHeight = window?.innerHeight;
     const {
       top: targetPosTop,
       left: targetPosLeft,
       bottom: targetPosBottom,
-      right: targetPosRight,
-    } = target?.getBoundingClientRect();
-    const tooltipContent = tooltip.querySelector(
-      ".tooltip-content"
-    ) as HTMLElement;
+      width: targetPosWidth,
+    } = getRelativePosition(target, container);
     const gap = 30;
-    const { width: tooltipW, height: tooltipH } =
-      tooltipContent?.getBoundingClientRect();
-    const tooltipWidth = tooltipW + gap;
-    const tooltipHeight = tooltipH + gap;
+    const tooltipWidth = 350 + gap;
+    const tooltipHeight = 145 + gap;
 
     const tooltipPosTopLeft = {
-      x: targetPosLeft - tooltipWidth,
+      x: targetPosLeft,
       y: targetPosTop - tooltipHeight,
     };
     const tooltipPosTopRight = {
-      x: targetPosRight,
-      y: targetPosTop,
+      x: targetPosLeft + targetPosWidth/2,
+      y: targetPosTop - tooltipHeight,
     };
     const tooltipPosBottomLeft = {
-      x: targetPosLeft - tooltipWidth,
-      y: targetPosBottom,
+      x: targetPosLeft,
+      y: targetPosBottom + gap,
     };
     const tooltipPosBottomRight = {
-      x: targetPosRight,
-      y: targetPosBottom,
+      x: targetPosLeft + targetPosWidth/2,
+      y: targetPosBottom + gap,
     };
 
     if (
       tooltipPosBottomRight.x + tooltipWidth < containerWidth &&
       tooltipPosBottomRight.y + tooltipHeight < containerHeight
     ) {
-      console.log("tooltipPosBottomRight");
+      // console.log("tooltipPosBottomRight");
       setTooltipPos(tooltip, tooltipPosBottomRight.y, tooltipPosBottomRight.x);
       return;
     }
@@ -253,7 +239,7 @@ const { content, id } = Astro.props as Props;
       tooltipPosBottomRight.x + tooltipWidth > containerWidth &&
       tooltipPosBottomRight.y + tooltipHeight < containerHeight
     ) {
-      console.log("tooltipPosBottomLeft");
+      // console.log("tooltipPosBottomLeft", containerWidth);
       setTooltipPos(tooltip, tooltipPosBottomLeft.y, tooltipPosBottomLeft.x);
       return;
     }
@@ -261,7 +247,7 @@ const { content, id } = Astro.props as Props;
       tooltipPosBottomRight.x + tooltipWidth < containerWidth &&
       tooltipPosBottomRight.y + tooltipHeight > containerHeight
     ) {
-      console.log("tooltipPosTopRight");
+      // console.log("tooltipPosTopRight");
       setTooltipPos(tooltip, tooltipPosTopRight.y, tooltipPosTopRight.x);
       return;
     }
@@ -269,7 +255,7 @@ const { content, id } = Astro.props as Props;
       tooltipPosBottomRight.x + tooltipWidth > containerWidth &&
       tooltipPosBottomRight.y + tooltipHeight > containerHeight
     ) {
-      console.log("tooltipPosTopLeft");
+      // console.log("tooltipPosTopLeft");
       setTooltipPos(tooltip, tooltipPosTopLeft.y, tooltipPosTopLeft.x);
       return;
     }
@@ -286,13 +272,21 @@ const { content, id } = Astro.props as Props;
     tooltip.style.left = tooltipStyleLeft;
   }
 
-  function getOffsetElPos(el: HTMLElement) {
-    const rect = el.getBoundingClientRect();
-    const scrollLeft = window.scrollX || document.documentElement.scrollLeft;
-    const scrollTop = window.scrollY || document.documentElement.scrollTop;
-    return {
-      top: (rect.top + scrollTop)?.toFixed(),
-      left: (rect.left + scrollLeft)?.toFixed(),
-    };
+  function getRelativePosition(
+    element: HTMLElement,
+    relativeTo: HTMLElement
+  ): position {
+    const width = element.offsetWidth;
+    const height = element.offsetHeight;
+    let left = 0,
+      top = 0;
+
+    while (element && element !== relativeTo) {
+      left += element.offsetLeft;
+      top += element.offsetTop;
+      element = element.offsetParent as HTMLElement;
+    }
+
+    return { top, left, right: left + width, bottom: top + height, width, height };
   }
 </script>

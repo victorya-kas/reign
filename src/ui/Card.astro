@@ -5,10 +5,9 @@ interface Props {
 const { className, ...rest } = Astro.props as Props;
 ---
 
-<div
+<figure
   class={`relative [&>span]:absolute [&>span]:z-20 [&>span]:flex [&>span]:justify-center [&>span]:items-center [&>span]:bg-contain [&>span]:bg-center [&>span]:bg-no-repeat ${className ?? ""}`}
   {...rest}
 >
-  <slot name="card-img" />
-  {Astro.slots.has("card-content") && <slot name="card-content" />}
-</div>
+  <slot />
+</figure>

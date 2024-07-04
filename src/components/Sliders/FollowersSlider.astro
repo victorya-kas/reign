@@ -39,43 +39,33 @@ const followersRow: FollowerID[] = [
   "2601",
   "2014",
 ];
+const sliders = [followersRowReverse, followersRow];
 ---
 
 <section
   class="flex flex-col gap-[16px] [&>*]:shrink-0 [&>*]:py-0"
   id="followers-carousel"
 >
-  <Slider
-    animation={{ direction: "reverse", duration: 76 }}
+{
+  sliders?.map(((slider, idx) => {
+    return <Slider
+    animation={{ direction: idx %2 === 0 ? "reverse" : "normal", duration: slider.length * 5.5 }}
     className="[&>div]:overflow-visible [&>div]:relative [&>div:hover]:z-10"
   >
     {
-      followersRowReverse?.map((id: FollowerID) => {
+      slider?.map((id: FollowerID) => {
         return (
           <div class="px-[8px]">
             <Follower
               id={id}
               showAttributes="onhover"
-              className="w-[100px] !h-[138px] shadow-2"
+              className="!w-[100px] !h-[138px] shadow-2"
             />
           </div>
         );
       })
     }
   </Slider>
-  <Slider animation={{ duration: 76 }} className="[&>div]:overflow-visible">
-    {
-      followersRow?.map((id: FollowerID) => {
-        return (
-          <div class="px-[8px]">
-            <Follower
-              id={id}
-              showAttributes="onhover"
-              className="w-[100px] !h-[138px] shadow-2"
-            />
-          </div>
-        );
-      })
-    }
-  </Slider>
+  }))
+}
 </section>

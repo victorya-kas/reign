@@ -2,16 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-	font-family: 'v_CCTheStorySoFar-Regular';
-	src: url('../assets/fonts/v_CCTheStorySoFar-Regular/v_ccthestorysofar-regular.eot'); /* IE 9 Compatibility Mode */
-	src: url('../assets/fonts/v_CCTheStorySoFar-Regular/v_ccthestorysofar-regular.eot?#iefix') format('embedded-opentype'), /* IE < 9 */
-		url('../assets/fonts/v_CCTheStorySoFar-Regular/v_ccthestorysofar-regular.woff2') format('woff2'), /* Super Modern Browsers */
-		url('../assets/fonts/v_CCTheStorySoFar-Regular/v_ccthestorysofar-regular.woff') format('woff'), /* Firefox >= 3.6, any other modern browser */
-		url('../assets/fonts/v_CCTheStorySoFar-Regular/v_ccthestorysofar-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-		url('../assets/fonts/v_CCTheStorySoFar-Regular/v_ccthestorysofar-regular.svg#v_ccthestorysofar-regular') format('svg'); /* Chrome < 4, Legacy iOS */
-}
-
 :root {
   --shadow1: 0px 0px 15px rgba(229, 149, 46, 0.40);
   --shadow2: 0px 0px 5px rgba(116, 115, 122, 1);

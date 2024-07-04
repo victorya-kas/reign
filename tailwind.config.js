@@ -15,17 +15,10 @@ module.exports = {
         "black-gradient-180": "linear-gradient(180deg, rgba(0, 0, 0, 0.90) 0%, rgba(0, 0, 0, 0.00) 85.14%)"
       },
       fontFamily: {
-        jost: ["Jost", "sans-serif"],
-        story: ["v_CCTheStorySoFar"]
-      },
-      padding: {
-        "11-22": "clamp(11px, 3vh, 22px)",
+        jost: ["Jost", "sans-serif"]
       },
       fontSize: {
         "20-40": "clamp(20px, 100%, 40px)",
-        "12-24": "clamp(12px, 2vw, 24px)",
-        "10-20": "clamp(10px, 100%, 20px)",
-        "11-22": "clamp(11px, 2vw, 22px)",
       },
       screens: {
         "mobile": "576px",
@@ -34,19 +27,6 @@ module.exports = {
         "desktop-md": "1280px",
         "desktop-lg": "1440px",
         "desktop-xl": "1536px",
-      },
-      textShadow: {
-        "button-black": "0px 0px 4px rgba(0, 0, 0, 0.90)",
-      },
-      position: {
-        "top-left": "top-0 left-0",
-        "top-right": "",
-        "bottom-left": "",
-        "botton-right": "",
-        "top-center": "",
-        "bottom-center": "",
-        "left-center": "",
-        "right-center": "",
       },
     },
   },
@@ -71,13 +51,6 @@ module.exports = {
           fontWeight: "800",
           lineHeight: 1,
         },
-        ".text-story-gold": {
-          fontFamily: "v_CCTheStorySoFar-Regular",
-          color: "transparent",
-          backgroundImage: "linear-gradient(180deg, #FCE9C9 0%, #B39F7D 100%)",
-          backgroundClip: "text",
-          fontWeight: "400"
-        },
         ".shadow-1": {
           filter: "drop-shadow(var(--shadow1))",
         },
@@ -98,20 +71,6 @@ module.exports = {
         }
       };
       addComponents(newComponents, ["responsive", "hover"]);
-      matchUtilities(
-        {
-          position: (value) => ({
-            position: value,
-          }),
-        },
-        {
-          "text-shadow": (value) => ({
-            textShadow: value,
-          }),
-        },
-
-        { values: theme("textShadow") }
-      );
     }),
   ],
 };

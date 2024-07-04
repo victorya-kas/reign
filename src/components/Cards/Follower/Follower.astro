@@ -187,13 +187,19 @@ const followerAttributes: Partial<followers> = {
 };
 
 const t = useTranslations(followerTr);
-const coin = followerAttributesImg[`coin-${followerAttributes[id]?.value}`];
-const border = followerAttributesImg[`border-${followerAttributes[id]?.color}`];
-const flag = followerAttributesImg[`flag-${followerAttributes[id]?.color}`];
+const coin =
+  followerAttributesImg[`coin-${followerAttributes[id]?.value}`] ?? "";
+const border =
+  followerAttributesImg[`border-${followerAttributes[id]?.color}`] ?? "";
+const flag =
+  followerAttributesImg[`flag-${followerAttributes[id]?.color}`] ?? "";
 const name = t(`${id}_name`);
 ---
 
 <style>
+  .hover-attributes {
+    transition: transform 0.3s;
+  }
   .hover-attributes [follower-card-img] span {
     z-index: 1;
   }
@@ -228,8 +234,9 @@ const name = t(`${id}_name`);
 </style>
 
 <Card
-  className=`${showAttributes === "onhover" && !isSmallSize ? "hover-attributes" : ""} 
-  ${ isSmallSize ? 'min-w-[45px] min-h-[55px] max-w-[90px] max-h-[105px]' : 'min-w-[75px] h-[105px] max-w-[150px] desktop-md:h-[210px]'} 
+  className=`${showAttributes === "onhover" && !isSmallSize ? "hover-attributes" : ""}
+  ${ isSmallSize ? 'w-[45px] h-[55px] desktop-md:w-[68px] desktop-md:h-[80px] desktop-lg:w-[90px] desktop-lg:h-[105px]' : 
+  'w-[75px] h-[105px] desktop-md:w-[110px] desktop-md:h-[158px] desktop-lg:w-[150px] desktop-lg:h-[210px]'} 
   ${className ?? ""}`
   tooltip-id={showTooltip &&
     `${isSmallSize ? "follower-card-sm" : "follower-card"}`}
@@ -238,10 +245,9 @@ const name = t(`${id}_name`);
   {
     flag && !isSmallSize ? (
       <span
-        class="!z-30 bg-contain bg-center bg-no-repeat top-[-1px] left-[-1px] w-[24%] h-[22%] min-w-[18px] min-h-[23px] max-w-[36px] max-h-[46px]"
+        class="!z-40 bg-contain bg-center bg-no-repeat top-[-1px] left-[-1px] w-[24%] h-[22%] min-w-[18px] min-h-[23px] max-w-[36px] max-h-[46px]"
         style={{ backgroundImage: `url("${flag}")` }}
         follower-card-flag
-        slot="card-content"
       />
     ) : (
       ""
@@ -249,34 +255,36 @@ const name = t(`${id}_name`);
   }
   {
     name && !isSmallSize ? (
-      <span
-        class="top-0 right-0 w-full h-[20px] desktop-md:h-[40px] p-[3px]"
+      <figcaption
+        class="absolute flex flex-col top-0 right-0 w-full h-[40px] p-[3px] z-30"
         follower-card-name
-        slot="card-content"
       >
         <span
-          class={`w-full h-full flex justify-center p-[3px] desktop-md:p-[6px] ${flag ? "!pl-[24%]" : ""} bg-black-gradient-180`}
+          class={`grow w-full h-full flex justify-center p-[3px] desktop-sm:p-[6px] ${flag ? "!pl-[24%]" : ""} bg-black-gradient-180`}
         >
-          <span class="text-story-gold text-[8px] desktop-md:text-[80%] desktop-lg:text-[12px] uppercase text-center">
-            {name}
-          </span>
+          <span class="text-gold text-[50%] uppercase text-center">{name}</span>
         </span>
-      </span>
+      </figcaption>
     ) : (
       ""
     )
   }
-  <Image url={border} className={"z-10"} slot="card-img" follower-card-img>
+  <span class="block relative h-full w-full" follower-card-img>
+    <Image
+      src={border}
+      width={isSmallSize ? "90" : "150"}
+      height={isSmallSize ? "105" : "210"}
+    />
     <span
       class=`block absolute top-0 bottom-0 left-0 right-0 z-[-1] w-full h-full bg-cover bg-no-repeat ${isSmallSize ? "bg-[-4px_top]" : "bg-center"}`
       style={{
         backgroundImage: `url("${followerImg[id as keyof followerImg]}")`,
       }}></span>
-  </Image>
+  </span>
+
   <span
     class=`bg-contain bg-no-repeat bg-center left-[-6px] ${isSmallSize ? 'bottom-[-6px] w-[35%] h-[30%] min-w-[16px] min-h-[16px] max-w-[32px] max-h-[32px]' : 'bottom-[-3px] w-[26%] h-[20%] min-w-[20px] min-h-[20px] max-w-[40px] max-h-[40px]'}`
     style={{ backgroundImage: `url("${coin}")` }}
-    slot="card-content"
     tooltip-id={showTooltip ? "follower-value" : null}
     follower-card-coin></span>
 </Card>

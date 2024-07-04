@@ -17,18 +17,16 @@ const heroes: heroID[] = [
 ---
 
 <div
-  class="h-[12%] min-h-[45px] max-h-[90px] flex justify-between items-center shrink-0"
+  class="h-[12%] min-h-[50px] max-h-[90px] flex justify-between items-center shrink-0 gap-x-[50px]"
 >
   <div class="relative shrink-0 h-full" tooltip-id="btn-timer">
-    <Button variant="trapezoid-right" size="lg"
-      >30</Button
-    >
+    <Button variant="trapezoid-right" size="lg">30</Button>
     <span class="absolute right-0 top-0" tooltip-id="btn-sm-timer">
       <Button variant="silver-bordered" size="sm">90</Button>
     </span>
   </div>
   <div
-    class="relative h-full flex items-center justify-center p-[0_25px_0_32px] desktop-md:p-[0_2vw_0_2.5vw]"
+    class="relative h-full flex items-center justify-center min-w-[225px] max-[450px]"
     tooltip-id="header-heroes"
   >
     {
@@ -43,10 +41,11 @@ const heroes: heroID[] = [
   </div>
   <div class="shrink-0 h-full" tooltip-id="btn-settings">
     <Button variant="trapezoid-left" size="lg">
-      <Image
-        name="icon-settings"
-        className="w-[22px] h-[22px] desktop-sm:w-[33px] desktop-sm:h-[33px] desktop-md:w-[44px] desktop-md:h-[44px]"
-      />
+      <span
+        class="block w-[22px] h-[22px] desktop-sm:w-[33px] desktop-sm:h-[33px] desktop-md:w-[44px] desktop-md:h-[44px]"
+      >
+        <Image name="icon-settings" width="44" height="44" />
+      </span>
     </Button>
   </div>
 </div>

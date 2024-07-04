@@ -14,26 +14,6 @@ export type translations<T = string> = {
   };
 };
 
-export type teamMemberID =
-  | "1001"
-  | "1201"
-  | "0202"
-  | "1302"
-  | "1603"
-  | "2904"
-  | "0705"
-  | "1706"
-  | "2508"
-  | "1009"
-  | "1609"
-  | "0211"
-  | "1311"
-  | "1811"
-  | "2211"
-  | "2511"
-  | "0212"
-  | "2912";
-
 // hero's types
 export type heroID =
   | "1101" //Praetor

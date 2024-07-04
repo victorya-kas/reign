@@ -14,10 +14,9 @@ const { name, active = false } = Astro.props as Props;
 >
   {
     active && (
-      <Image
-        name="icon-crown"
-        className="shrink-0 w-[6px] h-[5px] desktop-md:w-[12px] desktop-md:h-[10px]"
-      />
+      <span class="block shrink-0 w-[6px] h-[5px] desktop-md:w-[12px] desktop-md:h-[10px]">
+        <Image name="icon-crown" width="12" height="10" />
+      </span>
     )
   }
   <h3

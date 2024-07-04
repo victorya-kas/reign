@@ -2,20 +2,22 @@
 import Image from "@assets/Image.astro";
 
 interface Props {
-  icon:string,
+  icon: string;
   content: string;
 }
 
-const {
-  icon,
-  content
-} = Astro.props as Props;
+const { icon, content } = Astro.props as Props;
 ---
 
 <div class="w-full flex gap-[2px] desktop-md:gap-[4px] items-center">
-    <Image
-      name={icon}
-      className="w-[60%] h-full min-w-[10px] max-w-[20px] min-h-[10px] max-h-[20px]"
-    />
-    <span class="w-[40%] h-full min-w-[13px] text-silver text-[11px] desktop-sm:text-[16px] desktop-xl:text-[22px]">{content}</span>
+  <span
+    class="block w-[60%] h-full min-w-[10px] max-w-[20px] min-h-[10px] max-h-[20px]"
+  >
+    <Image name={icon} width="20" height="20" />
+  </span>
+
+  <span
+    class="w-[40%] h-full min-w-[13px] text-silver text-[11px] desktop-sm:text-[16px] desktop-xl:text-[22px]"
+    >{content}</span
+  >
 </div>

@@ -6,39 +6,43 @@ import Follower from "@components/Cards/Follower/Follower.astro";
 
 const followers: FollowerID[] = ["2603", "2802", "2501", "2015", "2403"];
 ---
-<style>
-  div[followers-hand] > div[follower-card="regular"] {
-    background-color: red !important;
-  }
+
+<style is:global>
   [followers-hand] div[follower-card="regular"] [follower-card-coin] {
-    position: sticky !important;
-    bottom: 0 !important;
+    position: sticky;
+    left: -3px;
+  }
+  [followers-hand]:hover div[follower-card="regular"] [follower-card-coin] {
+    position: absolute;
   }
 </style>
 
 <div
-  class="h-[15%] min-h-[56px] max-h-[96px] flex justify-between gap-[15px] shrink-0 desktop-md:[30px] px-[10px] desktop-md:px-[20px]"
+  class="h-[15%] min-h-[56px] max-h-[96px] flex justify-between gap-[60px] desktop-sm:gap-[120px] shrink-0 desktop-md:[30px] px-[10px] desktop-md:px-[20px]"
 >
-  <div class="shrink-0 h-full" tooltip-id="btn-resourses" tooltip-id="btn-ability-intelligence">
+  <div class="shrink-0 h-full" tooltip-id="btn-ability-intelligence">
     <Button variant="gold-bordered" size="lg">
-      <Image
-        name="icon-ability-intelligence"
-        className="w-[28px] h-[28px] desktop-md:w-[55px] desktop-md:h-[55px]"
-      />
+      <span
+        class="block w-[28px] h-[28px] desktop-md:w-[55px] desktop-md:h-[55px]"
+      >
+        <Image name="icon-ability-intelligence" width="55" height="55" />
+      </span>
     </Button>
   </div>
   <div
-    class="w-[47%] min-w-[383px] max-w-[756px] flex justify-center"
-    tooltip-id="followers-hand" followers-hand
+    class="flex justify-center min-w-[375px] max-w-[750px] [&>*]:shrink-0"
+    tooltip-id="followers-hand"
+    followers-hand
   >
     {followers?.map((id: FollowerID) => <Follower id={id} />)}
   </div>
   <div class="shrink-0 h-full" tooltip-id="btn-resourses">
     <Button variant="gold-bordered" size="lg">
-      <Image
-        name="icon-resourses"
-        className="w-[28px] h-[28px] desktop-md:w-[55px] desktop-md:h-[55px]"
-      />
+      <span
+        class="block w-[28px] h-[28px] desktop-md:w-[55px] desktop-md:h-[55px]"
+      >
+        <Image name="icon-resourses" width="55" height="55" />
+      </span>
     </Button>
   </div>
 </div>

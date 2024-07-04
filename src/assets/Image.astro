@@ -1,40 +1,34 @@
 ---
-import { images, type Images } from './images';
+import { images, type Images } from "./images";
+import { Image as AstroImage } from "astro:assets";
 
-interface Props {
-  name?: string;
-  url?: string | undefined
-  width?: string | undefined;
-  height?: string | undefined;
+type Props = (
+  | {
+      name: string;
+    }
+  | {
+      src: string;
+    }
+) & {
+  width?: string;
+  height?: string;
   className?: string;
-  style?: object;
-}
-
-const {
-  name,
-  url,
-  width,
-  height,
-  className,
-  style, 
-  ...rest
-} = Astro.props as Props;
-
-const compileStyle = {
-  ...(width && {width}),
-  ...(height && {height}),
-  ...(style && {...style})
-}
-const imgSrc = url ?? images[name as keyof Images] ?? '';
+  alt?: string;
+};
+const { alt = "", className = "", height, width, ...props } = Astro?.props as Props;
+const name = "name" in props && props.name ? props.name : "";
+const src = "src" in props && props.src ? props.src : null;
+const defaultSrc = images["reign-logo"];
+const imgSrc =
+  name && images?.[name] ? images?.[name as keyof Images] : src ?? defaultSrc;
 ---
-
-<figure
-  class={`relative overflow-hidden ${className ? className : ""}`} style={Object.keys(compileStyle)?.length > 0 ? compileStyle : {}} {...rest}
->
-  <slot/>
-  <img
-    class='block w-full h-full object-contain'
+<>
+  <!-- @ts-ignore -->
+  <AstroImage
     src={imgSrc}
-    alt={`reign ${name ?? ''}`}
+    alt={`reign ${alt}`}
+    width={width ?? null}
+    height={height ?? null}
+    class={`block max-w-full h-auto object-contain ${className ?? ""}`}
   />
-</figure>
+</>
