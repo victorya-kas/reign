@@ -10,7 +10,7 @@ const { className, isTooltipContainer = false, ...rest } = Astro.props as Props;
 ---
 
 <div
-  class={`relative max-w-[1605px] max-h-[775px] min-w-[812px] min-h-[375px] flex flex-col ${className ?? ""}`}
+  class={`relative w-full min-w-[812px] min-h-[375px] max-w-[1605px] max-h-[775px] overflow-auto flex flex-col ${className ?? ""}`}
   {...rest}
 >
   <Image

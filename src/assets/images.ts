@@ -33,5 +33,5 @@ export const images: Images = {
     "https://static.tildacdn.com/tild3737-6337-4131-b530-393739353964/roll-ability.png",
   "icon-gold-cross":
     "https://static.tildacdn.com/tild6334-6130-4437-b830-306635393534/gold-cross.svg",
-  "reign-logo": "https://static.tildacdn.com/tild3432-3464-4637-a430-306563376532/reign-logo.png"
+  "reign-logo": "https://static.tildacdn.com/tild3964-3838-4135-b230-656331336535/reign-logo.png"
 };

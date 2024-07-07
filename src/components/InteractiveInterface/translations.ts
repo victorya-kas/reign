@@ -74,8 +74,7 @@ export const interactiveInterfaceTr: translations<InteractiveGalleryContent> = {
     "followers-hand": {
       title: "Hand",
       content: "Displays the cards that the player currently have.",
-    },
-    "popup-message": "Please, turn on your device in landscape mode"
+    }
   },
   ru: {
     "btn-timer": {
@@ -145,7 +144,6 @@ export const interactiveInterfaceTr: translations<InteractiveGalleryContent> = {
     "followers-hand": {
       title: "Рука",
       content: "Отображает карты, которые имеются у игрока в данный момент.",
-    },
-    "popup-message": "Пожалуйста, переверните девайс в альбомный режим"
+    }
   },
 };

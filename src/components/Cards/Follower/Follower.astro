@@ -202,6 +202,10 @@ const name = t(`${id}_name`);
   }
   .hover-attributes [follower-card-img] span {
     z-index: 1;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left:0;
   }
   .hover-attributes [follower-card-name] {
     opacity: 0;
@@ -214,6 +218,7 @@ const name = t(`${id}_name`);
   }
 
   .hover-attributes:hover {
+    filter: none;
     transform: scale(1.3);
   }
   .hover-attributes:hover [follower-card-flag] {
@@ -235,8 +240,7 @@ const name = t(`${id}_name`);
 
 <Card
   className=`${showAttributes === "onhover" && !isSmallSize ? "hover-attributes" : ""}
-  ${ isSmallSize ? 'w-[45px] h-[55px] desktop-md:w-[68px] desktop-md:h-[80px] desktop-lg:w-[90px] desktop-lg:h-[105px]' : 
-  'w-[75px] h-[105px] desktop-md:w-[110px] desktop-md:h-[158px] desktop-lg:w-[150px] desktop-lg:h-[210px]'} 
+  ${ isSmallSize ? 'w-[45px] h-[53px] desktop-md:w-[68px] desktop-md:h-[80px] desktop-lg:w-[90px] desktop-lg:h-[105px]' : 'w-[75px] desktop-md:w-[110px] desktop-lg:w-[150px] min-h-[105px] max-h-[210px]'} 
   ${className ?? ""}`
   tooltip-id={showTooltip &&
     `${isSmallSize ? "follower-card-sm" : "follower-card"}`}
@@ -262,7 +266,7 @@ const name = t(`${id}_name`);
         <span
           class={`grow w-full h-full flex justify-center p-[3px] desktop-sm:p-[6px] ${flag ? "!pl-[24%]" : ""} bg-black-gradient-180`}
         >
-          <span class="text-gold text-[50%] uppercase text-center">{name}</span>
+          <span class="text-gold text-[6px] desktop-md:text-[10px] desktop-lg:text-[12px] uppercase text-center">{name}</span>
         </span>
       </figcaption>
     ) : (
@@ -274,16 +278,17 @@ const name = t(`${id}_name`);
       src={border}
       width={isSmallSize ? "90" : "150"}
       height={isSmallSize ? "105" : "210"}
+      className="min-h-full min-w-full"
     />
     <span
-      class=`block absolute top-0 bottom-0 left-0 right-0 z-[-1] w-full h-full bg-cover bg-no-repeat ${isSmallSize ? "bg-[-4px_top]" : "bg-center"}`
+      class=`block absolute w-[calc(100%-4px)] h-[calc(100%-4px)] top-[2px] left-[2px] bg-cover bg-no-repeat ${isSmallSize ? "bg-[left_top]" : "bg-center"}`
       style={{
         backgroundImage: `url("${followerImg[id as keyof followerImg]}")`,
       }}></span>
   </span>
 
   <span
-    class=`bg-contain bg-no-repeat bg-center left-[-6px] ${isSmallSize ? 'bottom-[-6px] w-[35%] h-[30%] min-w-[16px] min-h-[16px] max-w-[32px] max-h-[32px]' : 'bottom-[-3px] w-[26%] h-[20%] min-w-[20px] min-h-[20px] max-w-[40px] max-h-[40px]'}`
+    class=`bg-contain bg-no-repeat bg-center -left-[3px] ${isSmallSize ? '-bottom-[3px] w-[35%] h-[30%] min-w-[16px] min-h-[16px] max-w-[32px] max-h-[32px]' : '-bottom-[6px] w-[26%] h-[20%] min-w-[20px] min-h-[20px] max-w-[40px] max-h-[40px]'}`
     style={{ backgroundImage: `url("${coin}")` }}
     tooltip-id={showTooltip ? "follower-value" : null}
     follower-card-coin></span>
