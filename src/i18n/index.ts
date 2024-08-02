@@ -5,4 +5,4 @@ export const languages: TLanguages = {
   ru: "Русский",
 };
 
-export const defaultLang: lang = "en";
+export const defaultLang: lang = "ru";

@@ -20,8 +20,8 @@ const { content, id } = Astro.props as Props;
     left: number;
     bottom: number;
     right: number;
-    width: number,
-    height: number
+    width: number;
+    height: number;
   };
 
   const tooltipContainers = document.querySelectorAll("[tooltip-container]");
@@ -105,13 +105,13 @@ const { content, id } = Astro.props as Props;
     container: HTMLElement
   ): void {
     const tooltipId = target.getAttribute("tooltip-id");
-    const newTooltip = createTooltip(JSON.parse(content), tooltipId!);
-    addHighlightTooltip(target, newTooltip, tooltipId!, container);
+    const tooltip = createTooltip(JSON.parse(content), tooltipId!);
+    addHighlightTooltip(target, tooltip, tooltipId!, container);
   }
 
   function addHighlightTooltip(
     target: HTMLElement,
-    newTooltip: HTMLElement,
+    tooltip: HTMLElement,
     tooltipId: string,
     container: HTMLElement
   ) {
@@ -132,16 +132,12 @@ const { content, id } = Astro.props as Props;
       "[&>*]:absolute"
     );
     const overlay = document.createElement("span");
-    overlay?.classList?.add(
-      "w-full",
-      "h-full",
-      "bg-[rgba(0,0,0,0.8)]",
-    );
+    overlay?.classList?.add("w-full", "h-full", "bg-[rgba(0,0,0,0.8)]");
     overlay.addEventListener("click", removeTooltip);
-    overlay.addEventListener("mouseenter", removeTooltip);
+    overlay.addEventListener("mouseenter", removeTooltip, true);
     highlightedElsContainer.appendChild(overlay);
-    highlightedElsContainer.appendChild(newTooltip);
-    positionTooltip(target, newTooltip, container);
+    container.appendChild(tooltip);
+    positionTooltip(target, tooltip, container);
     tooltipHighlightedEls.forEach((tooltipEl) => {
       const originEl = tooltipEl as HTMLElement;
       const { top, left } = getRelativePosition(originEl, container);
@@ -176,8 +172,9 @@ const { content, id } = Astro.props as Props;
       "shadow",
       "z-[550]",
       "gold-bordered",
-      "min-w-[175px]",
-      "max-w-[350px]",
+      "w-[175px]",
+      "desktop-md:w-[260px]",
+      "desktop-lg:w-[350px]",
       "max-h-[145px]",
       "overflow-auto"
     );
@@ -185,7 +182,7 @@ const { content, id } = Astro.props as Props;
       typeof content === "string"
         ? content
         : `<span class="tooltip-content block w-full rounded-[5px] p-[1px]">
-                      <span class="flex flex-col justify-center bg-dark-gold-gradient p-[15px] desktop-md:p-[30px] shadow rounded-[5px] relative z-30">
+                      <span class="flex flex-col justify-center bg-dark-gold-gradient p-[15px] desktop-lg:p-[30px] shadow rounded-[5px] relative z-30">
                         <h3 class="text-[12px] desktop-sm-[16px] desktop-md-[20px] text-gold pb-[10px]">${content?.title}</h3>
                         <p class="font-jost text-[10px] desktop-sm-[14px] desktop-md-[16px] text-[#FFC99D]">${content?.content}</p>
                       </span>
@@ -198,78 +195,68 @@ const { content, id } = Astro.props as Props;
     tooltip: HTMLElement,
     container: HTMLElement
   ) {
-    const containerWidth = window?.innerWidth;
-    const containerHeight = window?.innerHeight;
-    const {
-      top: targetPosTop,
-      left: targetPosLeft,
-      bottom: targetPosBottom,
-      width: targetPosWidth,
-    } = getRelativePosition(target, container);
-    const gap = 30;
-    const tooltipWidth = 350 + gap;
-    const tooltipHeight = 145 + gap;
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+    const targetPos = getRelativePosition(target, container);
+    const gap: number = 15;
+    const tooltipWidth: number = tooltip.offsetWidth + gap;
+    const tooltipHeight: number = tooltip.offsetHeight + gap;
 
     const tooltipPosTopLeft = {
-      x: targetPosLeft,
-      y: targetPosTop - tooltipHeight,
-    };
-    const tooltipPosTopRight = {
-      x: targetPosLeft + targetPosWidth/2,
-      y: targetPosTop - tooltipHeight,
+      left: targetPos.left - tooltipWidth / 2,
+      top: targetPos.top - tooltipHeight,
     };
     const tooltipPosBottomLeft = {
-      x: targetPosLeft,
-      y: targetPosBottom + gap,
+      left: targetPos.left - tooltipWidth / 2,
+      top: targetPos.bottom + gap,
+    };
+    const tooltipPosTopRight = {
+      left: targetPos.right + gap,
+      top: targetPos.top - tooltipHeight,
     };
     const tooltipPosBottomRight = {
-      x: targetPosLeft + targetPosWidth/2,
-      y: targetPosBottom + gap,
+      left: targetPos.right + gap,
+      top: targetPos.bottom + gap,
     };
 
     if (
-      tooltipPosBottomRight.x + tooltipWidth < containerWidth &&
-      tooltipPosBottomRight.y + tooltipHeight < containerHeight
+      targetPos.right + tooltipWidth < containerWidth &&
+      targetPos.bottom + tooltipHeight < containerHeight
     ) {
-      // console.log("tooltipPosBottomRight");
-      setTooltipPos(tooltip, tooltipPosBottomRight.y, tooltipPosBottomRight.x);
+      setTooltipPos(tooltip, tooltipPosBottomRight);
       return;
     }
     if (
-      tooltipPosBottomRight.x + tooltipWidth > containerWidth &&
-      tooltipPosBottomRight.y + tooltipHeight < containerHeight
+      targetPos.right + tooltipWidth < containerWidth &&
+      targetPos.top - tooltipHeight > 0 
     ) {
-      // console.log("tooltipPosBottomLeft", containerWidth);
-      setTooltipPos(tooltip, tooltipPosBottomLeft.y, tooltipPosBottomLeft.x);
+      setTooltipPos(tooltip, tooltipPosTopRight);
       return;
     }
     if (
-      tooltipPosBottomRight.x + tooltipWidth < containerWidth &&
-      tooltipPosBottomRight.y + tooltipHeight > containerHeight
+      targetPos.left - tooltipWidth < containerWidth &&
+      targetPos.bottom + tooltipHeight < containerHeight
     ) {
-      // console.log("tooltipPosTopRight");
-      setTooltipPos(tooltip, tooltipPosTopRight.y, tooltipPosTopRight.x);
+      setTooltipPos(tooltip, tooltipPosBottomLeft);
       return;
     }
     if (
-      tooltipPosBottomRight.x + tooltipWidth > containerWidth &&
-      tooltipPosBottomRight.y + tooltipHeight > containerHeight
+      targetPos.left - tooltipWidth < containerWidth &&
+      targetPos.top - tooltipHeight > 0
     ) {
-      // console.log("tooltipPosTopLeft");
-      setTooltipPos(tooltip, tooltipPosTopLeft.y, tooltipPosTopLeft.x);
+      setTooltipPos(tooltip, tooltipPosTopLeft);
       return;
     }
   }
 
   function setTooltipPos(
     tooltip: HTMLElement,
-    tooltipPosTop: number,
-    tooltipPosLeft: number
+    position: { [key:string]: number }
   ) {
-    const tooltipStyleTop = `${tooltipPosTop?.toFixed(0)}px`;
-    const tooltipStyleLeft = `${tooltipPosLeft?.toFixed(0)}px`;
-    tooltip.style.top = tooltipStyleTop;
-    tooltip.style.left = tooltipStyleLeft;
+    Object.entries(position).forEach(([key, value]: [string, number]) => {
+      //@ts-ignore
+      tooltip.style[key] = `${value?.toFixed(0)}px`;
+    });
   }
 
   function getRelativePosition(
@@ -287,6 +274,13 @@ const { content, id } = Astro.props as Props;
       element = element.offsetParent as HTMLElement;
     }
 
-    return { top, left, right: left + width, bottom: top + height, width, height };
+    return {
+      top,
+      left,
+      right: left + width,
+      bottom: top + height,
+      width,
+      height,
+    };
   }
 </script>

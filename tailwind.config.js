@@ -12,10 +12,11 @@ module.exports = {
         "dark-gold-gradient":
           "linear-gradient(180deg, #35251C 0%, #170C06 100%)",
         "black-gradient-270": "linear-gradient(270deg, #0E0601 0%, #070402 100%)",
-        "black-gradient-180": "linear-gradient(180deg, rgba(0, 0, 0, 0.90) 0%, rgba(0, 0, 0, 0.00) 85.14%)"
+        "black-gradient-180": "linear-gradient(180deg, rgba(0, 0, 0, 0.90) 45%, rgba(0, 0, 0, 0.00) 85.14%)"
       },
       fontFamily: {
-        jost: ["Jost", "sans-serif"]
+        jost: ["Jost", "sans-serif"],
+        bebas: ["Bebas-Neue", "sans-serif"]
       },
       fontSize: {
         "20-40": "clamp(20px, 100%, 40px)",
@@ -51,6 +52,14 @@ module.exports = {
           fontWeight: "800",
           lineHeight: 1,
         },
+        ".text-gold-bebas": {
+          fontFamily: "Bebas-Neue, sans-serif",
+          color: "transparent",
+          backgroundImage: "linear-gradient(180deg, #E6C486 0%, #9B752C 100%)",
+          backgroundClip: "text",
+          fontWeight: "800",
+          lineHeight: 1,
+        },
         ".shadow-1": {
           filter: "drop-shadow(var(--shadow1))",
         },
@@ -67,7 +76,8 @@ module.exports = {
           minHeight: "100vh",
           maxWidth: "1980px",
           minWidth: "375px",
-          overflow: "hidden"
+          overflow: "hidden",
+          margin: "0 auto"
         }
       };
       addComponents(newComponents, ["responsive", "hover"]);

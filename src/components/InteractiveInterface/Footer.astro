@@ -6,19 +6,16 @@ import Follower from "@components/Cards/Follower/Follower.astro";
 
 const followers: FollowerID[] = ["2603", "2802", "2501", "2015", "2403"];
 ---
-
 <style is:global>
-  [followers-hand] div[follower-card="regular"] [follower-card-coin] {
+  [followers-hand] [follower-card-coin] {
     position: sticky;
     left: -3px;
-  }
-  [followers-hand]:hover div[follower-card="regular"] [follower-card-coin] {
-    position: absolute;
+    bottom: 0
   }
 </style>
 
 <div
-  class="h-[15%] min-h-[56px] max-h-[96px] flex justify-between gap-[60px] desktop-sm:gap-[120px] shrink-0 desktop-md:[30px] px-[10px] desktop-md:px-[20px]"
+  class="h-[15%] min-h-[56px] max-h-[112px] flex justify-between items-start gap-[60px] desktop-sm:gap-[120px] shrink-0 desktop-md:[30px] px-[10px] desktop-md:px-[20px]"
 >
   <div class="shrink-0 h-full" tooltip-id="btn-ability-intelligence">
     <Button variant="gold-bordered" size="lg">
@@ -30,7 +27,7 @@ const followers: FollowerID[] = ["2603", "2802", "2501", "2015", "2403"];
     </Button>
   </div>
   <div
-    class="flex justify-center min-w-[375px] max-w-[750px] [&>*]:shrink-0"
+    class="flex justify-center items-start min-w-[375px] max-w-[750px] gap-[2px] h-full overflow-hidden px-[8px] shrink-0"
     tooltip-id="followers-hand"
     followers-hand
   >

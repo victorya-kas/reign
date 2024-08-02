@@ -41,6 +41,11 @@ const followersRow: FollowerID[] = [
 ];
 const sliders = [followersRowReverse, followersRow];
 ---
+<style is:global>
+  #followers-carousel figcaption span {
+    font-size: 9px;
+  }
+</style>
 
 <section
   class="flex flex-col gap-[16px] [&>*]:shrink-0 [&>*]:py-0"
