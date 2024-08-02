@@ -1,0 +1,145 @@
+---
+import Tooltip from "@ui/Tooltip.astro";
+import Footer from "./Footer.astro";
+import Header from "./Header.astro";
+import PlayersTable from "./PlayersTable/PlayerTable.astro";
+import { useTranslations } from "i18n/utils";
+import { interactiveInterfaceTr } from "./translations";
+import MobileMockup from "@components/MobileMockup.astro";
+
+const t = useTranslations(interactiveInterfaceTr);
+---
+
+<style>
+  [interactive-interface-container] [interactive-interface] {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  [interactive-interface-container] [interactive-interface]::-webkit-scrollbar {
+    display: none;
+  }
+</style>
+<section
+  id="astro-interactive-gallery"
+  class="flex justify-center w-full px-[15px] desktop-sm:px-[30px] overflow-hidden"
+  interactive-interface-container
+>
+  <div class="overflow-auto desktop-sm:overflow-hidden" interactive-interface>
+    <MobileMockup isTooltipContainer={true}>
+      <div
+        class="relative w-full h-full flex flex-col gap-[4px] [&>div]:overflow-hidden"
+      >
+        <>
+          <Tooltip
+            id="follower-card-sm"
+            content={{
+              title: t("follower-card-sm")?.title,
+              content: t("follower-card-sm")?.content,
+            }}
+          />
+          <Tooltip
+            id="follower-value"
+            content={{
+              title: t("follower-value")?.title,
+              content: t("follower-value")?.content,
+            }}
+          />
+          <Tooltip
+            id="hero-card"
+            content={{
+              title: t("hero-card")?.title,
+              content: t("hero-card")?.content,
+            }}
+          />
+          <Tooltip
+            id="hero-card-cover"
+            content={{
+              title: t("hero-card-cover")?.title,
+              content: t("hero-card-cover")?.content,
+            }}
+          />
+          <Tooltip
+            id="hero-order"
+            content={{
+              title: t("hero-order")?.title,
+              content: t("hero-order")?.content,
+            }}
+          />
+          <Tooltip
+            id="hero-flag"
+            content={{
+              title: t("hero-flag")?.title,
+              content: t("hero-flag")?.content,
+            }}
+          />
+          <Tooltip
+            id="statistics"
+            content={{
+              title: t("statistics")?.title,
+              content: t("statistics")?.content,
+            }}
+          />
+          <Tooltip
+            id="header-heroes"
+            content={{
+              title: t("header-heroes")?.title,
+              content: t("header-heroes")?.content,
+            }}
+          />
+          <Tooltip
+            id="btn-settings"
+            content={{
+              title: t("btn-settings")?.title,
+              content: t("btn-settings")?.content,
+            }}
+          />
+          <Tooltip
+            id="btn-timer"
+            content={{
+              title: t("btn-timer")?.title,
+              content: t("btn-timer")?.content,
+            }}
+          />
+          <Tooltip
+            id="btn-sm-timer"
+            content={{
+              title: t("btn-sm-timer")?.title,
+              content: t("btn-sm-timer")?.content,
+            }}
+          />
+          <Tooltip
+            id="btn-resourses"
+            content={{
+              title: t("btn-resourses")?.title,
+              content: t("btn-resourses")?.content,
+            }}
+          />
+          <Tooltip
+            id="btn-ability-intelligence"
+            content={{
+              title: t("btn-ability-intelligence")?.title,
+              content: t("btn-ability-intelligence")?.content,
+            }}
+          />
+          <Tooltip
+            id="followers-hand"
+            content={{
+              title: t("followers-hand")?.title,
+              content: t("followers-hand")?.content,
+            }}
+          />
+          <Tooltip
+            id="player-name"
+            content={{
+              title: t("player-name")?.title,
+              content: t("player-name")?.content,
+            }}
+          />
+        </>
+        <Header />
+        <PlayersTable />
+        <Footer />
+      </div>
+    </MobileMockup>
+  </div>
+</section>

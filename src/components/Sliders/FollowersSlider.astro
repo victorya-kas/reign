@@ -1,0 +1,76 @@
+---
+import type { FollowerID } from "@ts/types";
+import Slider from "@ui/Slider.astro";
+import Follower from "@components/Cards/Follower/Follower.astro";
+const followersRowReverse: FollowerID[] = [
+  "2013",
+  "2603",
+  "2010",
+  "2802",
+  "2002",
+  "2403",
+  "2009",
+  "2602",
+  "2504",
+  "2008",
+  "2803",
+  "2005",
+  "2604",
+  "2004",
+  "2605",
+  "2016",
+];
+const followersRow: FollowerID[] = [
+  "2015",
+  "2003",
+  "2402",
+  "2012",
+  "2804",
+  "2011",
+  "2606",
+  "2501",
+  "2007",
+  "2801",
+  "2401",
+  "2006",
+  "2503",
+  "2001",
+  "2502",
+  "2601",
+  "2014",
+];
+const sliders = [followersRowReverse, followersRow];
+---
+<style is:global>
+  #followers-carousel figcaption span {
+    font-size: 9px;
+  }
+</style>
+
+<section
+  class="flex flex-col gap-[16px] [&>*]:shrink-0 [&>*]:py-0"
+  id="followers-carousel"
+>
+{
+  sliders?.map(((slider, idx) => {
+    return <Slider
+    animation={{ direction: idx %2 === 0 ? "reverse" : "normal", duration: slider.length * 5.5 }}
+    className="[&>div]:overflow-visible [&>div]:relative [&>div:hover]:z-10"
+  >
+    {
+      slider?.map((id: FollowerID) => {
+        return (
+          <div class="px-[8px]">
+            <Follower
+              id={id}
+              showAttributes="onhover"
+              className="!w-[100px] !h-[138px] shadow-2"
+            />
+          </div>
+        );
+      })
+    }
+  </Slider>
+  }))
+}
+</section>

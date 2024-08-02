@@ -1,0 +1,130 @@
+---
+interface Props {
+  animation?: {
+    direction?: "reverse" | "normal";
+    duration?: number;
+  };
+  className?: string;
+}
+const { animation = {}, className } = Astro.props;
+const { direction = "normal", duration = 20 } = animation;
+---
+
+<style>
+  /* [astro-slider-scroll-container] {
+    display: none;
+  }
+  [astro-slider-scroll-container] {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  [astro-slider-scroll-container]::-webkit-scrollbar {
+    display: none;
+  } */
+  [astro-slider-track-container]:hover [astro-slider-track] {
+    animation-play-state: paused !important;
+  }
+  [astro-slider-track] img {
+    transform: translateZ(0);
+  }
+
+  @keyframes astroSlider {
+    0% {
+      transform: translateX(0) translateZ(0);
+    }
+    100% {
+      transform: translateX(-50%) translateZ(0);
+    }
+  }
+</style>
+<div
+  class=`flex flex-col justify-center items-center w-screen h-full relative ${className ?? ""}`
+  astro-slider
+>
+  <div class="w-screen h-full overflow-hidden" astro-slider-track-container>
+    <div
+      class=`flex [&>*]:shrink-0`
+      style={{
+        animation: `astroSlider ${duration}s linear infinite ${direction}`,
+      }}
+      astro-slider-track
+    >
+      <slot />
+      <slot />
+    </div>
+  </div>
+</div>
+
+<script>
+  const sliders = document?.querySelectorAll(`div[astro-slider]`);
+  if (sliders) {
+    sliders?.forEach((el) => {
+      const slider = el as HTMLElement;
+      launchSliderTrack(slider);
+      window.addEventListener("resize", () => {
+        launchSliderTrack(slider);
+      });
+    });
+  }
+  function launchSliderTrack(slider: HTMLElement) {
+    const trackContainer = slider.querySelector(
+      "[astro-slider-track-container]"
+    ) as HTMLElement;
+    // const scrollContainer = slider.querySelector(
+    //   "[astro-slider-scroll-container]"
+    // ) as HTMLElement;
+    const track = trackContainer.querySelector(
+      "[astro-slider-track]"
+    ) as HTMLElement;
+    const children = track?.children as HTMLCollection;
+    let width = 0;
+    Array.from(children)?.forEach((el) => {
+      const child = el as HTMLElement;
+      width += child?.offsetWidth;
+    });
+    trackContainer.style.maxWidth = `${(width / 2).toFixed(0)}px`;
+    // scrollContainer.style.maxWidth = `${width / 2}px`;
+    track.style.width = `${width}px`;
+    // slider.addEventListener("mouseover", () =>
+    //   sliderOnHover(trackContainer, scrollContainer)
+    // );
+    // slider.addEventListener("mouseleave", () =>
+    //   sliderOnUnhover(trackContainer, scrollContainer)
+    // );
+  }
+
+  // function sliderOnHover(
+  //   trackContainer: HTMLElement,
+  //   scrollContainer: HTMLElement
+  // ) {
+  //   const track = trackContainer.querySelector(
+  //     "[astro-slider-track]"
+  //   ) as HTMLElement;
+  //   const scroll = scrollContainer.querySelector(
+  //     "[astro-slider-scroll]"
+  //   ) as HTMLElement;
+  //   console.log({ track, scroll });
+  //   const computedStyle = getComputedStyle(track);
+  //   const transformMatrix = computedStyle.transform;
+  //   if (transformMatrix && transformMatrix !== "none") {
+  //     const matrixValues =
+  //       transformMatrix.match(/matrix.*\((.+)\)/)[1]?.split(", ") ?? {};
+  //     const translateX = parseFloat(matrixValues[4]).toFixed(0);
+  //     scroll.style.transform = `translateX(${translateX}px)`;
+  //     trackContainer.style.display = "none";
+  //     scrollContainer.style.display = "block";
+  //   }
+  // }
+
+  // function sliderOnUnhover( trackContainer: HTMLElement,
+  // scrollContainer: HTMLElement) {
+  //   const scroll = scrollContainer.querySelector(
+  //     "[astro-slider-scroll]"
+  //   ) as HTMLElement;
+  //   scroll.style.transform = `none`;
+  //   scroll.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
+  //   console.log(scroll.scrollLeft)
+  //   trackContainer.style.display = "block";
+  //     scrollContainer.style.display = "none";
+  // }
+</script>

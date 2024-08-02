@@ -1,0 +1,13 @@
+---
+interface Props {
+  className?: string | undefined;
+}
+const { className, ...rest } = Astro.props as Props;
+---
+
+<figure
+  class={`relative [&>span]:absolute [&>span]:z-10 [&>span]:flex [&>span]:justify-center [&>span]:items-center [&>span]:bg-contain [&>span]:bg-center [&>span]:bg-no-repeat ${className ?? ""}`}
+  {...rest}
+>
+  <slot />
+</figure>

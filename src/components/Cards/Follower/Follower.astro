@@ -1,0 +1,268 @@
+---
+import Card from "@ui/Card.astro";
+import type { FollowerID, followerColor, followerValue, lang } from "ts/types";
+import Image from "@assets/Image.astro";
+import type { Images } from "@assets/images";
+import { useTranslations } from "i18n/utils";
+import { followerTr } from "./translations";
+
+type follower = {
+  color: followerColor;
+  value: followerValue;
+  name?: {
+    [key in lang]: string;
+  };
+};
+
+type followerImg = {
+  [key in FollowerID]: string;
+};
+
+type followers = {
+  [key in FollowerID]: follower;
+};
+
+interface Props {
+  id: FollowerID;
+  type?: "square" | "rounded";
+  showTooltip?: boolean;
+  showAttributes?: "onhover" | "onload";
+  className?: string;
+}
+
+const {
+  id,
+  type = "square",
+  showTooltip = false,
+  showAttributes = "onload",
+  className,
+} = Astro.props as Props;
+
+const isRounded = type === "rounded";
+const hoverAttr = showAttributes === "onhover" && !isRounded;
+
+const followerImg: Partial<followerImg> = {
+  "2603":
+    "https://static.tildacdn.com/tild3262-3637-4162-b365-303239323461/follower-2603.png",
+  "2401":
+    "https://static.tildacdn.com/tild6364-3539-4533-b862-623862326630/follower-2401.png",
+  "2002":
+    "https://static.tildacdn.com/tild6230-3464-4530-a262-303064623735/follower-2002.png",
+  "2501":
+    "https://static.tildacdn.com/tild3465-3831-4633-b834-376133613966/follower-2501.png",
+  "2803":
+    "https://static.tildacdn.com/tild6633-3630-4839-b736-646466333838/follower-2803.png",
+  "2502":
+    "https://static.tildacdn.com/tild6566-3036-4333-a637-336165366132/follower-2502.png",
+  "2802":
+    "https://static.tildacdn.com/tild3666-6532-4765-a262-353163333831/follower-2802.png",
+  "2015":
+    "https://static.tildacdn.com/tild3634-3333-4962-a334-663338613663/follower-20015.png",
+  "2403":
+    "https://static.tildacdn.com/tild3361-6664-4435-b631-633363666161/follower-2403.png",
+  "2013":
+    "https://static.tildacdn.com/tild3538-6361-4264-b035-623261393736/follower-20013.png",
+  "2010":
+    "https://static.tildacdn.com/tild3132-6562-4264-b163-343563393638/follower-20010.png",
+  "2009":
+    "https://static.tildacdn.com/tild3138-3164-4535-a433-383561316132/follower-2009.png",
+  "2602":
+    "https://static.tildacdn.com/tild6233-3363-4039-b130-656363323364/follower-2602.png",
+  "2504":
+    "https://static.tildacdn.com/tild3830-6262-4937-a531-383733393765/follower-2504.png",
+  "2008":
+    "https://static.tildacdn.com/tild6439-3763-4561-b939-383635376139/follower-2008.png",
+  "2005":
+    "https://static.tildacdn.com/tild3733-6632-4466-b532-396166326438/follower-2005.png",
+  "2604":
+    "https://static.tildacdn.com/tild3831-3935-4936-b237-393136323931/follower-2604.png",
+  "2004":
+    "https://static.tildacdn.com/tild6266-6438-4631-a633-666563623434/follower-2004.png",
+  "2605":
+    "https://static.tildacdn.com/tild6232-6530-4630-b266-633736323863/follower-2605.png",
+  "2016":
+    "https://static.tildacdn.com/tild3661-6461-4137-b538-316134616536/follower-20016.png",
+  "2003":
+    "https://static.tildacdn.com/tild3634-3065-4065-b631-393463303561/follower-2003.png",
+  "2402":
+    "https://static.tildacdn.com/tild3230-6638-4532-b734-363237613466/follower-2402.png",
+  "2012":
+    "https://static.tildacdn.com/tild6235-3363-4332-b463-393134643735/follower-20012.png",
+  "2804":
+    "https://static.tildacdn.com/tild6337-6261-4432-a438-316333303264/follower-2804.png",
+  "2011":
+    "https://static.tildacdn.com/tild3063-6131-4433-a633-666531366432/follower-20011.png",
+  "2606":
+    "https://static.tildacdn.com/tild6433-3536-4232-a363-353332663561/follower-2606.png",
+  "2007":
+    "https://static.tildacdn.com/tild3139-3565-4430-b237-376636346138/follower-2007.png",
+  "2801":
+    "https://static.tildacdn.com/tild6162-3837-4462-a166-313637303762/follower-2801.png",
+  "2006":
+    "https://static.tildacdn.com/tild6633-3433-4238-a162-633339363639/follower-2006.png",
+  "2503":
+    "https://static.tildacdn.com/tild3934-3033-4262-a635-363633363035/follower-2503.png",
+  "2001":
+    "https://static.tildacdn.com/tild6364-3037-4430-b532-366236353538/follower-2001.png",
+  "2601":
+    "https://static.tildacdn.com/tild3264-6430-4239-a637-613731343661/follower-2601.png",
+  "2014":
+    "https://static.tildacdn.com/tild3137-3138-4666-a630-663335346637/follower-20014.png",
+};
+
+const followerAttributesImg: Images = {
+  // follower's cards borders bg
+  "border-red": isRounded
+    ? "https://static.tildacdn.com/tild3562-3331-4065-a235-636535323263/Follower-round-borde.png"
+    : "https://static.tildacdn.com/tild3266-3837-4661-a464-633536636166/border-follower-card.png",
+  "border-green": isRounded
+    ? "https://static.tildacdn.com/tild3962-3539-4831-b339-333839343962/Follower-round-borde.png"
+    : "https://static.tildacdn.com/tild3333-3833-4331-b366-316133313631/border-follower-card.png",
+  "border-blue": isRounded
+    ? "https://static.tildacdn.com/tild3666-3033-4964-a166-336539626337/Follower-round-borde.png"
+    : "https://static.tildacdn.com/tild3766-6233-4333-b937-346131663031/border-follower-card.png",
+  "border-gold": isRounded
+    ? "https://static.tildacdn.com/tild6535-3663-4166-b530-323962386439/Follower-round-borde.png"
+    : "https://static.tildacdn.com/tild6530-3661-4538-b136-363632313066/border-follower-card.png",
+  "border-purple": isRounded
+    ? "https://static.tildacdn.com/tild3065-6231-4435-b765-623831633330/Follower-round-borde.png"
+    : "https://static.tildacdn.com/tild3231-6664-4436-b837-643464613136/border-follower-card.png",
+  //follower's flags
+  "flag-red":
+    "https://static.tildacdn.com/tild6133-6239-4166-b462-373865353034/emblem-hero-red.png",
+  "flag-green":
+    "https://static.tildacdn.com/tild3662-6435-4463-b661-373237643939/emblem-hero-green.png",
+  "flag-blue":
+    "https://static.tildacdn.com/tild3930-6336-4238-b039-333862306163/emblem-hero-blue.png",
+  "flag-gold":
+    "https://static.tildacdn.com/tild3734-6161-4331-a639-316636353833/emblem-hero-gold.png",
+  // follower's values
+  "coin-1":
+    "https://static.tildacdn.com/tild3065-3036-4336-b635-613531393261/coin-1.svg",
+  "coin-2":
+    "https://static.tildacdn.com/tild3233-6165-4431-a239-653632396237/coin-2.svg",
+  "coin-3":
+    "https://static.tildacdn.com/tild3635-6235-4366-b832-663333383362/coin-3.svg",
+  "coin-4":
+    "https://static.tildacdn.com/tild6432-3132-4232-b138-613461383538/coin-4.svg",
+  "coin-5":
+    "https://static.tildacdn.com/tild6636-6230-4339-b034-363766343134/coin-5.svg",
+  "coin-6":
+    "https://static.tildacdn.com/tild6163-3234-4339-a530-626365363231/coin-6.svg",
+};
+
+const followerAttributes: Partial<followers> = {
+  "2603": { color: "green", value: "2" },
+  "2401": { color: "gold", value: "3" },
+  "2002": { color: "purple", value: "2" },
+  "2501": { color: "blue", value: "1" },
+  "2803": { color: "red", value: "3" },
+  "2502": { color: "blue", value: "2" },
+  "2802": { color: "red", value: "2" },
+  "2015": { color: "purple", value: "5" },
+  "2403": { color: "gold", value: "5" },
+  "2016": { color: "purple", value: "6" },
+  "2014": { color: "purple", value: "5" },
+  "2013": { color: "purple", value: "5" },
+  "2011": { color: "purple", value: "5" },
+  "2012": { color: "purple", value: "3" },
+  "2804": { color: "red", value: "4" },
+  "2606": { color: "green", value: "5" },
+  "2801": { color: "red", value: "1" },
+  "2604": { color: "green", value: "3" },
+  "2605": { color: "green", value: "4" },
+  "2602": { color: "green", value: "2" },
+  "2504": { color: "blue", value: "5" },
+  "2601": { color: "green", value: "1" },
+  "2503": { color: "blue", value: "3" },
+  "2402": { color: "gold", value: "4" },
+  "2009": { color: "purple", value: "5" },
+  "2007": { color: "purple", value: "5" },
+  "2004": { color: "purple", value: "4" },
+  "2006": { color: "purple", value: "5" },
+  "2003": { color: "purple", value: "3" },
+  "2005": { color: "purple", value: "5" },
+  "2008": { color: "purple", value: "5" },
+  "2010": { color: "purple", value: "5" },
+  "2001": { color: "purple", value: "3" },
+};
+
+const t = useTranslations(followerTr);
+const coin =
+  followerAttributesImg[`coin-${followerAttributes[id]?.value}`] ?? "";
+const border =
+  followerAttributesImg[`border-${followerAttributes[id]?.color}`] ?? "";
+const flag =
+  followerAttributesImg[`flag-${followerAttributes[id]?.color}`] ?? "";
+const name = t(`${id}_name`);
+---
+
+<Card
+  className=`group ${hoverAttr ? "hover:scale-125 transition-transform" : ""}
+  ${ isRounded ? 'w-[45px] h-[53px] desktop-md:w-[68px] desktop-md:h-[80px] desktop-lg:w-[90px] desktop-lg:h-[105px]' : 'w-[75px] desktop-md:w-[110px] desktop-lg:w-[150px] h-[105px] desktop-md:h-[157px] desktop-lg:h-[210px]'} 
+  ${className ?? ""}`
+  tooltip-id={showTooltip &&
+    `${isRounded ? "follower-card-sm" : "follower-card"}`}
+  follower-card={type}
+>
+  {
+    flag && !isRounded ? (
+      <span
+        class={`!z-20 bg-contain bg-center bg-no-repeat top-0 -left-[5px] w-[24%] h-[22%] min-w-[18px] min-h-[23px] max-w-[36px] max-h-[46px] ${hoverAttr ? "opacity-0 group-hover:opacity-100" : ""}`}
+        style={{ backgroundImage: `url("${flag}")` }}
+        follower-card-flag
+      />
+    ) : (
+      ""
+    )
+  }
+  {
+    name && !isRounded ? (
+      <figcaption
+        class={`absolute top-0 left-0 z-10 w-full px-[5%] py-[10%] flex items-center justify-center bg-black-gradient-180 ${flag ? "pl-[20%]" : ""} ${hoverAttr ? "opacity-0 group-hover:opacity-100" : ""}`}
+        follower-card-name
+      >
+        <span class="text-gold-bebas text-[6px] desktop-md:text-[10px] desktop-lg:text-[14px] uppercase text-center">
+          {name}
+        </span>
+      </figcaption>
+    ) : (
+      ""
+    )
+  }
+  <div class={`w-full h-full relative ${hoverAttr ? "group-hover:z-10" : "z-10"}`}>
+    <Image
+      src={border}
+      width={isRounded ? "90" : "150"}
+      height={isRounded ? "105" : "210"}
+      className="h-full"
+    />
+  </div>
+
+  <div
+    class={`block absolute w-full h-full top-0 left-0 !z-0 ${isRounded ? "p-[2px]" : ""}`}
+    follower-card-img
+  >
+    <Image
+      src={`${followerImg[id as keyof followerImg]}`}
+      width={isRounded ? "90" : "150"}
+      height={isRounded ? "105" : "210"}
+      className={`h-full object-cover ${isRounded ? "rounded-[45%] object-[center_30%]" : "object-center"}`}
+    />
+  </div>
+
+  <span
+    class=`h-auto 
+    ${isRounded ? '-bottom-[1px] -left-[1px] w-[35%] min-w-[18px] max-w-[36px]' : '-bottom-[3px] -left-[3px] desktop-md:-bottom-[6px] desktop-md:-left-[6px] min-w-[20px] w-[27%] max-w-[40px]'} 
+    ${hoverAttr ? "opacity-0 group-hover:opacity-100" : ""}`
+    tooltip-id={"follower-value"}
+    follower-card-coin
+  >
+    <Image
+      src={coin}
+      width={isRounded ? "32" : "40"}
+      height={isRounded ? "32" : "40"}
+      className="min-h-full min-w-full"
+    />
+  </span>
+</Card>

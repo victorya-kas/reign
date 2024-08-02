@@ -14,7 +14,7 @@ const { type } = Astro.props as Props;
       class="w-[25%] max-w-[128px] min-w-[65px] max-h-full flex flex-col shadow-[3px_0_4px_0_rgba(0,0,0,0.4)] rounded-l-[5px] p-[3px] [&>*]:flex [&>*]:justify-center [&>*]:items-center"
     >
       <div
-        class="shrink-0 h-[15px] desktop-md:h-[30px] shadow-[0_2px_4px_0_rgba(0,0,0,0.9)] px-[4px] desktop-md:px-[8px]"
+        class="shrink-0 h-[15px] desktop-md:h-[30px] shadow-[0_2px_4px_0_rgba(0,0,0,0.9)]"
       >
         <slot name="table-item-player-name" />
       </div>
@@ -29,10 +29,10 @@ const { type } = Astro.props as Props;
         <slot name="table-item-statistic" />
       </div>
     </div>
-    <section
-      class="grow p-[15px] desktop-md:p-[30px] flex justify-center items-center [&>div]:max-h-full [&>div]:w-full [&>div]:h-[113px] [&>div]:min-w-[141px] [&>div]:desktop-lg:h-[216px] [&>div]:max-w-[282px] [&>div]:flex [&>div]:flex-wrap [&>div]:justify-center [&>div]:items-center [&>div]:gap-[9px] [&>div]:desktop-md:gap-[12px] [&>div>*]:w-[33%]"
+    <div
+      class="grow p-[15px] desktop-md:p-[30px] flex justify-center items-center [&>div]:max-h-full [&>div]:w-full [&>div]:h-[113px] [&>div]:min-w-[141px] [&>div]:desktop-lg:h-[216px] [&>div]:max-w-[282px] [&>div]:flex [&>div]:flex-wrap [&>div]:justify-center [&>div]:items-center [&>div]:gap-[9px] [&>div]:desktop-md:gap-[12px] [&>div>*]:max-w-[33%]"
     >
       <slot name="table-item-followers" />
-    </section>
+    </div>
   </div>
 </div>

@@ -1,0 +1,51 @@
+---
+import Button from "ui/Button.astro";
+import Hero from "@components/Cards/Hero.astro";
+import Image from "@assets/Image.astro";
+import type { heroID } from "@ts/types";
+
+const heroes: heroID[] = [
+  "1101",
+  "1201",
+  "1301",
+  "1401",
+  "1501",
+  "1601",
+  "1701",
+  "1801",
+];
+---
+
+<div
+  class="h-[12%] min-h-[50px] max-h-[90px] flex justify-between items-center shrink-0 gap-x-[50px]"
+>
+  <div class="relative shrink-0 h-full" tooltip-id="btn-timer">
+    <Button variant="trapezoid-right" size="lg">30</Button>
+    <span class="absolute right-0 top-0" tooltip-id="btn-sm-timer">
+      <Button variant="silver-bordered" size="sm">90</Button>
+    </span>
+  </div>
+  <div
+    class="relative h-full flex items-center justify-center min-w-[225px] max-[450px]"
+    tooltip-id="header-heroes"
+  >
+    {
+      heroes?.map((id: heroID) => (
+        <Hero
+          id={id}
+          mode="horizontal"
+          orderFlag={id === "1301" ? "empty" : id === "1701" ? "real" : null}
+        />
+      ))
+    }
+  </div>
+  <div class="shrink-0 h-full" tooltip-id="btn-settings">
+    <Button variant="trapezoid-left" size="lg">
+      <span
+        class="block w-[22px] h-[22px] desktop-sm:w-[33px] desktop-sm:h-[33px] desktop-md:w-[44px] desktop-md:h-[44px]"
+      >
+        <Image name="icon-settings" width="44" height="44" />
+      </span>
+    </Button>
+  </div>
+</div>

@@ -12,20 +12,14 @@ module.exports = {
         "dark-gold-gradient":
           "linear-gradient(180deg, #35251C 0%, #170C06 100%)",
         "black-gradient-270": "linear-gradient(270deg, #0E0601 0%, #070402 100%)",
-        "black-gradient-180": "linear-gradient(180deg, rgba(0, 0, 0, 0.90) 0%, rgba(0, 0, 0, 0.00) 85.14%)"
+        "black-gradient-180": "linear-gradient(180deg, rgba(0, 0, 0, 0.90) 45%, rgba(0, 0, 0, 0.00) 85.14%)"
       },
       fontFamily: {
         jost: ["Jost", "sans-serif"],
-        story: ["v_CCTheStorySoFar"]
-      },
-      padding: {
-        "11-22": "clamp(11px, 3vh, 22px)",
+        bebas: ["Bebas-Neue", "sans-serif"]
       },
       fontSize: {
         "20-40": "clamp(20px, 100%, 40px)",
-        "12-24": "clamp(12px, 2vw, 24px)",
-        "10-20": "clamp(10px, 100%, 20px)",
-        "11-22": "clamp(11px, 2vw, 22px)",
       },
       screens: {
         "mobile": "576px",
@@ -34,19 +28,6 @@ module.exports = {
         "desktop-md": "1280px",
         "desktop-lg": "1440px",
         "desktop-xl": "1536px",
-      },
-      textShadow: {
-        "button-black": "0px 0px 4px rgba(0, 0, 0, 0.90)",
-      },
-      position: {
-        "top-left": "top-0 left-0",
-        "top-right": "",
-        "bottom-left": "",
-        "botton-right": "",
-        "top-center": "",
-        "bottom-center": "",
-        "left-center": "",
-        "right-center": "",
       },
     },
   },
@@ -71,32 +52,35 @@ module.exports = {
           fontWeight: "800",
           lineHeight: 1,
         },
-        ".text-story-gold": {
-          fontFamily: "v_CCTheStorySoFar-Regular",
+        ".text-gold-bebas": {
+          fontFamily: "Bebas-Neue, sans-serif",
           color: "transparent",
-          backgroundImage: "linear-gradient(180deg, #FCE9C9 0%, #B39F7D 100%)",
+          backgroundImage: "linear-gradient(180deg, #E6C486 0%, #9B752C 100%)",
           backgroundClip: "text",
-          fontWeight: "400"
+          fontWeight: "800",
+          lineHeight: 1,
         },
         ".shadow-1": {
           filter: "drop-shadow(var(--shadow1))",
         },
+        ".shadow-2": {
+          filter: "drop-shadow(var(--shadow2))"
+        },
+        ".p-container": {
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          width: "100%",
+          height: "100%",
+          minHeight: "100vh",
+          maxWidth: "1980px",
+          minWidth: "375px",
+          overflow: "hidden",
+          margin: "0 auto"
+        }
       };
       addComponents(newComponents, ["responsive", "hover"]);
-      matchUtilities(
-        {
-          position: (value) => ({
-            position: value,
-          }),
-        },
-        {
-          "text-shadow": (value) => ({
-            textShadow: value,
-          }),
-        },
-
-        { values: theme("textShadow") }
-      );
     }),
   ],
 };

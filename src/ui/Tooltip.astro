@@ -1,0 +1,286 @@
+---
+import type { tooltip } from "@ts/types";
+
+interface Props {
+  id: string;
+  content: tooltip;
+}
+const { content, id } = Astro.props as Props;
+---
+
+<div tooltip-for={id} tooltip-content={JSON.stringify(content)} class="hidden">
+</div>
+
+<script>
+  import type { tooltip } from "@ts/types";
+
+  type tooltipsContent = { [key: string]: string };
+  type position = {
+    top: number;
+    left: number;
+    bottom: number;
+    right: number;
+    width: number;
+    height: number;
+  };
+
+  const tooltipContainers = document.querySelectorAll("[tooltip-container]");
+  if (tooltipContainers?.length) {
+    tooltipContainers?.forEach((container) => {
+      container.classList.add("relative");
+      const tooltips: NodeListOf<Element> | [] =
+        container?.querySelectorAll("[tooltip-id]") ?? [];
+      assignTooltipEventsListeners(tooltips);
+    });
+  }
+
+  function assignTooltipEventsListeners(tooltips: NodeListOf<Element> | []) {
+    const tooltipsContent: tooltipsContent = getTooltipsContent(tooltips);
+    tooltips.forEach((element) => {
+      element.addEventListener("mouseover", (event: Event) => {
+        onShowTooltip(event, tooltipsContent);
+      });
+      element.addEventListener("click", (event: Event) =>
+        onShowTooltip(event, tooltipsContent)
+      );
+    });
+  }
+  function getTooltipContainer(
+    tooltip: HTMLElement | null
+  ): HTMLElement | null {
+    if (!tooltip) null;
+    return tooltip?.closest("[tooltip-container]") as HTMLElement;
+  }
+
+  function getTooltipsContent(
+    tooltips: NodeListOf<Element> | []
+  ): tooltipsContent {
+    const tooltipsContent: tooltipsContent = {};
+    tooltips?.forEach((el) => {
+      const container = getTooltipContainer(el as HTMLElement);
+      const id: string = el?.getAttribute("tooltip-id") ?? "";
+      const tooltip = container?.querySelector(`[tooltip-for="${id}"]`);
+      const tooltipContent = tooltip?.getAttribute("tooltip-content") ?? "";
+
+      if (!tooltip || !tooltipContent || tooltipsContent?.[id]) return;
+
+      tooltipsContent[id as string] = tooltipContent as string;
+    });
+    return tooltipsContent;
+  }
+
+  function removeTooltip(): void {
+    const highlightedElsContainer = document?.querySelector(
+      "[highligted-tooltips-id]"
+    ) as HTMLElement;
+    const tooltipId = highlightedElsContainer?.getAttribute(
+      "highligted-tooltips-id"
+    );
+    if (!highlightedElsContainer || !tooltipId) return;
+    const tooltipEls = document?.querySelectorAll(
+      `[origin-highlighted=${tooltipId}]`
+    );
+    tooltipEls?.forEach((el) => {
+      el?.removeAttribute("origin-highlighted");
+    });
+    highlightedElsContainer?.remove();
+    document?.getElementById("interactive-tooltip")?.remove();
+  }
+
+  function onShowTooltip(event: Event, tooltipsContent: tooltipsContent): void {
+    event.preventDefault();
+    event.stopPropagation();
+    const el = event.currentTarget as HTMLElement;
+    const container = getTooltipContainer(el) as HTMLElement;
+    const id = el?.getAttribute("tooltip-id") ?? "";
+    const content = tooltipsContent?.[id];
+    if (!el || !content || !container) return;
+
+    showTooltip(el, content, container);
+  }
+
+  function showTooltip(
+    target: HTMLElement,
+    content: string,
+    container: HTMLElement
+  ): void {
+    const tooltipId = target.getAttribute("tooltip-id");
+    const tooltip = createTooltip(JSON.parse(content), tooltipId!);
+    addHighlightTooltip(target, tooltip, tooltipId!, container);
+  }
+
+  function addHighlightTooltip(
+    target: HTMLElement,
+    tooltip: HTMLElement,
+    tooltipId: string,
+    container: HTMLElement
+  ) {
+    const tooltipHighlightedEls = container?.querySelectorAll(
+      `[tooltip-id=${tooltipId}]`
+    );
+    if (!tooltipId || !tooltipHighlightedEls) return;
+    target.setAttribute("highlight-active", "true");
+    const highlightedElsContainer = document.createElement("div");
+    highlightedElsContainer?.setAttribute("highligted-tooltips-id", tooltipId);
+    highlightedElsContainer?.classList?.add(
+      "absolute",
+      "top-0",
+      "left-0",
+      "w-full",
+      "h-full",
+      "z-[450]",
+      "[&>*]:absolute"
+    );
+    const overlay = document.createElement("span");
+    overlay?.classList?.add("w-full", "h-full", "bg-[rgba(0,0,0,0.8)]");
+    overlay.addEventListener("click", removeTooltip);
+    overlay.addEventListener("mouseenter", removeTooltip, true);
+    highlightedElsContainer.appendChild(overlay);
+    container.appendChild(tooltip);
+    positionTooltip(target, tooltip, container);
+    tooltipHighlightedEls.forEach((tooltipEl) => {
+      const originEl = tooltipEl as HTMLElement;
+      const { top, left } = getRelativePosition(originEl, container);
+      const elClone = originEl.cloneNode(true) as HTMLElement;
+      elClone.classList.add("shadow-1");
+      elClone.style.top = `${top}px`;
+      elClone.style.left = `${left}px`;
+      elClone.style.width = `${originEl.offsetWidth}px`;
+      elClone.style.height = `${originEl.offsetHeight}px`;
+      highlightedElsContainer.appendChild(elClone);
+      originEl.setAttribute("origin-highlighted", tooltipId);
+      if (elClone.getAttribute("highlight-active") === "true") {
+        elClone.addEventListener("mouseout", () => {
+          target.removeAttribute("highlight-active");
+          removeTooltip();
+        });
+      }
+    });
+    container.appendChild(highlightedElsContainer);
+  }
+
+  function createTooltip(
+    content: tooltip | string,
+    id: string
+  ): HTMLSpanElement {
+    const span = document.createElement("span");
+    span.setAttribute("id", "interactive-tooltip");
+    span.setAttribute("tooltip-for", id);
+    span.classList.add(
+      "block",
+      "!absolute",
+      "shadow",
+      "z-[550]",
+      "gold-bordered",
+      "w-[175px]",
+      "desktop-md:w-[260px]",
+      "desktop-lg:w-[350px]",
+      "max-h-[145px]",
+      "overflow-auto"
+    );
+    span.innerHTML =
+      typeof content === "string"
+        ? content
+        : `<span class="tooltip-content block w-full rounded-[5px] p-[1px]">
+                      <span class="flex flex-col justify-center bg-dark-gold-gradient p-[15px] desktop-lg:p-[30px] shadow rounded-[5px] relative z-30">
+                        <h3 class="text-[12px] desktop-sm-[16px] desktop-md-[20px] text-gold pb-[10px]">${content?.title}</h3>
+                        <p class="font-jost text-[10px] desktop-sm-[14px] desktop-md-[16px] text-[#FFC99D]">${content?.content}</p>
+                      </span>
+                    </span>`;
+    return span;
+  }
+
+  function positionTooltip(
+    target: HTMLElement,
+    tooltip: HTMLElement,
+    container: HTMLElement
+  ) {
+    const containerWidth = container.offsetWidth;
+    const containerHeight = container.offsetHeight;
+    const targetPos = getRelativePosition(target, container);
+    const gap: number = 15;
+    const tooltipWidth: number = tooltip.offsetWidth + gap;
+    const tooltipHeight: number = tooltip.offsetHeight + gap;
+
+    const tooltipPosTopLeft = {
+      left: targetPos.left - tooltipWidth / 2,
+      top: targetPos.top - tooltipHeight,
+    };
+    const tooltipPosBottomLeft = {
+      left: targetPos.left - tooltipWidth / 2,
+      top: targetPos.bottom + gap,
+    };
+    const tooltipPosTopRight = {
+      left: targetPos.right + gap,
+      top: targetPos.top - tooltipHeight,
+    };
+    const tooltipPosBottomRight = {
+      left: targetPos.right + gap,
+      top: targetPos.bottom + gap,
+    };
+
+    if (
+      targetPos.right + tooltipWidth < containerWidth &&
+      targetPos.bottom + tooltipHeight < containerHeight
+    ) {
+      setTooltipPos(tooltip, tooltipPosBottomRight);
+      return;
+    }
+    if (
+      targetPos.right + tooltipWidth < containerWidth &&
+      targetPos.top - tooltipHeight > 0 
+    ) {
+      setTooltipPos(tooltip, tooltipPosTopRight);
+      return;
+    }
+    if (
+      targetPos.left - tooltipWidth < containerWidth &&
+      targetPos.bottom + tooltipHeight < containerHeight
+    ) {
+      setTooltipPos(tooltip, tooltipPosBottomLeft);
+      return;
+    }
+    if (
+      targetPos.left - tooltipWidth < containerWidth &&
+      targetPos.top - tooltipHeight > 0
+    ) {
+      setTooltipPos(tooltip, tooltipPosTopLeft);
+      return;
+    }
+  }
+
+  function setTooltipPos(
+    tooltip: HTMLElement,
+    position: { [key:string]: number }
+  ) {
+    Object.entries(position).forEach(([key, value]: [string, number]) => {
+      //@ts-ignore
+      tooltip.style[key] = `${value?.toFixed(0)}px`;
+    });
+  }
+
+  function getRelativePosition(
+    element: HTMLElement,
+    relativeTo: HTMLElement
+  ): position {
+    const width = element.offsetWidth;
+    const height = element.offsetHeight;
+    let left = 0,
+      top = 0;
+
+    while (element && element !== relativeTo) {
+      left += element.offsetLeft;
+      top += element.offsetTop;
+      element = element.offsetParent as HTMLElement;
+    }
+
+    return {
+      top,
+      left,
+      right: left + width,
+      bottom: top + height,
+      width,
+      height,
+    };
+  }
+</script>

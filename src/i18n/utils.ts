@@ -1,13 +1,18 @@
-import { translations, defaultLang } from './index.ts';
+import {defaultLang } from './index.ts';
+import type { lang as TLang } from '@ts/types.ts';
 
-export function getLangFromUrl(url: URL) {
-  const [, lang] = url.pathname.split('/');
-  if (lang && lang in translations) return lang as keyof typeof translations;
-  return defaultLang;
+type translations = {
+  [key in TLang]: any
 }
 
-export function useTranslations(lang: keyof typeof translations = defaultLang) {
-  return function t(key: keyof typeof translations[typeof defaultLang]) {
-    return translations[lang][key] || translations[defaultLang][key];
+
+export function useTranslations(translations: translations, lang: TLang = defaultLang) {
+  return function t(key: string) {
+    return translations?.[lang]?.[key] || translations?.[defaultLang]?.[key];
   }
+}
+
+export function getLangFromUrl(): TLang | null {
+  const [, lang] = window?.location?.pathname.split('/');
+  return lang ? lang as TLang : null;
 }
