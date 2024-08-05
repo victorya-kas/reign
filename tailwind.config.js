@@ -5,6 +5,10 @@ module.exports = {
   content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
   theme: {
     extend: {
+      colors: {
+        "golden": "#dc9644" ,
+        "golden-dark": "#a77132"
+      },
       backgroundImage: {
         "gold-gradient-270":
           "linear-gradient(270deg, #533419 0%, #1E0E01 77.48%, #1C0C00 100%)",
@@ -62,6 +66,9 @@ module.exports = {
         },
         ".shadow-1": {
           filter: "drop-shadow(var(--shadow1))",
+        },
+        ".shadow-1-md": {
+          filter: "drop-shadow(var(--shadow1-md))"
         },
         ".shadow-2": {
           filter: "drop-shadow(var(--shadow2))"

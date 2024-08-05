@@ -1,5 +1,9 @@
 ---
+import i18next, { t } from "i18next";
+import { HeadHrefLangs } from "astro-i18next/components";
+import Header from "@components/Header.astro";
 import "../styles/global.css";
+import { ViewTransitions } from "astro:transitions";
 
 interface Props {
   title?: string;
@@ -7,11 +11,13 @@ interface Props {
 }
 
 const { title = "Reign", className } = Astro.props;
+console.log(i18next)
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={i18next.language}>
   <head>
+    <ViewTransitions />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link
@@ -20,13 +26,13 @@ const { title = "Reign", className } = Astro.props;
     />
     <title>{title}</title>
     <slot name="head" />
+    <HeadHrefLangs />
   </head>
   <body>
-    <div
-      class={`p-container py-[60px] ${className ?? ""}`}
-    >
+    <Header t={t} />
+    <main class={`p-container px-4 desktop-sm:px-7 py-14 ${className ?? ""}`}>
       <slot />
-    </div>
+    </main>
     <slot name="scripts" />
   </body>
 </html>

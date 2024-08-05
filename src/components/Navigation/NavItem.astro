@@ -1,0 +1,76 @@
+---
+interface Props {
+  type: "link" | "dropdown";
+  href?: string;
+  target?: "_blank" | "_self" | "_parent" | "_top";
+  className?: string;
+}
+const { type, className, href, target, ...rest } =
+  Astro.props as Partial<Props>;
+const commonClasses = `h-full min-w-[100px] flex flex-col justify-center items-center px-4 text-jost text-golden hover:text-golden-dark text-bold text-xs laptop:text-sm ${className ?? ""}`;
+---
+
+{
+  type === "link" ? (
+    <a
+      class={commonClasses}
+      href={href ?? ""}
+      target={target ?? "_self"}
+      {...rest}
+    >
+      <slot />
+    </a>
+  ) : type === "dropdown" && Astro.slots.has("dropdown-menu") ? (
+    <div class={`group ${commonClasses}`} {...rest}>
+      <div class="flex items-center gap-1">
+        <slot />
+        <span class="group-hover:rotate-180">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="5245 5002 7.625 5">
+            {" "}
+            <path
+              fill="transparent"
+              fill-opacity="1"
+              stroke="url(#tSvgGradient3ece395b69)"
+              stroke-opacity="1"
+              stroke-width="1"
+              fill-rule="evenodd"
+              id="tSvg95216cb81c"
+              d="M 5246 5003 C 5246 5003 5248.8125 5006 5248.8125 5006 C 5248.8125 5006 5251.625 5003 5251.625 5003"
+              stroke-linecap="butt"
+            />{" "}
+            <defs>
+              {" "}
+              <linearGradient
+                id="tSvgGradient3ece395b69"
+                x1="0.5000000000000001"
+                x2="0.5"
+                y1="1"
+                y2="0"
+                gradientTransform=""
+              >
+                {" "}
+                <stop
+                  offset="0"
+                  stop-color="hsl(32.184,83%,39.22%)"
+                  stop-opacity="1"
+                />{" "}
+                <stop
+                  offset="1"
+                  stop-color="hsl(32.364,100%,72.75%)"
+                  stop-opacity="1"
+                />{" "}
+              </linearGradient>{" "}
+            </defs>{" "}
+          </svg>
+        </span>
+      </div>
+      <div class="h-0 opacity-0 transition-opacity group-hover:opacity-1 group-hover:h-auto">
+        <slot name="dropdown-menu" />
+      </div>
+    </div>
+  ) : (
+    <div class={commonClasses}>
+      <slot />
+    </div>
+  )
+}

@@ -1,0 +1,22 @@
+---
+import Nav from "@components/Navigation/Nav.astro";
+import NavItem from "./Navigation/NavItem.astro";
+import { t } from "i18next";
+import { LanguageSelector } from "astro-i18next/components";
+import { localizePath } from "node_modules/astro-i18next/src";
+---
+
+<header class="flex justify-between items-center py-4 px-8 desktop-lg:px-14">
+  <Nav className="fixed top-4 z-50">
+    <NavItem type="link" href={localizePath("/rules")}>{t("rules")}</NavItem>
+    <NavItem type="link" href={localizePath("/cards")}>{t("cards")}</NavItem>
+    <NavItem type="link" href={localizePath("/esports")}>{t("esports")}</NavItem>
+  </Nav>
+  <Nav>
+    <LanguageSelector
+    showFlag={false}
+    languageMapping={{ en: "Anglais" }}
+    class="my-select-class"
+  />
+  </Nav>
+</header>

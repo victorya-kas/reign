@@ -1,0 +1,62 @@
+{
+  "btn-timer": {
+    "title": "Main time per turn",
+    "content": "The renewable time for a specific stage for each player. When it ends, extra time is spent."
+  },
+  "btn-sm-timer": {
+    "title": "Extra time per turn",
+    "content": "The additional time, which is used if the main time has run out. If the extra time was spent as well as the main time, the turn ends automatically."
+  },
+  "btn-settings": {
+    "title": "Settings",
+    "content": "Opens the settings panel with the option to leave the game."
+  },
+  "header-heroes": {
+    "title": "Hero status panel",
+    "content": "Displays the list of the heroes and the status of abilities that are applied to them. It allows you to look at their description at any moment of the game."
+  },
+  "statistics": {
+    "title": "Player statistics",
+    "content": "Displays players' current amount of coins, cards, influence, disciples."
+  },
+  "player-name": {
+    "title": "Player name",
+    "content": "Displays the player's name, his position on the board does not change."
+  },
+  "hero-card-cover": {
+    "title": "Unknown hero",
+    "content": "Demonstrates that the player has chosen a hero, but the hero's turn has not come yet."
+  },
+  "hero-card": {
+    "title": "Revealed hero",
+    "content": "When a certain hero's turn comes, that hero is revealed to all the players."
+  },
+  "hero-order": {
+    "title": "Heroes' turn order",
+    "content": "Displays the sequence of the heroes' turns."
+  },
+  "hero-flag": {
+    "title": "Effect on the hero",
+    "content": "Displays the effects of abilities on heroes."
+  },
+  "follower-card-sm": {
+    "title": "Recruited disciple",
+    "content": "As soon as a player spends coins to recruit a disciple, that disciple goes under the player's control and the disciple's abilities take effect."
+  },
+  "follower-value": {
+    "title": "Cost of the disciple",
+    "content": "Displays the disciple's cost and the basic amount of influence this disciple will bring to their owner."
+  },
+  "btn-ability-intelligence": {
+    "title": "Hero's active ability",
+    "content": "Activates the hero's ability. Once per round."
+  },
+  "btn-resourses": {
+    "title": "Resources",
+    "content": "Allows you to get resources. Once per round."
+  },
+  "followers-hand": {
+    "title": "Hand",
+    "content": "Displays the cards that the player currently have."
+  }
+}

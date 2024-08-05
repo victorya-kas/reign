@@ -7,12 +7,7 @@ export type tooltip = {
 export type lang = "en" | "ru";
 export type languages = {
   [key in lang]: string;
-};
-export type translations<T = string> = {
-  [key in lang]: {
-    [key: string]: T;
-  };
-};
+}
 
 // hero's types
 export type heroID =

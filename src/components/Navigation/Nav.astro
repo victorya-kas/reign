@@ -1,0 +1,14 @@
+---
+interface Props {
+  className?: string
+}
+
+const {className = ""} =  Astro.props as Props;
+---
+<nav
+  class={`shadow-1-md h-[50px] ${className ?? ""}`}
+>
+  <span class="h-full flex px-8 items-center bg-gradient-to-b from-[#212121] to-black" style={{clipPath: "polygon(0 0, 100% 0, 94% 100%, 6% 100%)"}}>
+    <slot />
+  </span>
+</nav>
