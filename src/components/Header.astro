@@ -1,22 +1,74 @@
 ---
 import Nav from "@components/Navigation/Nav.astro";
 import NavItem from "./Navigation/NavItem.astro";
-import { t } from "i18next";
-import { LanguageSelector } from "astro-i18next/components";
+import i18next, { t } from "i18next";
 import { localizePath } from "node_modules/astro-i18next/src";
+import { Image } from "astro:assets";
+import iconDiscord from "@images/discord.svg"
+import Button from "@/ui/Button.astro";
+
+const langMapping: { [key: string]: string } = {
+  en: "EN (english)",
+  ru: "RU (русский)",
+};
+const langOnclick = (e) => {
+  const href = window.location.href.split("/");
+  const page = href[href.length - 1];
+  if (page) {
+    console.log(e.currentTarget, page);
+  } else {
+    return;
+  }
+};
 ---
 
-<header class="flex justify-between items-center py-4 px-8 desktop-lg:px-14">
-  <Nav className="fixed top-4 z-50">
+<header
+  class="fixed top-0 left-0 z-50 w-full flex justify-between items-center py-4 px-8 desktop-lg:px-14"
+>
+  <Nav>
     <NavItem type="link" href={localizePath("/rules")}>{t("rules")}</NavItem>
     <NavItem type="link" href={localizePath("/cards")}>{t("cards")}</NavItem>
-    <NavItem type="link" href={localizePath("/esports")}>{t("esports")}</NavItem>
+    <NavItem type="link" href={localizePath("/esports")}>{t("esports")}</NavItem
+    >
   </Nav>
-  <Nav>
-    <LanguageSelector
-    showFlag={false}
-    languageMapping={{ en: "Anglais" }}
-    class="my-select-class"
-  />
+  <Nav className="animate-on-scroll transition-transform duration-500">
+    <NavItem type="dropdown">
+      <span class="uppercase">
+        {i18next.language}
+      </span>
+      <span
+        slot="dropdown-menu"
+        class="w-[180px] h-[54px] flex flex-col itemms-center"
+      >
+        {
+          i18next.languages
+            .filter((lang: string) => lang !== i18next.language)
+            .map((lang: string) => (
+              <NavItem type="link" href={`/${lang}`} onClick={langOnclick}>
+                {langMapping?.[lang]}
+              </NavItem>
+            ))
+        }
+      </span>
+    </NavItem>
+    <NavItem type="link" href="https://discord.gg/TopDeckStudio" target="_blank" className="flex-row items-center gap-1">
+      <Image src={iconDiscord} alt="reign"/>
+      {t("community")}
+    </NavItem>
+    <Button variant="oblique-trapezoid-outline">
+      {t("play")}
+    </Button>
   </Nav>
 </header>
+
+<script>
+  const hideNav = document.body.querySelector("header .animate-on-scroll");
+  if (hideNav)
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 0) {
+        hideNav.classList.add("-translate-y-[calc(100%+20px)]");
+      } else {
+        hideNav.classList.remove("-translate-y-[calc(100%+20px)]");
+      }
+    });
+</script>

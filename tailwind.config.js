@@ -7,7 +7,13 @@ module.exports = {
     extend: {
       colors: {
         "golden": "#dc9644" ,
-        "golden-dark": "#a77132"
+        "golden-dark-1": "#a77132",
+        "golden-dark-2": "#493824",
+        "dark-1": "#0d0d0d",
+        "dark-2": "#212121",
+        "dark-3": "#222A2E",
+        "dark-4": "#17181D",
+        "light": "#d3d3d3"
       },
       backgroundImage: {
         "gold-gradient-270":
@@ -85,6 +91,9 @@ module.exports = {
           minWidth: "375px",
           overflow: "hidden",
           margin: "0 auto"
+        },
+        ".shape-trapezoid": {
+          clipPath: "polygon(0 0, 100% 0, 94% 100%, 6% 100%)"
         }
       };
       addComponents(newComponents, ["responsive", "hover"]);

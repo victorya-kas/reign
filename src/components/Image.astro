@@ -1,5 +1,5 @@
 ---
-import { images, type Images } from "./images";
+import { images } from "@images/images";
 import { Image as AstroImage } from "astro:assets";
 
 type Props = (
@@ -19,16 +19,16 @@ const { alt = "", className = "", height, width, ...props } = Astro?.props as Pr
 const name = "name" in props && props.name ? props.name : "";
 const src = "src" in props && props.src ? props.src : null;
 const defaultSrc = images["reign-logo"];
-const imgSrc =
-  name && images?.[name] ? images?.[name as keyof Images] : src ?? defaultSrc;
+const img =
+  name && images?.[name] ? images?.[name as string] : src ?? defaultSrc;
 ---
 <>
-  <!-- @ts-ignore -->
-  <AstroImage
-    src={imgSrc}
-    alt={`reign ${alt}`}
-    width={width ?? null}
-    height={height ?? null}
-    class={`block max-w-full h-auto object-contain ${className ?? ""}`}
-  />
+<!-- @ts-ignore -->
+<AstroImage
+src={img}
+alt={`reign ${alt}`}
+width={width ?? null}
+height={height ?? null}
+class={`block max-w-full h-auto object-contain ${className ?? ""}`}
+/>
 </>

@@ -4,13 +4,15 @@
     "baseUrl": "/Users/victoriakasianova/Documents/reign",
     "paths": {
       "@/*": ["src/*"],
+      "@public": ["public/*"],
       "@ui/*": ["src/ui/*"],
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
       "@pages/*": ["src/pages/*"],
       "@assets/*": ["src/assets/*"],
       "@ts/*": ["src/ts/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@images/*": ["./src/images/*"]
     }
   }
 }

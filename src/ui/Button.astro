@@ -1,20 +1,24 @@
 ---
-import { images } from "@assets/images";
+import { images } from "@images/images";
+import obliqueTrapezoidGold from "@images/oblique-trapezoid-gold.png"
+
 type variant =
   | "gold-bordered"
   | "silver-bordered"
   | "trapezoid-left"
-  | "trapezoid-right";
+  | "trapezoid-right"
+  | "oblique-trapezoid"
+  | "oblique-trapezoid-outline";
 type size = "sm" | "md" | "lg";
 interface Props {
   variant: variant;
-  size: size;
+  size?: size;
   className?: string | undefined;
 }
 
-const { variant, size, className, ...rest } = Astro.props as Props;
+const { variant, size = "sm", className, ...rest } = Astro.props as Props;
 
-const bthClasses = `w-full h-full max-h-full min-h-full flex justify-center items-center relative ${variant} ${size} ${
+const bthClasses = `flex justify-center items-center relative ${variant} ${size} ${
   className ?? ""
 }`;
 ---
@@ -103,4 +107,20 @@ const bthClasses = `w-full h-full max-h-full min-h-full flex justify-center item
       </span>
     </button>
   )
+}
+
+{(variant === "oblique-trapezoid" || variant === "oblique-trapezoid-outline") && 
+  <button
+      class={`group bg-cover bg-center bg-no-repeat py-2 px-8 w-[147px] h-[40px] has-["lg"]:w-[190px] has-["lg"]:h-[54px] ${bthClasses}`}
+      style={{
+        backgroundImage: `url(${obliqueTrapezoidGold?.src})`,
+      }}
+      {...rest}
+    >
+      <span
+        class={`text-gold overflow-hidden italic text-sm group-has-["lg"]:text-lg border border-transparent  ${variant === "oblique-trapezoid" ? "bg-gradient-to-b from-dark-3 to-dark-4" : ""}`}
+      >
+        <slot />
+      </span>
+    </button>
 }

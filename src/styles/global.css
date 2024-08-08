@@ -6,7 +6,7 @@
   font-style: "normal";
   font-weight: 400;
   src: local("Bebas-Neue"),
-  url("/assets/fonts/Bebas-Neue.ttf") format('truetype'),
+  url("/fonts/Bebas-Neue.ttf") format('truetype'),
 }
 
 :root {

@@ -2,8 +2,7 @@
 import { t, setDefaultNamespace } from "i18next";
 import Card from "@ui/Card.astro";
 import type { FollowerID, followerColor, followerValue, lang } from "@ts/types";
-import Image from "@assets/Image.astro";
-import type { Images } from "@assets/images";
+import Image from "@/components/Image.astro";
 
 type follower = {
   color: followerColor;
@@ -109,7 +108,7 @@ const followerImg: Partial<followerImg> = {
     "https://static.tildacdn.com/tild3137-3138-4666-a630-663335346637/follower-20014.png",
 };
 
-const followerAttributesImg: Images = {
+const followerAttributesImg: {[key:string]: string} = {
   // follower's cards borders bg
   "border-red": isRounded
     ? "https://static.tildacdn.com/tild3562-3331-4065-a235-636535323263/Follower-round-borde.png"
