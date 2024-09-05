@@ -1,4 +1,21 @@
 
+import discordSquare from "@images/discord.png"
+import discord from "@images/discord.svg"
+import instagramSquare from "@images/instagram.png"
+import telegramSquare from "@images/telegram.png"
+import twitterSquare from "@images/twitter.png"
+import youtubeSquare from "@images/youtube.png"
+import twitchSquare from "@images/twitch.png"
+import redditSquare from "@images/reddit.png"
+import vkSquare from "@images/vk.png"
+import dtfSquare from "@images/dtf.png"
+import esportsCup from "@images/esports-cup.svg"
+import trainingSilver from "@images/training-silver.svg"
+import cardsSilver from "@images/cards-silver.svg"
+import cornerTrapezoidBlack  from "@images/corner-trapezoid-black.svg"
+import reignLogoMini from "@images/reign-logo-mini.png"
+import footerBg from "@images/footer-bg.png";
+import topDeckLogo from "@images/topDeck-logo.png";
 
 export type Images = {
   [key: string]: string | ImageMetadata;
@@ -37,3 +54,23 @@ export const images: Images = {
     "https://static.tildacdn.com/tild6334-6130-4437-b830-306635393534/gold-cross.svg",
   "reign-logo": "https://static.tildacdn.com/tild3964-3838-4135-b230-656331336535/reign-logo.png",
 };
+
+export {
+  discord,
+  discordSquare,
+  instagramSquare,
+  telegramSquare, 
+  twitterSquare,
+  youtubeSquare,
+  twitchSquare,
+  redditSquare,
+  vkSquare,
+  dtfSquare,
+  esportsCup,
+  trainingSilver,
+  cardsSilver,
+  cornerTrapezoidBlack,
+  reignLogoMini,
+  footerBg,
+  topDeckLogo
+}

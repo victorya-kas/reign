@@ -1,5 +1,5 @@
 ---
-import type { heroID, heroOrder } from "ts/types";
+import type { heroID, heroOrder } from "@ts/types";
 import Image from "@/components/Image.astro";
 import Card from "@ui/Card.astro";
 
@@ -139,7 +139,7 @@ const url = isHorizontallMode ? heroesHorizontalImg[id] : heroesImg[id];
 const coverUrl = heroesAttributesImg?.["card-cover"] ?? "";
 const orderValue = heroesAtrributes?.[id as keyof heroes]?.order?.value!;
 const orderBg = heroesAtrributes?.[id as keyof heroes]?.order?.url!;
-const border = heroesAtrributes?.[id as keyof heroes]?.border;
+const border = heroesAtrributes?.[id as keyof heroes]?.border!;
 const cardSizeClasses = isHorizontallMode
   ? "w-[70px] h-[46px] desktop-sm:w-[105px] desktop-sm:h-[66px] desktop-md:w-[140px] desktop-md:h-[86px]"
   : "w-[46px] h-[60px] desktop-sm:w-[80px] desktop-sm:h-[107px] desktop-md:w-[112px] desktop-md:h-[154px]";

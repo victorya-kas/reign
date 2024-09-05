@@ -1,0 +1,53 @@
+---
+import { Image } from "astro:assets";
+import iconCross from "@images/cross-btn-gold.svg";
+import BtnContainer from "@ui/Button/BtnContainer.astro";
+
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props as Props;
+---
+
+<script>
+  const openBtn = document.getElementById(`modal-btn-${id}`);
+  const cancelButton = document.getElementById("cancel");
+  const dialog = document.getElementById("favDialog");
+  dialog.returnValue = "favAnimal";
+
+  function openCheck(dialog) {
+    if (dialog.open) {
+      console.log("Dialog open");
+    } else {
+      console.log("Dialog closed");
+    }
+  }
+
+  // Update button opens a modal dialog
+  updateButton.addEventListener("click", () => {
+    dialog.showModal();
+    openCheck(dialog);
+  });
+
+  // Form cancel button closes the dialog box
+  cancelButton.addEventListener("click", () => {
+    dialog.close("animalNotChosen");
+    openCheck(dialog);
+  });
+</script>
+
+<div onclick={`window.${id}.showModal()`} id={`modal-btn-${id}`}>
+  <slot name="open" />
+</div>
+
+<dialog id={`modal-${id}`} class="">
+  <slot />
+  <form
+    method="dialog fixed top-8 left-4 desktop-sm:top-14 desktop-sm:lft-4 z-[110] pointer"
+  >
+    <BtnContainer tag="button" type="reset">
+      <Image src={iconCross} alt="cross icon" />
+    </BtnContainer>
+  </form>
+</dialog>

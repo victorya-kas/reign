@@ -1,16 +1,16 @@
 ---
-import i18next, { t } from "i18next";
+import i18next from "i18next";
 import { HeadHrefLangs } from "astro-i18next/components";
 import Header from "@components/Header.astro";
-import "../styles/global.css";
 import { ViewTransitions } from "astro:transitions";
+import Footer from "@/components/Footer.astro";
 
 interface Props {
-  title?: string;
+  title: string;
   className?: string;
 }
 
-const { title = "Reign", className } = Astro.props;
+const { title, className } = Astro.props;
 ---
 
 <!doctype html>
@@ -23,15 +23,17 @@ const { title = "Reign", className } = Astro.props;
       href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="/styles/global.css" />
     <title>{title}</title>
     <slot name="head" />
     <HeadHrefLangs />
   </head>
-  <body>
-    <Header t={t} />
-    <main class={`p-container px-4 desktop-sm:px-7 py-14 ${className ?? ""}`}>
+  <body class={`min-h-screen flex flex-col ${className ?? ""}`}>
+    <Header /> 
+    <main class="grow w-full overflow-hidden">
       <slot />
     </main>
+    <Footer/>
     <slot name="scripts" />
   </body>
 </html>

@@ -8,7 +8,7 @@ const {className = ""} =  Astro.props as Props;
 <nav
   class={`shadow-1-md h-[50px] ${className ?? ""}`}
 >
-  <div class="h-full flex px-4 items-center bg-gradient-to-b from-dark-2 to-black shape-trapezoid">
+  <div class="h-full flex items-center bg-gradient-to-b from-dark-2 to-black shape-trapezoid">
     <slot />
   </div>
 </nav>

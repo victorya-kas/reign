@@ -1,0 +1,13 @@
+---
+interface Props {
+    dist: {
+        x: number,
+        y: number
+    }
+}
+
+const {dist} = Astro.props as Props;
+---
+<div parallax-item={JSON.stringify(dist)}>
+    <slot/>
+</div>

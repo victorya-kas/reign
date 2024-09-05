@@ -4,6 +4,7 @@ export default {
     locales: ["en", "ru"],
     namespaces: ["common", "Follower", "Tooltip"],
     defaultNamespace: "common",
+    showDefaultLocale: false,
     i18nextServer: {
       backend: {
         loadPath: './public/locales/{{lng}}/{{ns}}.json',

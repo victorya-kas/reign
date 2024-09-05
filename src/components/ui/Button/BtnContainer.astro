@@ -1,0 +1,19 @@
+---
+interface Props {
+  tag: "button" | "link";
+  [key:string]: any
+}
+const { tag, ...rest } = Astro.props as Props;
+---
+
+{
+  tag === "button" ? (
+    <button {...rest}>
+      <slot />
+    </button>
+  ) : (
+    <a {...rest}>
+      <slot />
+    </a>
+  )
+}

@@ -4,10 +4,13 @@ import Page from "@layouts/Page.astro";
 import InteractiveInterface from "@components/InteractiveInterface/InteractiveInterface.astro";
 import FollowersSlider from "@components/Sliders/FollowersSlider.astro";
 import TeamSlider from "@components/Sliders/TeamSlider.astro";
+import HeroSection from "@/components/HeroSection/HeroSection.astro";
 
 changeLanguage("en");
 ---
-<Page title="Reign">
+
+<Page title="REIGN">
+  <HeroSection/>
   <TeamSlider />
   <FollowersSlider />
   <InteractiveInterface />

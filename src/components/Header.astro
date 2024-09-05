@@ -1,74 +1,138 @@
 ---
 import Nav from "@components/Navigation/Nav.astro";
 import NavItem from "./Navigation/NavItem.astro";
-import i18next, { t } from "i18next";
-import { localizePath } from "node_modules/astro-i18next/src";
+import { t } from "i18next";
+import { localizePath } from "@/utils";
 import { Image } from "astro:assets";
-import iconDiscord from "@images/discord.svg"
-import Button from "@/ui/Button.astro";
-
-const langMapping: { [key: string]: string } = {
-  en: "EN (english)",
-  ru: "RU (русский)",
-};
-const langOnclick = (e) => {
-  const href = window.location.href.split("/");
-  const page = href[href.length - 1];
-  if (page) {
-    console.log(e.currentTarget, page);
-  } else {
-    return;
-  }
-};
+import {
+  cardsSilver,
+  discord,
+  esportsCup,
+  trainingSilver,
+  cornerTrapezoidBlack,
+  reignLogoMini,
+} from "@images/images.ts";
+import Button from "@ui/Button/Button.astro";
+import LocalizationDropdown from "@components/Navigation/LocalizationDropdown.astro";
 ---
 
-<header
-  class="fixed top-0 left-0 z-50 w-full flex justify-between items-center py-4 px-8 desktop-lg:px-14"
->
-  <Nav>
-    <NavItem type="link" href={localizePath("/rules")}>{t("rules")}</NavItem>
-    <NavItem type="link" href={localizePath("/cards")}>{t("cards")}</NavItem>
-    <NavItem type="link" href={localizePath("/esports")}>{t("esports")}</NavItem
+<header>
+  <Nav
+    className="animate-on-scroll [&>div]:shape-none [&>div]:bg-none w-full fixed left-0 top-0 z-50 laptop:hidden"
+  >
+    <div>
+      <LocalizationDropdown />
+    </div>
+  </Nav>
+  <Nav
+    className="[&>div]:shape-none h-[70px] w-full fixed left-0 bottom-0 z-50 laptop:hidden"
+  >
+    <a
+      href="/"
+      class="shrink-0 w-[88px] h-[70px] flex items-center justify-center bg-no-repeat bg-cover pr-4 pb-2"
+      style={{ backgroundImage: `url('${cornerTrapezoidBlack.src}')` }}
     >
-  </Nav>
-  <Nav className="animate-on-scroll transition-transform duration-500">
-    <NavItem type="dropdown">
-      <span class="uppercase">
-        {i18next.language}
-      </span>
-      <span
-        slot="dropdown-menu"
-        class="w-[180px] h-[54px] flex flex-col itemms-center"
+      <Image src={reignLogoMini} alt="reign" width="34" height="34" />
+    </a>
+    <div class="grow flex items-center justify-center">
+      <NavItem
+        type="link"
+        href={localizePath("/rules")}
+        className="flex-col justtify-center min-w-[auto] gap-2"
       >
-        {
-          i18next.languages
-            .filter((lang: string) => lang !== i18next.language)
-            .map((lang: string) => (
-              <NavItem type="link" href={`/${lang}`} onClick={langOnclick}>
-                {langMapping?.[lang]}
-              </NavItem>
-            ))
-        }
-      </span>
-    </NavItem>
-    <NavItem type="link" href="https://discord.gg/TopDeckStudio" target="_blank" className="flex-row items-center gap-1">
-      <Image src={iconDiscord} alt="reign"/>
-      {t("community")}
-    </NavItem>
-    <Button variant="oblique-trapezoid-outline">
-      {t("play")}
-    </Button>
+        <Image src={trainingSilver} alt="training" width="24" height="24" />
+        <span class="text-silver-1">
+          {t("rules")}
+        </span>
+      </NavItem>
+      <NavItem
+        type="link"
+        href={localizePath("/cards")}
+        className="flex-col justtify-center min-w-[auto] gap-2"
+      >
+        <Image src={cardsSilver} alt="cards" width="24" height="24" />
+        <span class="text-silver-1">
+          {t("cards")}
+        </span>
+      </NavItem>
+      <NavItem
+        type="link"
+        href={localizePath("/esports")}
+        className="flex-col justtify-center min-w-[auto] gap-1"
+      >
+        <Image src={esportsCup} alt="esports cup" width="24" height="24" />
+        <span class="text-gold-1">
+          {t("esports")}
+        </span>
+      </NavItem>
+      <NavItem
+        type="link"
+        href="https://discord.gg/TopDeckStudio"
+        target="_blank"
+        className="flex-col justtify-center min-w-[auto] gap-2"
+      >
+        <Image src={discord} alt="discord" width="24" height="24" />
+        <span class="text-gold-1"> Discord </span>
+      </NavItem>
+    </div>
   </Nav>
+  <div
+    class="hidden laptop:flex fixed top-0 left-0 z-50 w-full justify-between items-center py-4 px-8 desktop-lg:px-14"
+  >
+    <Nav className="[&>div]:pr-4">
+      <a
+        href="/"
+        class="w-[91px] h-[50px] flex items-center justify-center bg-no-repeat bg-cover px-4"
+        style={{ backgroundImage: `url('${cornerTrapezoidBlack.src}')` }}
+      >
+        <Image src={reignLogoMini} alt="reign" width="42" height="42" />
+      </a>
+      <NavItem type="link" href={localizePath("/rules")}>{t("rules")}</NavItem>
+      <NavItem type="link" href={localizePath("/cards")}>{t("cards")}</NavItem>
+      <NavItem type="link" href={localizePath("/esports")}
+        >{t("esports")}</NavItem
+      >
+    </Nav>
+    <Nav className="animate-on-scroll [&>div]:pr-4">
+      <LocalizationDropdown />
+      <NavItem
+        type="link"
+        href="https://discord.gg/TopDeckStudio"
+        target="_blank"
+        className="flex-row items-center gap-1"
+      >
+        <Image src={discord} alt="reign" />
+        <span>
+          {t("community")}
+        </span>
+      </NavItem>
+      <Button variant="oblique-trapezoid-outline">
+        {t("play")}
+      </Button>
+    </Nav>
+  </div>
 </header>
 
 <script>
-  const hideNav = document.body.querySelector("header .animate-on-scroll");
-  if (hideNav)
+  const hideNav = document.body.querySelectorAll(".animate-on-scroll");
+  if (hideNav.length) {
+    let lastScrollY = window.scrollY;
+
     window.addEventListener("scroll", () => {
-      if (window.scrollY > 0) {
-        hideNav.classList.add("-translate-y-[calc(100%+20px)]");
-      } else {
-        hideNav.classList.remove("-translate-y-[calc(100%+20px)]");
-      }
+      const currentScrollY = window.scrollY;
+      hideNav.forEach((nav) => {
+        if (currentScrollY > lastScrollY) {
+          nav.classList.add(
+            "-translate-y-[calc(100%+20px)]",
+            "transition-transform",
+            "duration-500"
+          );
+        } else if (currentScrollY < lastScrollY || window.scrollY === 0) {
+          nav.classList.remove("-translate-y-[calc(100%+20px)]");
+        }
+      });
+
+      lastScrollY = currentScrollY;
     });
+  }
 </script>

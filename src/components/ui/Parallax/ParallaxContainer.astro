@@ -1,0 +1,61 @@
+---
+
+---
+
+<div parallax-container {...Astro.props}>
+  <slot />
+</div>
+
+<style is:global>
+    [parallax-item] {
+        transition: 1s
+    }
+</style>
+<script>
+  let lastMouseX = 0;
+  let lastMouseY = 0;
+
+  const parallaxContainers = document.querySelectorAll(`[parallax-container]`);
+
+  parallaxContainers.forEach((item) => {
+    const container = item as HTMLElement;
+    container.addEventListener("mousemove", function (event) {
+      const items = container.querySelectorAll("[parallax-item]");
+
+      // Get the current mouse position
+      const rect = container.getBoundingClientRect();
+      const mouseX = event.clientX - rect.left;
+      const mouseY = event.clientY - rect.top;
+
+      // Calculate the direction of mouse movement
+      let deltaX = mouseX - lastMouseX;
+      let deltaY = mouseY - lastMouseY;
+
+      items.forEach((i) => {
+        const item = i as HTMLElement;
+        const {x, y} = JSON.parse(item.getAttribute("parallax-item") as string);
+        let translateX:number = 0;
+        let translateY:number = 0;
+
+        // Move the image by 10px in the direction of the mouse
+        if (deltaX > 0) {
+            translateX += x; // move right
+        } else {
+            translateX -= x; // move left
+        }
+
+        if (deltaY > 0) {
+            translateY +=y; // move down
+        } else {
+            translateY -=y; // move up
+        }
+
+        item.style.transform = `translate3d(${translateX}px, ${translateY}px, 0px)`
+      });
+
+      // Update last mouse positions
+      lastMouseX = mouseX;
+      lastMouseY = mouseY;
+    });
+  });
+</script>

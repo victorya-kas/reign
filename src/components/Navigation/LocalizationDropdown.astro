@@ -1,0 +1,25 @@
+---
+import NavItem from "./NavItem.astro";
+import i18next from "i18next";
+
+const langMapping: { [key: string]: string } = {
+  en: "EN (english)",
+  ru: "RU (русский)",
+};
+---
+
+<NavItem type="dropdown">
+    <span class="uppercase">{i18next.language}</span>
+    <span
+      slot="dropdown-menu"
+      class="w-[180px] h-[54px] flex flex-col itemms-center"
+    >
+      {i18next.languages
+        .filter((lang: string) => lang !== i18next.language)
+        .map((lang: string) => (
+          <NavItem type="link" href={`/${lang !== "en" ? lang : ""}`}>
+            {langMapping?.[lang]}
+          </NavItem>
+        ))}
+    </span>
+  </NavItem>

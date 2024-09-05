@@ -6,7 +6,7 @@ interface Props {
 }
 const { type, className, ...rest } =
   Astro.props as Partial<Props>;
-const commonClasses = `h-full min-w-[100px] flex justify-center items-center px-4 text-jost text-golden hover:text-golden-dark-1 text-bold text-xs laptop:text-sm cursor-pointer ${className ?? ""}`;
+const commonClasses = `h-full min-w-[100px] flex justify-center items-center px-3 mobile:px-4 text-jost text-golden hover:text-golden-dark-1 text-bold text-xs laptop:text-sm cursor-pointer ${className ?? ""}`;
 ---
 
 {

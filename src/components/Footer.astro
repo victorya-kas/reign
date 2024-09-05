@@ -1,0 +1,179 @@
+---
+import {
+  discordSquare,
+  dtfSquare,
+  instagramSquare,
+  redditSquare,
+  telegramSquare,
+  twitchSquare,
+  vkSquare,
+  twitterSquare,
+  youtubeSquare,
+  footerBg,
+  topDeckLogo,
+} from "@images/images.ts";
+import Button from "@ui/Button/Button.astro";
+import { localizePath } from "@/utils";
+import { Image } from "astro:assets";
+import i18next, { t } from "i18next";
+
+type socials = { [key: string]: { img: ImageMetadata; url: string } };
+
+const enSocials: socials = {
+  discord: {
+    img: discordSquare,
+    url: "https://discord.gg/TopDeckStudio",
+  },
+  twitter: {
+    img: twitterSquare,
+    url: "https://twitter.com/TopDeckStudio",
+  },
+  youtube: {
+    img: youtubeSquare,
+    url: "https://www.youtube.com/@TopDeckStudio",
+  },
+  instagram: {
+    img: instagramSquare,
+    url: "https://www.instagram.com/TopDeckStudio",
+  },
+  reddit: {
+    img: redditSquare,
+    url: "https://www.reddit.com/r/TopDeckStudio",
+  },
+};
+const ruSocials: socials = {
+  discord: {
+    img: discordSquare,
+    url: "https://discord.gg/TopDeckStudio",
+  },
+  twitch: {
+    img: twitchSquare,
+    url: "https://www.twitch.tv/TopDeckStudio",
+  },
+  telegram: {
+    img: telegramSquare,
+    url: "https://t.me/TopDeckStudio",
+  },
+  vk: {
+    img: vkSquare,
+    url: "https://t.me/TopDeckStudio",
+  },
+  youtube: {
+    img: youtubeSquare,
+    url: "https://www.youtube.com/@TopDeckStudio",
+  },
+  dtf: {
+    img: dtfSquare,
+    url: "https://dtf.ru/u/444145-topdeck-studio",
+  },
+};
+---
+
+<footer
+  class="relative bg-cover bg-no-repeat"
+  style={{
+    backgroundImage: `url('${footerBg.src}')`,
+    backgroundColor: "rgba(17,17,17,0.7)",
+  }}
+>
+  <div
+    class="container max-w-[1430px] flex flex-wrap desktop-sm:flex-nowrap gap-8 desktop-sm:gap-4 items-center justify-center py-12"
+  >
+    <Image src={topDeckLogo} width="92" height="94" alt="TopDeck Studio" />
+    <div
+      class="grow flex flex-wrap laptop:flex-nowrap justify-center laptop:justify-between gap-8"
+    >
+      <div class="flex flex-col gap-6 items-center">
+        <h4 class="text-xl text-gold uppercase">{t("contacts")}</h4>
+        <div class="flex items-center">
+          <Button
+            variant="oblique-trapezoid"
+            size="md"
+            tag="link"
+            href="mailto:team@topdeck.studio"
+            target="_blank"
+          >
+            team@topdeck.studio
+          </Button>
+          <Button
+            variant="oblique-trapezoid"
+            size="md"
+            tag="link"
+            href="https://t.me/TuchkovGo"
+            target="_blank"
+          >
+            Telegram
+          </Button>
+        </div>
+      </div>
+      <div class="flex flex-col gap-6 items-center">
+        <h4 class="text-xl text-gold uppercase">{t("socialsTitle")}</h4>
+        <div class="flex items-center gap-3">
+          {
+            i18next.language === "ru"
+              ? Object.keys(ruSocials).map((social) => {
+                  return (
+                    <a
+                      href={ruSocials[social]?.url}
+                      target="_blank"
+                      class="block hover:opacity-70 transition-opacity"
+                    >
+                      <Image
+                        src={ruSocials[social]?.img!}
+                        alt={`TopDeck Studio reign ${social}`}
+                        width="50"
+                        height="50"
+                      />
+                    </a>
+                  );
+                })
+              : Object.keys(enSocials).map((social) => {
+                  return (
+                    <a
+                      href={enSocials[social]?.url}
+                      target="_blank"
+                      class="block hover:opacity-70 transition-opacity"
+                    >
+                      <Image
+                        src={enSocials[social]?.img!}
+                        alt={`TopDeck Studio reign ${social}`}
+                        width="50"
+                        height="50"
+                      />
+                    </a>
+                  );
+                })
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="container relative flex items-center justify-between flex-wrap laptop:flex-nowrap gap-8 py-10 before:block before:absolute before:left-0 before:top-0 before:h-[1px] before:w-[calc(100%-30px)] before:mx-[15px] before:bg-[#6b6049] before:opacity-70"
+  >
+    <div class="flex items-center gap-8">
+      <a
+        href={localizePath("/cookies")}
+        target="_blank"
+        class="text-xs text-golden-light-1"
+      >
+        Cookies
+      </a>
+      <a
+        href={localizePath("/terms")}
+        target="_blank"
+        class="text-xs text-golden-light-1"
+      >
+        {t("terms")}
+      </a>
+      <a
+        href={localizePath("/privacy")}
+        target="_blank"
+        class="text-xs text-golden-light-1"
+      >
+        {t("privacy")}
+      </a>
+    </div>
+    <div class="text-xs text-golden-light-1">© 2024 TopDeck Studio</div>
+  </div>
+</footer>

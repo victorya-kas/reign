@@ -1,0 +1,9 @@
+---
+import Page from "@/layouts/Page.astro";
+import { t, changeLanguage } from "i18next";
+
+changeLanguage("en");
+---
+<Page title={t("cardsPageTitle")}>
+    <h1 class="py-12">{t("cardsPageTitle")}</h1>
+</Page>

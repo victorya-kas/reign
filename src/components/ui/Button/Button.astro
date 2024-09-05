@@ -1,0 +1,160 @@
+---
+import { images } from "@images/images.ts";
+import obliqueTrapezoidFilledLg from "@images/oblique-trapezoid-filled-lg.png";
+import obliqueTrapezoidFilledMd from "@images/oblique-trapezoid-filled-md.png";
+import obliqueTrapezoidOutlinedMd from "@images/oblique-trapezoid-outline-md.png";
+import obliqueTrapezoidOutlinedSm from "@images/oblique-trapezoid-outline-sm.png";
+import BtnContainer from "./BtnContainer.astro";
+
+type variant =
+  | "gold-bordered"
+  | "silver-bordered"
+  | "trapezoid-left"
+  | "trapezoid-right"
+  | "oblique-trapezoid"
+  | "oblique-trapezoid-outline";
+type size = "sm" | "md" | "lg";
+interface Props {
+  variant: variant;
+  tag?: "button" | "link";
+  size?: size;
+  className?: string | undefined;
+  [key: string]: any;
+}
+
+const {
+  variant,
+  tag = "button",
+  size = "sm",
+  className,
+  ...rest
+} = Astro.props as Props;
+
+const bthClasses = `flex justify-center items-center relative ${variant} ${size} ${
+  className ?? ""
+}`;
+
+const obliqueTrapezoidBg = (variant: string, size: string): string => {
+  if (variant === "oblique-trapezoid" && size === "lg")
+    return obliqueTrapezoidFilledLg.src;
+  if (variant === "oblique-trapezoid" && size === "md")
+    return obliqueTrapezoidFilledMd.src;
+  if (variant === "oblique-trapezoid-outline" && size === "md")
+    return obliqueTrapezoidOutlinedMd.src;
+  if (variant === "oblique-trapezoid-outline" && size === "sm")
+    return obliqueTrapezoidOutlinedSm.src;
+  return "";
+};
+---
+
+<style>
+  [class*="bordered"].sm {
+    width: 27px;
+    height: 16px;
+    border-radius: 3px;
+    padding: 1px;
+  }
+  [class*="bordered"].sm > span {
+    border-radius: 3px;
+    padding: 2px 5px;
+  }
+  [class*="bordered"].lg {
+    width: 80px;
+    height: 50px;
+    border-radius: 6px;
+    padding: 1px;
+  }
+  [class*="bordered"].lg > span {
+    border-radius: 6px;
+    padding: 4px 10px;
+  }
+  [class*="trapezoid-left"].lg,
+  [class*="trapezoid-right"].lg {
+    height: 100%;
+    width: 78px;
+    min-height: 43px;
+    max-height: 86px;
+    padding: clamp(10px, 1vw, 20px);
+  }
+  @media (min-width: 1024px) {
+    [class*="bordered"].sm {
+      width: 36px;
+      height: 24px;
+    }
+    [class*="bordered"].lg {
+      width: 120px;
+      height: 75px;
+    }
+    [class*="trapezoid-left"].lg,
+    [class*="trapezoid-right"].lg {
+      width: 110px;
+    }
+  }
+  @media (min-width: 1440px) {
+    [class*="bordered"].sm {
+      width: 45px;
+      height: 32px;
+    }
+    [class*="bordered"].lg {
+      width: 160px;
+      height: 100px;
+    }
+    [class*="trapezoid-left"].lg,
+    [class*="trapezoid-right"].lg {
+      width: 156px;
+    }
+  }
+</style>
+{
+  (variant === "silver-bordered" || variant === "gold-bordered") && (
+    <BtnContainer tag={tag} class={`shadow ${bthClasses}`} {...rest}>
+      <span class="w-full h-full flex justify-center items-center bg-[#1C1C1C] z-10">
+        <span
+          class={`text-[12px] desktop-sm:text-[18px] desktop-lg:text-[24px] ${variant === "silver-bordered" ? "text-silver" : "text-gold"}`}
+        >
+          <slot />
+        </span>
+      </span>
+    </BtnContainer>
+  )
+}
+{
+  (variant === "trapezoid-left" || variant === "trapezoid-right") && (
+    <BtnContainer
+      tag={tag}
+      class={`relative bg-cover bg-center bg-no-repeat ${variant === "trapezoid-left" ? "" : ""} ${bthClasses}`}
+      style={{
+        backgroundImage: `url(${variant === "trapezoid-left" ? images?.["trapezoid-btn-left"] : images?.["trapezoid-btn-right"]})`,
+      }}
+      {...rest}
+    >
+      <span
+        class={`text-gold text-20-40 ${variant === "trapezoid-left" ? "translate-x-[40%] -translate-y-[10%]" : "-translate-x-[11px]"}`}
+      >
+        <slot />
+      </span>
+    </BtnContainer>
+  )
+}
+
+{
+  (variant === "oblique-trapezoid" ||
+    variant === "oblique-trapezoid-outline") && (
+    <BtnContainer
+      tag={tag}
+      class={`group bg-cover bg-center bg-no-repeat py-2 px-8 hover:scale-110 transition-transform ${size === "md" ? "w-[190px] h-[54px]" : size === "lg" ? "w-[230px] h-[54px]" : "w-[147px] h-[40px]"} ${bthClasses}`}
+      style={{
+        backgroundImage: `url(${obliqueTrapezoidBg(variant, size)})`,
+      }}
+      {...rest}
+    >
+      <span class="w-full h-full flex items-center justify-center overflow-hidden border border-transparent">
+        <span
+          class={`text-gold italic ${size === "lg" ? "text-sm" : "text-xs"}`}
+        >
+          <slot />
+        </span>
+      </span>
+    </BtnContainer>
+  )
+}

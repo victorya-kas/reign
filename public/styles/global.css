@@ -6,7 +6,7 @@
   font-style: "normal";
   font-weight: 400;
   src: local("Bebas-Neue"),
-  url("/fonts/Bebas-Neue.ttf") format('truetype'),
+  url("fonts/Bebas-Neue.ttf") format('truetype'),
 }
 
 :root {
@@ -22,7 +22,18 @@
 
 body {
   box-sizing: border-box;
-  background-color: #000
+  background-color: #000;
+  font-family: "Jost", "sans-serif";
+  color: "#dc9644";
+  font-weight: 400;
+  font-size: 16px;
+}
+.wrapper {
+  width: 100%;
+  max-width: 1980px;
+  min-width: 697px;
+  margin: 0 auto;
+  padding: 0 15px;
 }
 .gold-bordered {
   position: relative;
@@ -80,3 +91,9 @@ body {
       transparent 45%
     );
   }
+
+@media (min-width: 1280px) {
+  .wrapper {
+    padding: 0 30px;
+  }
+}
