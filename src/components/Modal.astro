@@ -1,53 +1,70 @@
 ---
 import { Image } from "astro:assets";
-import iconCross from "@images/cross-btn-gold.svg";
-import BtnContainer from "@ui/Button/BtnContainer.astro";
-
-interface Props {
-  id: string;
-}
-
-const { id } = Astro.props as Props;
+import crossIcon from "@images/cross-btn-gold.svg";
 ---
 
-<script>
-  const openBtn = document.getElementById(`modal-btn-${id}`);
-  const cancelButton = document.getElementById("cancel");
-  const dialog = document.getElementById("favDialog");
-  dialog.returnValue = "favAnimal";
-
-  function openCheck(dialog) {
-    if (dialog.open) {
-      console.log("Dialog open");
-    } else {
-      console.log("Dialog closed");
-    }
+<style>
+  dialog:-internal-dialog-in-top-layer::backdrop {
+    background: rgba(13, 13, 13, 0.7);
   }
+  dialog > [modal-content] {
+    display: none;
+  }
+  dialog > [modal-content].open {
+    display: block;
+  }
+</style>
 
-  // Update button opens a modal dialog
-  updateButton.addEventListener("click", () => {
-    dialog.showModal();
-    openCheck(dialog);
-  });
-
-  // Form cancel button closes the dialog box
-  cancelButton.addEventListener("click", () => {
-    dialog.close("animalNotChosen");
-    openCheck(dialog);
-  });
-</script>
-
-<div onclick={`window.${id}.showModal()`} id={`modal-btn-${id}`}>
-  <slot name="open" />
+<div modal-btn>
+  <slot name="modal-btn" />
 </div>
-
-<dialog id={`modal-${id}`} class="">
-  <slot />
-  <form
-    method="dialog fixed top-8 left-4 desktop-sm:top-14 desktop-sm:lft-4 z-[110] pointer"
-  >
-    <BtnContainer tag="button" type="reset">
-      <Image src={iconCross} alt="cross icon" />
-    </BtnContainer>
-  </form>
+<dialog
+  class="bg-transparent flex items-center justify-center px-4 desktop-sm:px-8 py-12"
+>
+  <div modal-content>
+    <span
+      modal-close
+      class="fixed right-4 top-4 desktop-sm:right-8 desktop-sm:top-4 cursor-pointer desktop-sm:w-[60px]"
+    >
+      <Image src={crossIcon} alt="cross" class="w-full" />
+    </span>
+    <div class="w-[80%] h-[80%]">
+      <slot />
+    </div>
+  </div>
 </dialog>
+
+<script>
+  const modalBtns = document.querySelectorAll("[modal-btn]");
+  modalBtns?.forEach((el) => {
+    const btn = el as HTMLElement;
+    const dialog = btn.nextElementSibling as HTMLElement;
+    const dialogContent = dialog.querySelector("[modal-content]") as HTMLElement;
+    const closeBtn = dialog.querySelector("[modal-close]") as HTMLElement;
+    btn.addEventListener("click", (e: Event) => {
+      e.preventDefault();
+      //@ts-ignore
+      dialog?.showModal();
+      document.body.classList.add("overflow-hidden");
+      dialogContent.classList.add("open");
+    });
+    closeBtn?.addEventListener("click", (e: Event) => {
+      e.preventDefault();
+      closeModal(dialog, dialogContent);
+    });
+    dialog.addEventListener("click", (e: Event) => {
+      e.preventDefault();
+      const target = e.target as HTMLElement;
+      console.log(target, this)
+      if(target === dialog) {
+        closeModal(dialog, dialogContent);
+      }
+    })
+  });
+  function closeModal(dialog: HTMLElement, dialogContent:HTMLElement){
+      //@ts-ignore
+      dialog.close();
+      dialogContent.classList.remove("open");
+      document.body.classList.remove("overflow-hidden");
+  }
+</script>

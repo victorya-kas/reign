@@ -15,7 +15,7 @@ const { mobileImg, desktopImg, alt, className, ...rest } = Astro.props;
 ---
 
 <picture class={`block ${className ?? ""}`} {...rest}>
-    <source media="(max-width: 799px)" srcset={mobileImg.src}/>
-    <source media="(min-width: 800px)" srcset={desktopImg.src}/>
+    <source media="(max-width: 839px)" srcset={mobileImg.src}/>
+    <source media="(min-width: 840px)" srcset={desktopImg.src}/>
     <Image src={desktopImg} alt={alt}/>
 </picture>
