@@ -1,0 +1,87 @@
+---
+import Title from "@components/ui/Title.astro";
+import featuresBg from "@images/features-section-lg.jpg";
+import { t, setDefaultNamespace } from "i18next";
+import FeatureItem from "./FeatureItem.astro";
+import feature1Img from "@images/feature1.png";
+import feature2Img from "@images/feature2.png";
+import feature3Img from "@images/feature3.png";
+import feature4Img from "@images/feature4.png";
+import feature5Img from "@images/feature5.png";
+import feature6Img from "@images/feature6.png";
+import type { ImageMetadata } from "astro";
+
+const featuresBgImg = `url('${featuresBg?.src}')`;
+const images: { [key: number]: ImageMetadata } = {
+  1: feature1Img,
+  2: feature2Img,
+  3: feature3Img,
+  4: feature4Img,
+  5: feature5Img,
+  6: feature6Img,
+};
+setDefaultNamespace("home");
+---
+
+<style define:vars={{ featuresBgImg }}>
+  @import from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
+
+  section#features {
+    background-image: var(--featuresBgImg);
+  }
+</style>
+
+<section
+  id="features"
+  class="overflow-hidden bg-center bg-no-repeat bg-cover py-20 relative"
+>
+  <div class="wrapper">
+    <Title>{t('features.title')}</Title>
+    <div class="hidden laptop:flex flex-wrap gap-4">
+      {
+        [1, 2, 3, 4, 5, 6].map((el) => {
+          return (
+            <FeatureItem
+              name={t(`features.${el}.title`)}
+              description={t(`features.${el}.description`)}
+              img={images[el]!}
+            />
+          );
+        })
+      }
+    </div>
+    <div class="swiper block laptop:hidden">
+      <div class="swiper-wrapper">
+        {
+          [1, 2, 3, 4, 5, 6].map((el) => {
+            return (
+              <div class="swiper-slide flex flex-col justify-center items-center [&>figure]:w-[75%]">
+                <FeatureItem
+                  name={t(`features.${el}.title`)}
+                  description={t(`features.${el}.description`)}
+                  img={images[el]!}
+                />
+              </div>
+            );
+          })
+        }
+      </div>
+      <div class="swiper-button-prev text-golden-light-3"></div>
+      <div class="swiper-button-next text-golden-light-3"></div>
+    </div>
+  </div>
+  <script type="module" is:inline>
+    import Swiper from "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.mjs";
+
+    const swiper = new Swiper(".swiper", {
+      centeredSlides: true,
+      centeredSlidesBounds: true,
+      loop: true,
+      // autoplay: true,
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  </script>
+</section>

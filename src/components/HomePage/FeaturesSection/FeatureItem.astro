@@ -1,0 +1,20 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+    name: string;
+    description: string;
+    img: ImageMetadata;
+}
+const {name, description, img} = Astro.props as Props;
+---
+<figure class="w-full laptop:w-[32%]">
+    <div class="border-[4px] border-r-[6px] border-golden-1 flex items-center justify-center h-[235px] desktop-sm:">
+        <Image src={img} alt="reign feature" class="w-full h-full object-contain"/>
+    </div>
+    <figcaption>
+        <h4 class="text-gold-3 uppercase text-xl desktop-md:text-2-xl py-6 text-center">{name}</h4>
+        <p class="font-jost text-base text-golden-light-1 text-center desktop-md:text-xl">{description}</p>
+    </figcaption>
+</figure>

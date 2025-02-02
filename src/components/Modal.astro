@@ -9,9 +9,14 @@ import crossIcon from "@images/cross-btn-gold.svg";
   }
   dialog > [modal-content] {
     display: none;
+    height: 0;
+    opacity: 0;
+    transition: 0.5s linear;
   }
   dialog > [modal-content].open {
     display: block;
+    height: auto;
+    opacity: 1;
   }
 </style>
 

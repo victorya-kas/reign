@@ -1,5 +1,5 @@
 ---
-import QueryImg from "@/components/QueryImg.astro";
+import QueryImg from "@components/QueryImg.astro";
 import playIcon from "@images/play-icon.png";
 import playIconMb from "@images/play-icon.png";
 import heroMockupTopLeft from "@images/hero-mockup-top-left.png";
@@ -23,15 +23,17 @@ import heroBgLg from "@images/hero-section-bg.jpg";
 import BtnContainer from "@ui/Button/BtnContainer.astro";
 import { Image } from "astro:assets";
 import Modal from "@components/Modal.astro";
-import ParallaxItem from "../ui/Parallax/ParallaxItem.astro";
-import ParallaxContainer from "../ui/Parallax/ParallaxContainer.astro";
+import ParallaxItem from "@ui/Parallax/ParallaxItem.astro";
+import ParallaxContainer from "@ui/Parallax/ParallaxContainer.astro";
+import { t, setDefaultNamespace } from "i18next";
 
 const heroBgImg = `url('${heroBg?.src}')`;
 const heroBgLgImg = `url('${heroBgLg?.src}')`;
+setDefaultNamespace("Follower");
 ---
 
 <style define:vars={{ heroBgImg, heroBgLgImg }}>
-  @media (max-width: 1440px) {
+  @media (max-width: 1024px) {
     section#hero-section {
       background-image: var(--heroBgImg);
     }
@@ -69,7 +71,12 @@ const heroBgLgImg = `url('${heroBgLg?.src}')`;
       </ParallaxItem>
     </div>
     <div class="w-[30%] flex flex-col items-center gap-14">
-      <QueryImg mobileImg={reignLogoMb} desktopImg={reignLogo} alt="reign" className="max-w-[80%]" />
+      <QueryImg
+        mobileImg={reignLogoMb}
+        desktopImg={reignLogo}
+        alt="reign"
+        className="max-w-[80%]"
+      />
       <Modal id="hero-modal">
         <BtnContainer
           tag="button"
@@ -86,7 +93,15 @@ const heroBgLgImg = `url('${heroBgLg?.src}')`;
             class="block shrink-0 w-[80%] pb-[80%] rounded-full border-2 border-golden-light-2 animate-ping-slow"
           ></span>
         </BtnContainer>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/MG6NCsz7Cz8?si=Hz-dJDxiuPy8qKmp" title="Reigh" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/MG6NCsz7Cz8?si=Hz-dJDxiuPy8qKmp"
+          title="Reigh"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
       </Modal>
     </div>
     <div class="w-[35%]">
@@ -108,38 +123,43 @@ const heroBgLgImg = `url('${heroBgLg?.src}')`;
       </ParallaxItem>
     </div>
   </ParallaxContainer>
-  <div class="wrapper flex flex-col items-center justify-center gap-8 absolute bottom-[50px] left-[50%] -translate-x-[50%]">
-    <p class="text-gold-2 text-2xl desktop-sm:text-3xl desktop-lg:text-5xl text-center uppercase">
-        Victory <br />
-        is in your hands
-      </p>
+  <div
+    class="wrapper flex flex-col items-center justify-center gap-8 absolute bottom-[50px] left-[50%] -translate-x-[50%]"
+  >
+    <p
+      class="text-gold-2 text-2xl desktop-sm:text-3xl desktop-lg:text-5xl text-center uppercase"
+    >
+      Victory <br />
+      is in your hands
+    </p>
     <div class="flex items-center gap-8">
-        <BtnContainer
-          tag="link"
-          href="https://play.google.com/store/apps/details?id=top.deck.reign"
-          target="_blank"
-        >
-          <Image src={googlePlayBtn} alt="google play button" />
-        </BtnContainer>
-        <BtnContainer
-          tag="link"
-          href="https://store.steampowered.com/app/2749040"
-          target="_blank"
-        >
-          <Image src={steamBtn} alt="steam button" />
-        </BtnContainer>
+      <BtnContainer
+        tag="link"
+        href="https://play.google.com/store/apps/details?id=top.deck.reign"
+        target="_blank"
+      >
+        <Image src={googlePlayBtn} alt="google play button" />
+      </BtnContainer>
+      <BtnContainer
+        tag="link"
+        href="https://store.steampowered.com/app/2749040"
+        target="_blank"
+      >
+        <Image src={steamBtn} alt="steam button" />
+      </BtnContainer>
+    </div>
+    <div class="hint-container">
+      <div class="flex items-center gap-4">
+        <Image src={appleIcon} alt="apple icon" />
+        <Image src={consoleIcon} alt="console icon" />
+        <Image src={psIcon} alt="ps icon" />
+        <Image src={epicGamesIcon} alt="epic games icon" />
       </div>
-      <div class="group">
-        <div class="flex items-center gap-4">
-          <Image src={appleIcon} alt="apple icon" />
-          <Image src={consoleIcon} alt="console icon" />
-          <Image src={psIcon} alt="ps icon" />
-          <Image src={epicGamesIcon} alt="epic games icon" />
-        </div>
-        <span
-          class="h-[40px] flex w-full justify-center items-center text-golden-light-1 text-sm desktop-sm:text-lg bg-dark-5 border border-golden-light-1 shadox-[0px_0px_5px_0px_rgba(0,0,0,1)] scale-0 transition-transform group-hover:scale-100"
-          >Soon</span
-        >
-      </div>
+      <span
+        class="hint"
+        >{t('hero')}</span
+      >
+    </div>
   </div>
 </section>
+

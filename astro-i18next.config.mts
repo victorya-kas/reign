@@ -2,7 +2,7 @@
 export default {
     defaultLocale: "en",
     locales: ["en", "ru"],
-    namespaces: ["common", "Follower", "Tooltip"],
+    namespaces: ["common", "Follower", "Tooltip", "home"],
     defaultNamespace: "common",
     showDefaultLocale: false,
     i18nextServer: {

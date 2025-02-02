@@ -7,16 +7,18 @@ module.exports = {
     extend: {
       colors: {
         "golden": "#dc9644",
+        "golden-1": "#e09b49",
         "golden-dark-1": "#a77132",
         "golden-dark-2": "#493824",
         "golden-light-1": "#ffc99d",
         "golden-light-2": "#e8a454",
+        "golden-light-3": "#e6c486",
         "dark-1": "#0d0d0d",
         "dark-2": "#212121",
         "dark-3": "#222A2E",
         "dark-4": "#17181D",
         "dark-5": "#141414",
-        "light": "#d3d3d3"
+        "light": "#d3d3d3",
       },
       backgroundImage: {
         "gold-gradient-270":
@@ -90,6 +92,15 @@ module.exports = {
           fontFamily: "Jost, sans-serif",
           color: "transparent",
           backgroundImage: "linear-gradient(0.5turn,rgba(225,194,170,1) 0%,rgba(176,95,37,1) 100%)",
+          bacgroundPosition: "center",
+          backgroundClip: "text",
+          fontWeight: "800",
+          lineHeight: 1,
+        },
+        ".text-gold-3": {
+          fontFamily: "Jost, sans-serif",
+          color: "transparent",
+          backgroundImage: "linear-gradient(0.5turn,rgba(255,191,116,1) 0%,rgba(183,106,17,1) 99%)",
           bacgroundPosition: "center",
           backgroundClip: "text",
           fontWeight: "800",

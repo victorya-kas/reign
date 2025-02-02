@@ -1,17 +1,28 @@
 ---
 import { changeLanguage } from "i18next";
 import Page from "@layouts/Page.astro";
-import InteractiveInterface from "@components/InteractiveInterface/InteractiveInterface.astro";
-import FollowersSlider from "@components/Sliders/FollowersSlider.astro";
-import TeamSlider from "@components/Sliders/TeamSlider.astro";
-import HeroSection from "@/components/HeroSection/HeroSection.astro";
+import InteractiveInterface from "@components/HomePage/InteractiveInterface/InteractiveInterface.astro";
+import FollowersSlider from "@components/HomePage//Sliders/FollowersSlider.astro";
+import TeamSlider from "@components/HomePage/Sliders/TeamSlider.astro";
+import HeroSection from "@components/HomePage//HeroSection.astro";
+import AboutSection from "@/components/HomePage/AboutSection.astro";
+import FeaturesSection from "@/components/HomePage/FeaturesSection/FeaturesSection.astro";
+import ContentSection from "@/components/HomePage/ContentSection/ContentSection.astro";
 
 changeLanguage("en");
 ---
 
 <Page title="REIGN">
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  slot="head"
+/>
   <HeroSection/>
-  <TeamSlider />
-  <FollowersSlider />
+  <AboutSection/>
+  <FeaturesSection/>
   <InteractiveInterface />
+  <FollowersSlider />
+  <ContentSection/>
+  <TeamSlider />
 </Page>

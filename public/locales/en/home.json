@@ -1,0 +1,31 @@
+{
+  "hero": "Victory <br/> is in your hands",
+  "about": {},
+  "features": {
+    "title": "Features and Principles",
+    "1": {
+      "title": "WE CARE FOR THE COMMUNITY",
+      "description": "Suggest ideas, discuss changes and influence the development of the game. Taking care of the players is our top priority."
+    },
+    "2": {
+      "title": "NEXT GENERATION GAMEPLAY",
+      "description": "Deep strategies, multiple opportunities and the unique character of each game. You can find all this in a next generation game which turns the concept of the card entertainment upside down."
+    },
+    "3": {
+      "title": "AFFORDABLE AND FREE",
+      "description": "Immerse yourself into a fascinating world absolutely for free. There is no need to build decks. Play freely and enjoy every moment of the game without a care."
+    },
+    "4": {
+      "title": "FREEDOM OF COLLECTING",
+      "description": "You will be able to change the visual style of different aspects of the game for yourself. It will be possible to trade collectibles with other players."
+    },
+    "5": {
+      "title": "DEVELOPMENT OF CYBERSPORTS",
+      "description": "Full-fledged in-game tournaments where virtual maps become the arena for real sporting feats. Become a part of the cybersports evolution."
+    },
+    "6": {
+      "title": "SKILL OVER RANDOM",
+      "description": "In this game, random yields in the face of true masters of card battles. Exalt your skill over random."
+    }
+  }
+}
