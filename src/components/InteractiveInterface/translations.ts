@@ -28,7 +28,7 @@ export const interactiveInterfaceTr: translations<InteractiveGalleryContent> = {
     "statistics": {
       title: "Player statistics",
       content:
-        "Displays players' current amount of coins, cards, influence, disciples.",
+        "Displays players' current amount of coins and cards",
     },
     "player-name": {
       title: "Player name",
@@ -74,6 +74,10 @@ export const interactiveInterfaceTr: translations<InteractiveGalleryContent> = {
     "followers-hand": {
       title: "Hand",
       content: "Displays the cards that the player currently have.",
+    },
+    "victory-points": {
+      title: "Victory points",
+      content: "Determine the winner at the end of the game.",
     }
   },
   ru: {
@@ -99,7 +103,7 @@ export const interactiveInterfaceTr: translations<InteractiveGalleryContent> = {
     statistics: {
       title: "Статистика игрока",
       content:
-        "Отображает актуальное количество монет, карт, влияния, последователей у игроков.",
+        "Отображает актуальное количество монет и карт у игроков.",
     },
     "player-name": {
       title: "Имя игрока",
@@ -144,6 +148,10 @@ export const interactiveInterfaceTr: translations<InteractiveGalleryContent> = {
     "followers-hand": {
       title: "Рука",
       content: "Отображает карты, которые имеются у игрока в данный момент.",
+    },
+    "victory-points": {
+      title: "Очки победы",
+      content: "Определяют победителя в конце игры.",
     }
   },
 };

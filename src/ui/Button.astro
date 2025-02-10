@@ -1,10 +1,9 @@
 ---
-import { images } from "@assets/images";
 type variant =
   | "gold-bordered"
   | "silver-bordered"
-  | "trapezoid-left"
-  | "trapezoid-right";
+  | "corner-left"
+  | "corner-right";
 type size = "sm" | "md" | "lg";
 interface Props {
   variant: variant;
@@ -14,7 +13,7 @@ interface Props {
 
 const { variant, size, className, ...rest } = Astro.props as Props;
 
-const bthClasses = `w-full h-full max-h-full min-h-full flex justify-center items-center relative ${variant} ${size} ${
+const bthClasses = `max-h-full max-w-full flex justify-center items-center relative ${variant} ${size} ${
   className ?? ""
 }`;
 ---
@@ -22,55 +21,102 @@ const bthClasses = `w-full h-full max-h-full min-h-full flex justify-center item
 <style>
   button[class*="bordered"].sm {
     width: 27px;
-    height: 16px;
+    height: 27px;
     border-radius: 3px;
     padding: 1px;
   }
   button[class*="bordered"].sm > span {
     border-radius: 3px;
-    padding: 2px 5px;
+    padding: 5px;
   }
   button[class*="bordered"].lg {
-    width: 80px;
-    height: 50px;
+    width: 83px;
+    height: 83px;
     border-radius: 6px;
     padding: 1px;
   }
   button[class*="bordered"].lg > span {
     border-radius: 6px;
-    padding: 4px 10px;
+    padding: 10px;
   }
-  button[class*="trapezoid"].lg {
+  button[class*="corner"].sm {
+    width: 32px;
+    height: 23px;
+    min-height: 23px;
+    font-size: 16px;
+  }
+  button[class*="corner"].lg {
+    font-size: clamp(20px, 2.5em, 40px);
+    width: 62px;
+    height: 46px;
+    min-height: 46px;
+    font-size: 20px;
+  }
+  button[class*="corner"].corner-border,
+  button[class*="corner"].corner-border > span {
+    border-radius: 0;
+  }
+  button[class*="corner"].corner-border::after {
+    display: none;
+  }
+  button.corner-left.corner-border::before {
+    left: auto;
+    right: 0;
+    width: 100%;
     height: 100%;
-    width: 78px;
-    min-height: 43px;
-    max-height: 86px;
-    padding: clamp(10px, 1vw, 20px);
+    background-image: linear-gradient(
+      -35deg,
+      #d1ae6d 6%,
+      #615845 20%,
+      transparent 45%
+    );
+  }
+  button.corner-left.corner-border,
+  button.corner-left.corner-border > span {
+    border-bottom-right-radius: 5px;
+  }
+  button.corner-right.corner-border,
+  button.corner-right.corner-border > span {
+    border-bottom-left-radius: 5px;
   }
   @media (min-width: 1024px) {
     button[class*="bordered"].sm {
       width: 36px;
-      height: 24px;
+      height: 36px;
     }
     button[class*="bordered"].lg {
       width: 120px;
-      height: 75px;
+      height: 120px;
     }
-    button[class*="trapezoid"].lg {
-      width: 110px;
+    button[class*="corner"].sm {
+      width: 48px;
+      height: 35px;
+      font-size: 24px;
+    }
+    button[class*="corner"].lg {
+      width: 93px;
+      height: 66px;
+      font-size: 30px;
     }
   }
   @media (min-width: 1440px) {
     button[class*="bordered"].sm {
       width: 45px;
-      height: 32px;
+      height: 45px;
+      font-size: 32px;
     }
     button[class*="bordered"].lg {
       width: 160px;
-      height: 100px;
+      height: 160px;
     }
-    button[class*="trapezoid"].lg {
-      width: 156px;
+    button[class*="corner"].sm {
+      width: 64px;
+      height: 46px;
+    }
+    button[class*="corner"].lg {
+      width: 124px;
+      height: 86px;
+      font-size: 40px;
     }
   }
 </style>
@@ -88,18 +134,15 @@ const bthClasses = `w-full h-full max-h-full min-h-full flex justify-center item
   )
 }
 {
-  (variant === "trapezoid-left" || variant === "trapezoid-right") && (
+  (variant === "corner-left" || variant === "corner-right") && (
     <button
-      class={`relative bg-cover bg-center bg-no-repeat ${variant === "trapezoid-left" ? "" : ""} ${bthClasses}`}
-      style={{
-        backgroundImage: `url(${variant === "trapezoid-left" ? images?.["trapezoid-btn-left"] : images?.["trapezoid-btn-right"]})`,
-      }}
+      class={`relative p-[1px] gold-bordered corner-border ${bthClasses}`}
       {...rest}
     >
-      <span
-        class={`text-gold text-20-40 ${variant === "trapezoid-left" ? "translate-x-[40%] -translate-y-[10%]" : "-translate-x-[11px]"}`}
-      >
-        <slot />
+      <span class={`w-full h-full flex justify-center items-center bg-[#12161B] z-10 ${variant === "corner-left" ? "rounded-br-[5px]" : "rounded-bl-[5px]"}`}>
+        <span class="text-gold">
+          <slot />
+        </span>
       </span>
     </button>
   )

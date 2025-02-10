@@ -6,13 +6,13 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        "gold-gradient-270":
-          "linear-gradient(270deg, #533419 0%, #1E0E01 77.48%, #1C0C00 100%)",
+          "green-gradient-90":
+          "linear-gradient(90deg, #0E1921 25%, #3F8548 100%)",
           "gold-gradient-286": "linear-gradient(286deg, rgba(97, 88, 69, 0) 23%, rgb(209, 174, 109) 50%, rgba(97, 88, 69, 0) 84%)",
         "dark-gold-gradient":
           "linear-gradient(180deg, #35251C 0%, #170C06 100%)",
-        "black-gradient-270": "linear-gradient(270deg, #0E0601 0%, #070402 100%)",
-        "black-gradient-180": "linear-gradient(180deg, rgba(0, 0, 0, 0.90) 45%, rgba(0, 0, 0, 0.00) 85.14%)"
+        "black-gradient-90": "linear-gradient(to left, #0E0601 0%, #131C24 60%)",
+        "black-gradient-180": "linear-gradient(180deg, rgba(0, 0, 0, 0.90) 30%, rgba(0, 0, 0, 0.00) 64.14%)"
       },
       fontFamily: {
         jost: ["Jost", "sans-serif"],

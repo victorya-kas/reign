@@ -1,6 +1,4 @@
 ---
-import Image from "@assets/Image.astro";
-import { images } from "@assets/images";
 interface Props {
   className?: string;
   isTooltipContainer?: boolean;
@@ -8,22 +6,34 @@ interface Props {
 
 const { className, isTooltipContainer = false, ...rest } = Astro.props as Props;
 ---
+<style>
+  [interactive-interface] {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  [interactive-interface]::-webkit-scrollbar {
+    display: none;
+  }
+</style>
 
 <div
-  class={`relative w-full min-w-[812px] min-h-[375px] max-w-[1605px] max-h-[775px] overflow-auto flex flex-col ${className ?? ""}`}
+  class={`relative w-full min-w-[812px] max-w-[1460px] min-h-[460px] bg-[#00070C] rounded-[30px] p-[15px] desktop-md:p-[30px] overflow-auto flex flex-col ${className ?? ""}`} 
+  tooltip-container={isTooltipContainer}
+  interactive-interface
   {...rest}
 >
-  <Image
+<slot />
+  <!-- <Image
     name="mobile-mockup"
     className="object-fill"
     width="1605"
     height="775"
-  />
-  <div
+  /> -->
+  <!-- <div
     class="!absolute top-0 left-0 right-0 bottom-0 block m-[15px] desktop-md:m-[30px] bg-center bg-cover bg-no-repeat"
     style={{ backgroundImage: `url(${images?.["mobile-mockup-bg"]})` }}
     tooltip-container={isTooltipContainer}
   >
     <slot />
-  </div>
+  </div> -->
 </div>

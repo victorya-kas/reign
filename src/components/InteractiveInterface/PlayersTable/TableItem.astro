@@ -8,31 +8,36 @@ const { type } = Astro.props as Props;
 
 <div class=`w-full h-full gold-bordered rounded-[5px] p-[1px] ${type}`>
   <div
-    class=`relative flex w-full h-full ${type === 'active' ? 'bg-gold-gradient-270' : 'bg-black-gradient-270'} rounded-[5px] z-10`
+    class=`relative flex w-full h-full ${type === 'active' ? 'bg-green-gradient-90' : 'bg-black-gradient-90'} rounded-[5px] z-10`
   >
     <div
-      class="w-[25%] max-w-[128px] min-w-[65px] max-h-full flex flex-col shadow-[3px_0_4px_0_rgba(0,0,0,0.4)] rounded-l-[5px] p-[3px] [&>*]:flex [&>*]:justify-center [&>*]:items-center"
+      class="w-[26%] max-w-[130px] min-w-[65px] max-h-full flex flex-col shadow-[3px_0_4px_0_rgba(0,0,0,0.4)] rounded-l-[5px] [&>*]:flex [&>*]:justify-center [&>*]:items-center"
     >
       <div
-        class="shrink-0 h-[15px] desktop-md:h-[30px] shadow-[0_2px_4px_0_rgba(0,0,0,0.9)]"
+        class="shrink-0 h-[15px] desktop-md:h-[30px] shadow-[0_4px_8px_0_rgba(0,0,0,0.9)] relative z-20"
       >
         <slot name="table-item-player-name" />
       </div>
       <div
-        class="grow h-[calc(100%-26%-15px)] desktop-md:h-[calc(100%-26%-30px)] px-[6%] py-[5px] desktop-lg:py-[10px] [&>div]:h-full"
+        class="grow h-[calc(100%-17%-15px)] desktop-md:h-[calc(100%-17%-30px)] [&>div]:h-full"
       >
         <slot name="table-item-hero" />
       </div>
       <div
-        class="shrink-0 h-[26%] min-h-[32px] max-h-[64px] shadow-[0_-2px_4px_0_rgba(0,0,0,0.9)] flex flex-col items-center px-[4px] py-[4px] desktop-lg:px-[8px] desktop-lg:py-[6px]"
+        class="shrink-0 h-[17%] min-h-[24px] max-h-[48px] shadow-[0_-4px_8px_0_rgba(0,0,0,0.9)] flex flex-col items-center px-[4px] py-[4px] desktop-lg:px-[8px] desktop-lg:py-[6px] relative z-20"
       >
         <slot name="table-item-statistic" />
       </div>
     </div>
     <div
-      class="grow p-[15px] desktop-md:p-[30px] flex justify-center items-center [&>div]:max-h-full [&>div]:w-full [&>div]:h-[113px] [&>div]:min-w-[141px] [&>div]:desktop-lg:h-[216px] [&>div]:max-w-[282px] [&>div]:flex [&>div]:flex-wrap [&>div]:justify-center [&>div]:items-center [&>div]:gap-[9px] [&>div]:desktop-md:gap-[12px] [&>div>*]:max-w-[33%]"
+      class="relative grow p-[15px] flex flex-col justify-center items-center"
     >
-      <slot name="table-item-followers" />
+      <span class="absolute top-0 right-0 z-20">
+        <slot name="table-item-power" />
+      </span>
+      <div class="flex flex-col gap-[9px] desktop-md:gap-[12px] [&>div]:min-w-[93px] [&>div]:flex [&>div]:flex-wrap [&>div]:gap-[9px] [&>div]:desktop-md:gap-[12px]">
+        <slot name="table-item-followers-row" />
+      </div>
     </div>
   </div>
 </div>

@@ -10,15 +10,11 @@ interface Props {
 
 const {
   coin = "0",
-  cards = "0",
-  power = "0",
-  followers = "0",
+  cards = "0"
 } = Astro.props as Props;
 ---
 
-<div class="h-full w-full grid grid-cols-2 grid-rows-2 gap-[5px]" tooltip-id="statistics">
+<div class="h-full w-full flex items-center justify-between gap-[10px] px-[6px]" tooltip-id="statistics">
   <StatisticItem icon="icon-empty-coin-silver" content={coin} />
   <StatisticItem icon="icon-cards-silver" content={cards} />
-  <StatisticItem icon="icon-power-silver" content={power} />
-  <StatisticItem icon="icon-followers-silver" content={followers} />
 </div>

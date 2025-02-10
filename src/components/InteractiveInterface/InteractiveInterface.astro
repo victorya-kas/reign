@@ -9,27 +9,15 @@ import MobileMockup from "@components/MobileMockup.astro";
 
 const t = useTranslations(interactiveInterfaceTr);
 ---
-
-<style>
-  [interactive-interface-container] [interactive-interface] {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  [interactive-interface-container] [interactive-interface]::-webkit-scrollbar {
-    display: none;
-  }
-</style>
 <section
   id="astro-interactive-gallery"
   class="flex justify-center w-full px-[15px] desktop-sm:px-[30px] overflow-hidden"
-  interactive-interface-container
 >
-  <div class="overflow-auto desktop-sm:overflow-hidden" interactive-interface>
+  <div class="overflow-auto">
     <MobileMockup isTooltipContainer={true}>
       <div
-        class="relative w-full h-full flex flex-col gap-[4px] [&>div]:overflow-hidden"
+        class="relative w-full h-full flex flex-col [&>div]:overflow-hidden"
       >
-        <>
           <Tooltip
             id="follower-card-sm"
             content={{
@@ -135,7 +123,13 @@ const t = useTranslations(interactiveInterfaceTr);
               content: t("player-name")?.content,
             }}
           />
-        </>
+          <Tooltip
+            id="victory-points"
+            content={{
+              title: t("victory-points")?.title,
+              content: t("victory-points")?.content,
+            }}
+          />
         <Header />
         <PlayersTable />
         <Footer />

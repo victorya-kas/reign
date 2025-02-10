@@ -4,57 +4,88 @@ import Statictics from "./Statistics/Statistics.astro";
 import PlayerName from "./PlayerName.astro";
 import TableItem from "./TableItem.astro";
 import Follower from "@components/Cards/Follower/Follower.astro";
+import Button from "@ui/Button.astro";
 ---
 
-<div class="grow w-full grid grid-rows-2 grid-cols-3 gap-[2px]">
+<div class="grow min-h-[268px] w-full grid grid-rows-2 grid-cols-3 gap-[2px]">
   <TableItem>
-    <PlayerName name="JULHIP" slot="table-item-player-name" />
-    <Hero id="1701" active={false} showTooltip={true} slot="table-item-hero"/>
-    <Statictics coin="1" cards="2" power="3" followers="2" slot="table-item-statistic" />
-    <div slot="table-item-followers">
-      <Follower showTooltip={true} id="2002" type="rounded"/>
-      <Follower showTooltip={true} id="2501" type="rounded"/>
+    <PlayerName name="Newton" slot="table-item-player-name" />
+    <Hero id="1601" active={true} showTooltip={true} slot="table-item-hero"/>
+    <Statictics coin="1" cards="2" slot="table-item-statistic" />
+    <Button variant="corner-right" size="sm" slot="table-item-power" tooltip-id="victory-points">12</Button>
+    <div slot="table-item-followers-row">
+      <Follower showTooltip={true} id="2605" type="rounded"/>
+      <Follower showTooltip={true} id="2012" type="rounded"/>
+    </div>
+    <div slot="table-item-followers-row">
+      <Follower showTooltip={true} id="2606" type="rounded"/>
     </div>
   </TableItem>
   <TableItem>
-    <PlayerName name="Drone" slot="table-item-player-name" />
+    <PlayerName name="Doyle" slot="table-item-player-name" />
     <Hero id="1201" active={true} showTooltip={true} slot="table-item-hero"/>
-    <Statictics coin="5" cards="5" power="3" followers="1" slot="table-item-statistic" />
-    <div slot="table-item-followers">
+    <Statictics coin="2" cards="3" slot="table-item-statistic" />
+    <Button variant="corner-right" size="sm" slot="table-item-power" tooltip-id="victory-points">15</Button>
+    <div slot="table-item-followers-row">
+      <Follower showTooltip={true} id="2015" type="rounded"/>
+      <Follower showTooltip={true} id="2504" type="rounded"/>
+    </div>
+    <div slot="table-item-followers-row">
+      <Follower showTooltip={true} id="2009" type="rounded"/>
+    </div>
+  </TableItem>
+  <TableItem>
+    <PlayerName name="Lovecraft" slot="table-item-player-name" />
+    <Hero id="1701" active={true} showTooltip={true} slot="table-item-hero"/>
+    <Statictics coin="0" cards="2" slot="table-item-statistic" />
+    <Button variant="corner-right" size="sm" slot="table-item-power" tooltip-id="victory-points">15</Button>
+    <div slot="table-item-followers-row">
+      <Follower showTooltip={true} id="2011" type="rounded"/>
+      <Follower showTooltip={true} id="2602" type="rounded"/>
+    </div>
+    <div slot="table-item-followers-row">
+      <Follower showTooltip={true} id="2010" type="rounded"/>
+      <Follower showTooltip={true} id="2604" type="rounded"/>
+    </div>
+  </TableItem>
+  <TableItem>
+    <PlayerName name="Davinci" slot="table-item-player-name" />
+    <Hero id="1501" active={true} showTooltip={true} slot="table-item-hero"/>
+    <Statictics coin="3" cards="0" slot="table-item-statistic" />
+    <Button variant="corner-right" size="sm" slot="table-item-power" tooltip-id="victory-points">12</Button>
+    <div slot="table-item-followers-row">
       <Follower showTooltip={true} id="2803" type="rounded"/>
+      <Follower showTooltip={true} id="2007" type="rounded"/>
     </div>
-  </TableItem>
-  <TableItem>
-    <PlayerName name="koekver" active={true} slot="table-item-player-name" />
-    <Hero id="1401" active={true} showTooltip={true} slot="table-item-hero"/>
-    <Statictics coin="0" cards="2" power="4" followers="2" slot="table-item-statistic" />
-    <div slot="table-item-followers">
-      <Follower showTooltip={true} id="2502" type="rounded"/>
+    <div slot="table-item-followers-row">
       <Follower showTooltip={true} id="2802" type="rounded"/>
-    </div>
-  </TableItem>
-  <TableItem>
-    <PlayerName name="Diaris" slot="table-item-player-name" />
-    <Hero id="1101" active={true} showTooltip={true} slot="table-item-hero"/>
-    <Statictics coin="3" cards="3" power="2" followers="1" slot="table-item-statistic" />
-    <div slot="table-item-followers">
       <Follower showTooltip={true} id="2603" type="rounded"/>
     </div>
   </TableItem>
   <TableItem type="active">
-    <PlayerName name="WWWWWw" slot="table-item-player-name" />
-    <Hero id="1501" active={true} showTooltip={true} slot="table-item-hero"/>
-    <Statictics coin="2" cards="5" power="2" followers="1" slot="table-item-statistic" />
-    <div slot="table-item-followers">
-      <Follower showTooltip={true} id="2502" type="rounded"/>
+    <PlayerName name="Tesla" slot="table-item-player-name" />
+    <Hero id="1801" active={true} showTooltip={true} slot="table-item-hero"/>
+    <Statictics coin="1" cards="4" slot="table-item-statistic" />
+    <Button variant="corner-right" size="sm" slot="table-item-power" tooltip-id="victory-points">11</Button>
+    <div slot="table-item-followers-row">
+      <Follower showTooltip={true} id="2604" type="rounded"/>
+      <Follower showTooltip={true} id="2402" type="rounded"/>
+    </div>
+    <div slot="table-item-followers-row">
+      <Follower showTooltip={true} id="2804" type="rounded"/>
     </div>
   </TableItem>
   <TableItem>
-    <PlayerName name="Stosh" slot="table-item-player-name" />
-    <Hero id="1801" active={false} showTooltip={true} slot="table-item-hero"/>
-    <Statictics coin="1" cards="4" power="3" followers="1" slot="table-item-statistic" />
-    <div slot="table-item-followers">
-      <Follower showTooltip={true} id="2401" type="rounded"/>
+    <PlayerName name="Curie" slot="table-item-player-name" />
+    <Hero id="1401" active={true} showTooltip={true} slot="table-item-hero"/>
+    <Statictics coin="1" cards="4" slot="table-item-statistic" />
+    <Button variant="corner-right" size="sm" slot="table-item-power" tooltip-id="victory-points">5</Button>
+    <div slot="table-item-followers-row">
+      <Follower showTooltip={true} id="2501" type="rounded"/>
+      <Follower showTooltip={true} id="2801" type="rounded"/>
+    </div>
+    <div slot="table-item-followers-row">
+      <Follower showTooltip={true} id="2003" type="rounded"/>
     </div>
   </TableItem>
 </div>

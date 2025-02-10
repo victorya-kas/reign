@@ -27,61 +27,61 @@ const {
   orderFlag,
   showTooltip = false,
 } = Astro.props as Props;
-const isHorizontallMode = mode === "horizontal";
+const isHorizontalMode = mode === "horizontal";
 
 const heroesImg: { [key in heroID]: string } = {
   "1101":
-    "https://static.tildacdn.com/tild3165-6537-4935-b234-646436623037/hero-1101.png",
+    "https://static.tildacdn.com/tild3839-6337-4261-b333-316637383739/hero_1101.png",
   "1201":
-    "https://static.tildacdn.com/tild6237-3365-4034-a665-646562613334/hero-1201.png",
+    "https://static.tildacdn.com/tild6661-3332-4262-b862-363239313536/hero_1201.png",
   "1301":
-    "https://static.tildacdn.com/tild3333-3436-4365-a266-343035353362/hero-1301.png",
+    "https://static.tildacdn.com/tild3535-6264-4761-b735-653666323765/hero_1301.png",
   "1401":
-    "https://static.tildacdn.com/tild6666-6233-4264-b463-336532306165/hero-1401.png",
+    "https://static.tildacdn.com/tild6434-3463-4131-b637-653362653061/hero_1401.png",
   "1501":
-    "https://static.tildacdn.com/tild3033-3663-4665-a661-316232313235/hero-1501.png",
+    "https://static.tildacdn.com/tild3461-3965-4462-a431-656364636239/hero_1501.png",
   "1601":
-    "https://static.tildacdn.com/tild3864-3365-4131-b735-383333316261/hero-1601.png",
+    "https://static.tildacdn.com/tild6231-6536-4461-a665-643733373261/hero_1601.png",
   "1701":
-    "https://static.tildacdn.com/tild3435-3830-4639-a538-663531663766/hero-1701.png",
+    "https://static.tildacdn.com/tild6331-6437-4638-b935-303230626266/hero_1701.png",
   "1801":
-    "https://static.tildacdn.com/tild3532-3133-4362-b331-333133343335/hero-1801.png",
+    "https://static.tildacdn.com/tild6563-3137-4833-b933-373138386335/hero_1801.png",
 };
 
 const heroesHorizontalImg: { [key in heroID]: string } = {
   "1101":
-    "https://static.tildacdn.com/tild6434-3337-4763-b261-623736366334/hero-horizontal-1101.png",
+    "https://static.tildacdn.com/tild3961-3633-4536-b764-383035356666/hero_1101_horizontal.png",
   "1201":
-    "https://static.tildacdn.com/tild6463-3933-4765-b735-393934313261/hero-horizontal-1201.png",
+    "https://static.tildacdn.com/tild3036-3966-4835-a466-636664343636/hero_1201_horizontal.png",
   "1301":
-    "https://static.tildacdn.com/tild6132-3330-4332-b439-616461653931/hero-horizontal-1301.png",
+    "https://static.tildacdn.com/tild6637-3939-4635-b538-306565656163/hero_1301_horizontal.png",
   "1401":
-    "https://static.tildacdn.com/tild3734-3230-4962-a162-313032653465/hero-horizontal-1401.png",
+    "https://static.tildacdn.com/tild3334-3038-4461-a236-643634633031/hero_1401_horizontal.png",
   "1501":
-    "https://static.tildacdn.com/tild3735-6530-4937-a162-323038643965/hero-horizontal-1501.png",
+    "https://static.tildacdn.com/tild3565-3335-4735-b966-313231623038/hero_1501_horizontal.png",
   "1601":
-    "https://static.tildacdn.com/tild6262-6634-4739-b037-383964666235/hero-horizontal-1601.png",
+    "https://static.tildacdn.com/tild3363-3035-4538-b430-353762646632/hero_1601_horizontal.png",
   "1701":
-    "https://static.tildacdn.com/tild3732-3139-4836-b730-386530303530/hero-horizontal-1701.png",
+    "https://static.tildacdn.com/tild6335-6161-4639-b962-373066323731/hero_1701_horizontal.png",
   "1801":
-    "https://static.tildacdn.com/tild3966-3261-4536-a231-633266326330/hero-horizontal-1801.png",
+    "https://static.tildacdn.com/tild6530-3663-4539-a632-393635326661/hero_1801_horizontal.png",
 };
 
 const heroesAttributesImg: { [key: string]: string } = {
   // hero's cards borders bg
-  "border-blue": isHorizontallMode
+  "border-blue": isHorizontalMode
     ? "https://static.tildacdn.com/tild6437-3565-4234-b230-353866386264/border-hero-topframe.png"
     : "https://static.tildacdn.com/tild6564-3935-4334-a566-353331633833/border-hero-general-.png",
-  "border-gold": isHorizontallMode
+  "border-gold": isHorizontalMode
     ? "https://static.tildacdn.com/tild3361-3935-4466-b031-613063663634/border-hero-topframe.png"
     : "https://static.tildacdn.com/tild3039-6538-4636-b839-353361366262/border-hero-general-.png",
-  "border-silver": isHorizontallMode
+  "border-silver": isHorizontalMode
     ? "https://static.tildacdn.com/tild3531-3735-4335-b063-616535346235/border-hero-topframe.png"
     : "https://static.tildacdn.com/tild3065-3663-4935-a633-656230323165/border-hero-general-.png",
-  "border-green": isHorizontallMode
+  "border-green": isHorizontalMode
     ? "https://static.tildacdn.com/tild3534-3939-4264-b063-616435336666/border-hero-topframe.png"
     : "",
-  "border-red": isHorizontallMode
+  "border-red": isHorizontalMode
     ? "https://static.tildacdn.com/tild3863-3130-4562-b964-313464636535/border-hero-topframe.png"
     : "",
   // hero's card order bg
@@ -115,15 +115,15 @@ const heroesAtrributes: heroes = {
   },
   1401: {
     order: { value: "4", url: heroesAttributesImg?.["order-gold"]! },
-    border: heroesAttributesImg?.["border-gold"]!,
+    border: heroesAttributesImg?.["border-blue"]!,
   },
   1501: {
     order: { value: "5", url: heroesAttributesImg?.["order-blue"]! },
-    border: heroesAttributesImg?.["border-blue"]!,
+    border: heroesAttributesImg?.["border-red"]!,
   },
   1601: {
     order: { value: "6", url: heroesAttributesImg?.["order-green"]! },
-    border: heroesAttributesImg?.["border-green"]!,
+    border: heroesAttributesImg?.["border-gold"]!,
   },
   1701: {
     order: { value: "7", url: heroesAttributesImg?.["order-silver"]! },
@@ -131,18 +131,16 @@ const heroesAtrributes: heroes = {
   },
   1801: {
     order: { value: "8", url: heroesAttributesImg?.["order-red"]! },
-    border: heroesAttributesImg?.["border-red"]!,
+    border: heroesAttributesImg?.["border-green"]!,
   },
 };
 
-const url = isHorizontallMode ? heroesHorizontalImg[id] : heroesImg[id];
+const url = isHorizontalMode ? heroesHorizontalImg[id] : heroesImg[id];
 const coverUrl = heroesAttributesImg?.["card-cover"] ?? "";
-const orderValue = heroesAtrributes?.[id as keyof heroes]?.order?.value!;
-const orderBg = heroesAtrributes?.[id as keyof heroes]?.order?.url!;
 const border = heroesAtrributes?.[id as keyof heroes]?.border;
-const cardSizeClasses = isHorizontallMode
-  ? "w-[70px] h-[46px] desktop-sm:w-[105px] desktop-sm:h-[66px] desktop-md:w-[140px] desktop-md:h-[86px]"
-  : "w-[46px] h-[60px] desktop-sm:w-[80px] desktop-sm:h-[107px] desktop-md:w-[112px] desktop-md:h-[154px]";
+const cardSizeClasses = isHorizontalMode
+  ? "w-[70px] h-[46px] desktop-md:w-[105px] desktop-md:h-[66px] desktop-lg:w-[140px] desktop-lg:h-[86px]"
+  : "w-full h-full min-w-[65px] min-h-[95px] max-w-[130px] max-h-[190px]";
 ---
 
 <style>
@@ -156,17 +154,17 @@ const cardSizeClasses = isHorizontallMode
   active ? (
     <Card
       className={`${cardSizeClasses} max-w-full max-h-full`}
-      tooltip-id={showTooltip && !isHorizontallMode ? "hero-card" : null}
+      tooltip-id={showTooltip && !isHorizontalMode ? "hero-card" : null}
     >
-      {id !== "1101" && orderFlag && isHorizontallMode ? (
+      {id !== "1101" && orderFlag && isHorizontalMode ? (
         <div
-          class={`order z-30 absolute top-[-1px] left-[-1px] bg-gold-gradient-286 rounded-tl-[6px] ${isHorizontallMode ? "w-[64%] h-full min-w-[45px] max-w-[90px]" : "h-[64%] w-full min-h-[49px] max-h-[98px]"}`}
+          class={`order z-30 absolute top-[-1px] left-[-1px] bg-gold-gradient-286 rounded-tl-[6px] ${isHorizontalMode ? "w-[64%] h-full min-w-[45px] max-w-[90px]" : "h-[64%] w-full min-h-[49px] max-h-[98px]"}`}
           tooltip-id={showTooltip || orderFlag ? "hero-flag" : null}
         >
           <span class="block w-[calc(100%-1px)] h-[calc(100%-1px)] bg-[#560C15] p-[3px] desktop-md:p-[6px]">
             <Image
-              width={isHorizontallMode ? "90" : "112"}
-              height={isHorizontallMode ? "86" : "98"}
+              width={isHorizontalMode ? "90" : "112"}
+              height={isHorizontalMode ? "86" : "98"}
               name={"icon-ability"}
               className="w-[50%] h-[50%] drop-shadow-[0_0_2px_rgba(0,0,0.9)]"
             />
@@ -175,40 +173,37 @@ const cardSizeClasses = isHorizontallMode
       ) : (
         ""
       )}
-      <span class="block relative h-full max-h-full z-10">
-        <Image
-          src={border}
-          width={isHorizontallMode ? "140" : "112"}
-          height={isHorizontallMode ? "86" : "154"}
-          className="max-h-full min-h-full min-w-full"
+      <span class="block relative h-full max-h-full w-full">
+        {
+          isHorizontalMode ? (
+            <Image
+            src={border}
+            width="140"
+            height="86"
+            className="max-h-full min-h-full min-w-full"
+          />
+          <span
+            class="block absolute top-[3px] left-0 z-[-1] w-full h-[calc(100%-6px)] bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url("${url}")` }}
+          />) : <Image
+          src={url}
+          width="112"
+          height="154"
+          className="max-h-full min-h-full min-w-full object-cover"
         />
-        <span
-          class="block absolute top-0 bottom-0 left-0 right-0 z-[-1] w-full h-full bg-contain bg-center bg-no-repeat"
-          style={{ backgroundImage: `url("${url}")` }}
-        />
+        }
+      
       </span>
-
-      {!isHorizontallMode && (
-        <span
-          class="flex justify-center items-center bg-contain bg-center bg-no-repeat bottom-[-2px] right-[-2px] w-[25%] h-[25%] min-w-[12px] max-w-[32px] min-h-[15px] max-h-[40px]"
-          style={{ backgroundImage: `url("${orderBg}")` }}
-          tooltip-id={showTooltip ? "hero-order" : null}
-        >
-          <span class="text-gold text-[12px] desktop-sm:text-[18px] desktop-xl:text-[24px]">
-            {orderValue}
-          </span>
-        </span>
-      )}
     </Card>
   ) : (
     <Card
       className={cardSizeClasses}
-      tooltip-id={showTooltip && !isHorizontallMode ? "hero-card-cover" : null}
+      tooltip-id={showTooltip && !isHorizontalMode ? "hero-card-cover" : null}
     >
       <Image
         src={coverUrl}
-        width={isHorizontallMode ? "140" : "112"}
-        height={isHorizontallMode ? "86" : "154"}
+        width={isHorizontalMode ? "140" : "112"}
+        height={isHorizontalMode ? "86" : "154"}
       />
     </Card>
   )

@@ -21,7 +21,7 @@ const { title = "Reign", className } = Astro.props;
     <title>{title}</title>
     <slot name="head" />
   </head>
-  <body>
+  <body class="bg-black">
     <div
       class={`p-container py-[60px] ${className ?? ""}`}
     >
