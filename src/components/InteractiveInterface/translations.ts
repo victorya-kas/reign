@@ -139,11 +139,11 @@ export const interactiveInterfaceTr: translations<InteractiveGalleryContent> = {
     },
     "btn-ability-intelligence": {
       title: "Активная способность героя",
-      content: "Активирует способность героя. Раз за круг.",
+      content: "Активирует способность героя. Раз за раунд.",
     },
     "btn-resourses": {
       title: "Ресурсы",
-      content: "Позволяет получить ресурсы. Раз за круг.",
+      content: "Позволяет получить ресурсы. Раз за раунд.",
     },
     "followers-hand": {
       title: "Рука",
